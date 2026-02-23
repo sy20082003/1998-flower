@@ -277,7 +277,7 @@ const HomePage = () => {
       </section>
 
       {/* 5. Hoa theo loại */}
-      <section className="py-24 bg-[#FCF9F7]">
+      {/* <section className="py-24 bg-[#FCF9F7]">
         <Container>
           <div className="text-center mb-16">
             <span className="text-rose-500 font-bold tracking-widest uppercase text-xs mb-3">
@@ -309,7 +309,7 @@ const HomePage = () => {
             ))}
           </div>
         </Container>
-      </section>
+      </section> */}
 
       {/* 6. Review */}
       <section className="py-24 bg-white">
