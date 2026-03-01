@@ -175,7 +175,7 @@ const HomePage = () => {
               Tìm hoa nhanh
             </span>
             <h2 className="text-4xl font-bold text-gray-800">
-              Hoa Theo Dịp Ý Nghĩa
+              Hoa theo mùa
             </h2>
             <div className="w-16 h-1 bg-rose-200 mt-4 mx-auto rounded-full" />
           </div>
@@ -277,39 +277,39 @@ const HomePage = () => {
       </section>
 
       {/* 5. Hoa theo loại */}
-      {/* <section className="py-24 bg-[#FCF9F7]">
-        <Container>
-          <div className="text-center mb-16">
-            <span className="text-rose-500 font-bold tracking-widest uppercase text-xs mb-3">
-              Đa dạng lựa chọn
-            </span>
-            <h2 className="text-4xl font-bold text-gray-800">
-              Hoa Theo Chủng Loại
-            </h2>
-            <div className="w-16 h-1 bg-rose-200 mt-4 mx-auto rounded-full" />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {flowerTypes.map((type, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-3xl p-4 shadow-sm hover:shadow-lg transition-all text-center"
-              >
-                <div className="aspect-square rounded-2xl overflow-hidden mb-4">
-                  <Image
-                    width={400}
-                    height={400}
-                    src={type.img}
-                    alt={type.name}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                  />
+        {/* <section className="py-24 bg-[#FCF9F7]">
+          <Container>
+            <div className="text-center mb-16">
+              <span className="text-rose-500 font-bold tracking-widest uppercase text-xs mb-3">
+                Đa dạng lựa chọn
+              </span>
+              <h2 className="text-4xl font-bold text-gray-800">
+                Hoa Theo Chủng Loại
+              </h2>
+              <div className="w-16 h-1 bg-rose-200 mt-4 mx-auto rounded-full" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {flowerTypes.map((type, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-3xl p-4 shadow-sm hover:shadow-lg transition-all text-center"
+                >
+                  <div className="aspect-square rounded-2xl overflow-hidden mb-4">
+                    <Image
+                      width={400}
+                      height={400}
+                      src={type.img}
+                      alt={type.name}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <h4 className="font-bold text-gray-800 text-lg">{type.name}</h4>
+                  <p className="text-rose-400 text-sm mt-1">{type.count}</p>
                 </div>
-                <h4 className="font-bold text-gray-800 text-lg">{type.name}</h4>
-                <p className="text-rose-400 text-sm mt-1">{type.count}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section> */}
+              ))}
+            </div>
+          </Container>
+        </section> */}
 
       {/* 6. Review */}
       <section className="py-24 bg-white">
