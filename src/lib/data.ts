@@ -12,7 +12,7 @@ export const categories: { label: string; value: Category }[] = [
 export const flowers: Flower[] = [
   {
     id: "1",
-    name: "Serene Ivory Bouquet",
+    name: "Hoa Cam Tu Cau",
     slug: "serene-ivory-bouquet",
     price: 850000,
     category: "Hoa-Chia-Buồn",
