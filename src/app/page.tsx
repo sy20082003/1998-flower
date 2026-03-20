@@ -128,11 +128,11 @@ const HomePage = () => {
   return (
     <main className="pt-0">
       {/* Hero Section */}
-<section className="relative min-h-[90vh] flex items-center overflow-hidden">
+<section className="relative min-h-[60vh] md:min-h-[90vh] flex items-center overflow-hidden">
 
 {/* Background Image */}
 <div
-className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+className="absolute inset-0 bg-cover bg-center bg-no-repeat"
 style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
 ></div>
 
