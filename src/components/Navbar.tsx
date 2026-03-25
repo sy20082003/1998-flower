@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
               />
             </div>
             <span className="text-2xl font-bold tracking-tight text-gray-800">
-              Bloom & Petals
+              1998 Flower
             </span>
           </Link>
 
