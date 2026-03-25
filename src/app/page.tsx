@@ -133,7 +133,7 @@ const HomePage = () => {
           <Image
             width={1920}
             height={800}
-            src="https://images.unsplash.com/photo-1462456490601-4f7e60c96c5e?q=80&w=1074&auto=format&fit=crop"
+            src="image/hero-image.jpg"
             alt="Hero floral background"
             className="w-full h-full object-cover brightness-[0.8]"
           />
