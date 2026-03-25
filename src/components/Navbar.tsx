@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
       >
         <Container className="flex items-center justify-between">
           <Link href="/" className="group flex items-center space-x-2">
-            <div className="w-fit h-10 text-sky-600 rounded-full flex items-center justify-center px-4 py-2 shadow-sm">
+            <div className="w-fit h-10 bg-blue-700 rounded-full flex items-center justify-center px-4 py-2 shadow-sm">
               <Image
                 width={1920}
                 height={800}
@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
                 className="w-full h-full object-cover text-white"
               />
             </div>
-            <span className="text-2xl font-bold tracking-tight text-gray-800">
+            <span className="text-3xl font-serif italic tracking-wider text-sky-600">
               1998 Flower
             </span>
           </Link>
