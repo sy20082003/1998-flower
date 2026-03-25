@@ -143,13 +143,13 @@ const HomePage = () => {
         <Container className="relative z-10">
           <div className="max-w-2xl text-white">
             <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-[1.1] animate-in fade-in slide-in-from-bottom-4 duration-1000">
-              Vẻ Đẹp <br />
-              <span className="italic text-rose-100">Của Những</span> <br />
-              Cánh Hoa
+              Gửi trọn <br />
+              <span className="italic text-rose-100">Yêu thương</span> <br />
+              Qua từng bó hoa
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8 max-w-lg leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-              Khám phá bộ sưu tập hoa tươi nghệ thuật được thiết kế tinh xảo cho
-              mọi khoảnh khắc quý giá trong cuộc sống của bạn.
+              Những bó hoa tươi được chăm chút tỉ mỉ,
+              mang đến vẻ đẹp và cảm xúc cho từng dịp đặc biệt.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
               <Button size="lg" onClick={() => router.push("/flowers")}>
