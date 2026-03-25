@@ -131,10 +131,10 @@ const HomePage = () => {
       <section className="relative h-[65vh] md:h-[80vh] lg:h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
+            width={1920}
+            height={800}
             src="image/hero-image.jpg"
             alt="Hero floral background" 
-            fill
-            priority
             className="w-full h-full object-cover brightness-[0.8]"
           />
           <div className="absolute inset-0 bg-linear-to-r from-black/40 via-black/10 to-transparent" />
