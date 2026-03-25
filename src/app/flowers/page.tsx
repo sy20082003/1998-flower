@@ -30,7 +30,7 @@ const CatalogPage = () => {
       <Container>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-800 mb-4">
-            Cửa Hàng Của Chúng Tôi
+            Danh mục hoa của 1998Flower
           </h1>
           <p className="text-gray-500 max-w-xl mx-auto">
             Duyệt qua danh mục các mẫu hoa thiết kế độc quyền. Tìm kiếm món quà
