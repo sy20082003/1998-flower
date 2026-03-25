@@ -11,7 +11,7 @@ const AboutPage = () => {
               Về chúng tôi
             </span>
             <h1 className="text-5xl font-bold text-gray-800 mb-6">
-              Câu Chuyện Của 1998Flower
+              Shop hoa tươi 1998Flower
             </h1>
             <div className="w-16 h-1 bg-rose-200 mx-auto rounded-full" />
           </div>

@@ -52,7 +52,7 @@ const ContactPage = () => {
                     Địa chỉ cửa hàng
                   </h3>
                   <p className="text-gray-500 text-sm leading-relaxed">
-                    123 Đường Hoa Hồng, Phường 4, Quận 3, TP. Hồ Chí Minh
+                    272-274 Nguyễn Sơn, Phường Phú Thạnh, Quận Tân Phú, TP.HCM
                   </p>
                 </div>
               </div>
@@ -80,8 +80,8 @@ const ContactPage = () => {
                   <h3 className="font-bold text-gray-800 mb-1">
                     Số điện thoại
                   </h3>
-                  <p className="text-gray-500 text-sm">+84 (28) 3888 9999</p>
-                  <p className="text-gray-500 text-sm">Hotline: 090 123 4567</p>
+                  <p className="text-gray-500 text-sm">+84 976 848 744</p>
+                  <p className="text-gray-500 text-sm">Hotline: 097 684 8744</p>
                 </div>
               </div>
             </div>
@@ -107,10 +107,7 @@ const ContactPage = () => {
                 <div>
                   <h3 className="font-bold text-gray-800 mb-1">Email</h3>
                   <p className="text-gray-500 text-sm">
-                    hello@bloomandpetals.vn
-                  </p>
-                  <p className="text-gray-500 text-sm">
-                    support@bloomandpetals.vn
+                    hoatuoitanphu1998flower@gmail.com
                   </p>
                 </div>
               </div>
