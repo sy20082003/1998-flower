@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
       >
         <Container className="flex items-center justify-between">
           <Link href="/" className="group flex items-center space-x-2">
-            <div className="w-fit h-10 bg-pink-200 rounded-full flex items-center justify-center px-4 py-2 shadow-sm">
+            <div className="w-fit h-10 text-sky-600 rounded-full flex items-center justify-center px-4 py-2 shadow-sm">
               <Image
                 width={1920}
                 height={800}
