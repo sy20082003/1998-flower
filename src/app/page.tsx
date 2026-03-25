@@ -158,9 +158,10 @@ const HomePage = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10"
+                className="border-white text-white hover:bg-white/10" 
+                onClick={() => window.open("https://zalo.me/0976848744", "_blank")}
               >
-                Tìm hiểu thêm
+                Liên hệ ngay
               </Button>
             </div>
           </div>
