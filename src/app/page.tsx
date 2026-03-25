@@ -23,47 +23,47 @@ const HomePage = () => {
 
   const occasions = [
     {
-      name: "Tiệc Cưới",
-      slug: "wedding",
+      name: "Kệ Hoa ",
+      slug: "Kệ-Hoa",
       img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=400",
     },
     {
-      name: "Sinh Nhật",
-      slug: "birthday",
+      name: "Hoa Khai Trương",
+      slug: "Hoa-Khai-trương",
       img: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?q=80&w=765&auto=format&fit=crop",
     },
     {
-      name: "Khai Trương",
-      slug: "grand-opening",
+      name: "Hoa Sinh Nhật",
+      slug: "Hoa-Sinh-nhật",
       img: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?q=80&w=1171&auto=format&fit=crop",
     },
     {
-      name: "Theo Mùa",
-      slug: "seasonal",
+      name: "Hoa Chia Buồn",
+      slug: "Hoa-Chia-Buồn",
       img: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&q=80&w=400",
     },
   ];
 
   const commitments = [
     {
-      title: "Hoa Tươi 100%",
-      desc: "Hoa được nhập mới mỗi ngày từ các nông trại uy tín nhất.",
+      title: "Cam kết Hoa Tươi 100%",
+      desc: "Hoa tươi được tuyển chọn và nhập mới mỗi ngày.",
       icon: "🌸",
     },
     {
-      title: "Giao Hỏa Tốc",
-      desc: "Cam kết giao hoa tận nơi trong vòng 60-120 phút nội thành.",
+      title: "Giao hàng đúng giờ",
+      desc: "Cam kết giao hoa tận nơi đúng người đúng thời điểm.",
       icon: "🚚",
     },
     {
-      title: "Thiết Kế Riêng",
-      desc: "Mỗi bó hoa là một tác phẩm nghệ thuật độc bản dành cho bạn.",
+      title: "Phối hoa theo sở thích",
+      desc: "Phối hoa theo phong cách và tone màu sở thích của khách hàng",
       icon: "🎨",
     },
     {
-      title: "Bảo Hành Tươi",
-      desc: "Đổi trả miễn phí nếu hoa không đạt chất lượng như cam kết.",
-      icon: "✨",
+      title: "Hoteline 0976 848 744",
+      desc: "Tư vấn chọn hoa phù hợp với ngân sách của bạn.",
+      icon: "📞",
     },
   ];
 
