@@ -132,7 +132,7 @@ const HomePage = () => {
 
 {/* Background Image */}
 <div
-className="absolute inset-0 bg-cover bg-center"
+className="absolute inset-0 bg-contain bg-center bg-no-repeat"
 style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
 ></div>
 
@@ -360,7 +360,7 @@ style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">
               Dịch Vụ Giao Hoa Tươi Uy Tín Tại 1998Flower            </h2>
             <p>
-              <strong>1998Flower</strong>chuyên <strong>cung cấp</strong> các mẫu hoa tươi thiết kế tinh tế, phù hợp cho nhiều dịp như <strong>sinh nhật</strong>, <strong>khai trương</strong>, <strong>kỷ niệm</strong> hay <strong>chia buồn</strong>.{" "}
+              <strong>1998Flower</strong> chuyên <strong>cung cấp</strong> các mẫu hoa tươi thiết kế tinh tế, phù hợp cho nhiều dịp như <strong>sinh nhật</strong>, <strong>khai trương</strong>, <strong>kỷ niệm</strong> hay <strong>chia buồn</strong>.{" "}
               Hoa được <strong>tuyển chọn</strong> và nhập mới mỗi ngày từ các nông trại uy tín, mang đến sự tươi mới và chất lượng tốt nhất.
               Mỗi sản phẩm đều được chăm chút tỉ mỉ bởi thợ cắm hoa giàu kinh nghiệm. Chúng tôi cung cấp dịch vụ đặt hoa online và giao hoa tận nơi nhanh chóng, giúp bạn dễ dàng gửi gắm những lời chúc và tình cảm đến người thân, bạn bè và đối tác.
             </p>
