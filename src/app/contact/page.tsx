@@ -12,7 +12,7 @@ const ContactPage = () => {
             Liên hệ
           </span>
           <h1 className="text-5xl font-bold text-gray-800 mb-6">
-            Kết Nối Với Bloom & Petals
+            Kết Nối Với 1998Flower
           </h1>
           <p className="text-gray-500 max-w-xl mx-auto">
             Chúng tôi luôn sẵn sàng lắng nghe và tư vấn những mẫu hoa đẹp nhất

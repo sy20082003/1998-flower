@@ -37,13 +37,13 @@ const Navbar: React.FC = () => {
       >
         <Container className="flex items-center justify-between">
           <Link href="/" className="group flex items-center space-x-2">
-            <div className="w-fit h-10 bg-rose-100 rounded-full flex items-center justify-center px-3 py-2">
+            <div className="w-fit h-10 bg-pink-200 rounded-full flex items-center justify-center px-4 py-2 shadow-sm">
               <Image
                 width={1920}
                 height={800}
                 src="/image/logo.png"
                 alt="logo"
-                className="w-full h-full object-cover text-white dark:invert-0"
+                className="w-full h-full object-cover text-white"
               />
             </div>
             <span className="text-2xl font-bold tracking-tight text-gray-800">

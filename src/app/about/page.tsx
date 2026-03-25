@@ -11,7 +11,7 @@ const AboutPage = () => {
               Về chúng tôi
             </span>
             <h1 className="text-5xl font-bold text-gray-800 mb-6">
-              Câu Chuyện Của Bloom & Petals
+              Câu Chuyện Của 1998Flower
             </h1>
             <div className="w-16 h-1 bg-rose-200 mx-auto rounded-full" />
           </div>
@@ -32,7 +32,7 @@ const AboutPage = () => {
                 &quot;Nơi hoa nở, hy vọng cũng nở theo.&quot;
               </h2>
               <p className="text-gray-500 leading-relaxed">
-                Khởi đầu từ một góc nhỏ trên con phố yên tĩnh, Bloom & Petals ra
+                Khởi đầu từ một góc nhỏ trên con phố yên tĩnh, 1998Flower ra
                 đời với mong muốn mang vẻ đẹp thuần khiết của thiên nhiên vào
                 từng ngóc ngách không gian sống. Chúng tôi tin rằng mỗi bông hoa
                 đều mang trong mình một ngôn ngữ riêng, có khả năng chữa lành và

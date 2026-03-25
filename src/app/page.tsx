@@ -358,12 +358,11 @@ const HomePage = () => {
         <Container>
           <div className="max-w-4xl mx-auto prose prose-rose text-gray-600 leading-relaxed text-justify">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">
-              Dịch Vụ Giao Hoa Tươi Uy Tín Tại Bloom & Petals
-            </h2>
+              Dịch Vụ Giao Hoa Tươi Uy Tín Tại 1998Flower            </h2>
             <p>
               Bạn đang tìm kiếm một địa chỉ đặt hoa tươi uy tín để gửi gắm tình
               cảm đến người thân, bạn bè hay đối tác?{" "}
-              <strong>Bloom & Petals</strong> tự hào là hệ thống điện hoa hàng
+              <strong>1998Flower</strong> tự hào là hệ thống điện hoa hàng
               đầu, chuyên cung cấp các mẫu hoa thiết kế cao cấp phù hợp cho mọi
               dịp lễ như sinh nhật, khai trương, kỷ niệm ngày cưới hay hoa chia
               buồn. Với hàng ngàn mẫu hoa đa dạng từ hoa hồng, hoa lan, hoa
@@ -371,7 +370,7 @@ const HomePage = () => {
               kết mang đến cho khách hàng trải nghiệm mua sắm tuyệt vời nhất.
             </p>
             <p>
-              Tại Bloom & Petals, mỗi sản phẩm đều được các nghệ nhân cắm hoa
+              Tại 1998Flower, mỗi sản phẩm đều được các nghệ nhân cắm hoa
               tâm huyết thực hiện tỉ mỉ. Chúng tôi thấu hiểu rằng hoa không chỉ
               là quà tặng mà còn là thông điệp yêu thương. Vì vậy, dịch vụ giao
               hoa tận nơi của chúng tôi luôn đảm bảo tính kịp thời và bảo quản

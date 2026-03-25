@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-1">
-            <h3 className="text-xl font-bold mb-4">Bloom & Petals</h3>
+            <h3 className="text-xl font-bold mb-4">1998Flower</h3>
             <p className="text-sm text-gray-500 leading-relaxed">
               Mang cái đẹp từ thiên nhiên vào không gian sống của bạn. Chúng tôi
               cung cấp các dịch vụ hoa tươi chất lượng cao cho mọi dịp đặc biệt.
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="border-t border-gray-50 mt-12 pt-8 text-center text-xs text-gray-400">
-          © 2024 Bloom & Petals. All rights reserved. Design with love for
+          © 2024 1998Flower. All rights reserved. Design with love for
           elegance.
         </div>
       </Container>
