@@ -153,7 +153,7 @@ const HomePage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
               <Button size="lg" onClick={() => router.push("/flowers")}>
-                Xem bộ sưu tập
+                Danh mục hoa
               </Button>
               <Button
                 variant="outline"
