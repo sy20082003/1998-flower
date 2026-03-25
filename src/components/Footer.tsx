@@ -18,22 +18,22 @@ const Footer: React.FC = () => {
             <ul className="space-y-2 text-sm text-gray-500">
               <li>
                 <a href="#" className="hover:text-rose-500 transition-colors">
-                  Tiệc cưới
+                  Hoa chia buồn
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-rose-500 transition-colors">
-                  Sinh nhật
+                  Hoa Sinh nhật
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-rose-500 transition-colors">
-                  Khai trương
+                  Hoa Khai trương
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:text-rose-500 transition-colors">
-                  Theo mùa
+                  Hoa Sáp
                 </a>
               </li>
             </ul>

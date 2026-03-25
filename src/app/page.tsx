@@ -175,7 +175,7 @@ style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
               Tìm hoa nhanh
             </span>
             <h2 className="text-4xl font-bold text-gray-800">
-              Hoa theo mùa
+              DANH MỤC NỔI BẬT
             </h2>
             <div className="w-16 h-1 bg-rose-200 mt-4 mx-auto rounded-full" />
           </div>
