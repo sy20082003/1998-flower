@@ -1,10 +1,10 @@
 export type Category =
   | "all"
-  | "wedding"
-  | "birthday"
-  | "grand-opening"
-  | "seasonal"
-  | "hoa-tang"
+  | "Hoa-Chia-Buồn"
+  | "Hoa-Sinh-nhật"
+  | "Hoa-Khai-trương"
+  | "Hoa-Sáp"
+  | "Kệ-Hoa"
 
 export interface Flower {
   id: string;
