@@ -61,7 +61,7 @@ const HomePage = () => {
       icon: "🎨",
     },
     {
-      title: "Hoteline 0976 848 744",
+      title: "Hotline 0976 848 744",
       desc: "Tư vấn chọn hoa phù hợp với ngân sách của bạn.",
       icon: "📞",
     },
@@ -198,7 +198,7 @@ style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
                     {occ.name}
                   </h3>
                   <span className="text-white/80 text-sm flex items-center group-hover:translate-x-2 transition-transform">
-                    Khám phá ngay{" "}
+                    Xem thêm{" "}
                     <svg
                       className="w-4 h-4 ml-2"
                       fill="none"
