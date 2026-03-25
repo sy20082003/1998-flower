@@ -131,8 +131,6 @@ const HomePage = () => {
       <section className="relative h-[65vh] md:h-[80vh] lg:h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            width={1920}
-            height={800}
             src="image/hero-image.jpg"
             alt="Hero floral background" 
             fill
