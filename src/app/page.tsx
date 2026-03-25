@@ -128,7 +128,7 @@ const HomePage = () => {
   return (
     <main className="pt-0">
       {/* Hero Section */}
-<section className="relative h-[65vh] md:h-[80vh] lg:h-[90vh] flex items-center overflow-hidden">
+<section className="relative min-h-[90vh] flex items-center overflow-hidden">
 
 {/* Background Image */}
 <div
@@ -141,12 +141,12 @@ style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
 
         <Container className="relative z-10">
           <div className="max-w-2xl text-white">
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-[1.1] animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
               Gửi trọn <br />
-              <span className="italic text-rose-100">Yêu thương</span> <br />
+              <span className="italic text-rose-200">Yêu thương</span> <br />
               Qua từng bó hoa
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-lg leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            <p className="text-base md:text-lg mb-8">
               Những bó hoa tươi được chăm chút tỉ mỉ,
               mang đến vẻ đẹp và cảm xúc cho từng dịp đặc biệt.
             </p>
