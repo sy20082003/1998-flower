@@ -360,23 +360,9 @@ style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">
               Dịch Vụ Giao Hoa Tươi Uy Tín Tại 1998Flower            </h2>
             <p>
-              Bạn đang tìm kiếm một địa chỉ đặt hoa tươi uy tín để gửi gắm tình
-              cảm đến người thân, bạn bè hay đối tác?{" "}
-              <strong>1998Flower</strong> tự hào là hệ thống điện hoa hàng
-              đầu, chuyên cung cấp các mẫu hoa thiết kế cao cấp phù hợp cho mọi
-              dịp lễ như sinh nhật, khai trương, kỷ niệm ngày cưới hay hoa chia
-              buồn. Với hàng ngàn mẫu hoa đa dạng từ hoa hồng, hoa lan, hoa
-              tulip đến các loại hoa nhập khẩu từ Hà Lan, Ecuador, chúng tôi cam
-              kết mang đến cho khách hàng trải nghiệm mua sắm tuyệt vời nhất.
-            </p>
-            <p>
-              Tại 1998Flower, mỗi sản phẩm đều được các nghệ nhân cắm hoa
-              tâm huyết thực hiện tỉ mỉ. Chúng tôi thấu hiểu rằng hoa không chỉ
-              là quà tặng mà còn là thông điệp yêu thương. Vì vậy, dịch vụ giao
-              hoa tận nơi của chúng tôi luôn đảm bảo tính kịp thời và bảo quản
-              hoa ở điều kiện tốt nhất trong suốt quá trình vận chuyển. Dù bạn ở
-              đâu, chỉ với vài thao tác đặt hàng online, món quà ý nghĩa nhất sẽ
-              được chuyển đến tận tay người nhận một cách hoàn hảo nhất.
+              <strong>1998Flower</strong>chuyên <strong>cung cấp</strong> các mẫu hoa tươi thiết kế tinh tế, phù hợp cho nhiều dịp như <strong>sinh nhật</strong>, <strong>khai trương</strong>, <strong>kỷ niệm</strong> hay <strong>chia buồn</strong>.{" "}
+              Hoa được <strong>tuyển chọn</strong> và nhập mới mỗi ngày từ các nông trại uy tín, mang đến sự tươi mới và chất lượng tốt nhất.
+              Mỗi sản phẩm đều được chăm chút tỉ mỉ bởi thợ cắm hoa giàu kinh nghiệm. Chúng tôi cung cấp dịch vụ đặt hoa online và giao hoa tận nơi nhanh chóng, giúp bạn dễ dàng gửi gắm những lời chúc và tình cảm đến người thân, bạn bè và đối tác.
             </p>
           </div>
         </Container>
