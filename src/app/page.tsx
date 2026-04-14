@@ -25,7 +25,7 @@ const HomePage = () => {
     {
       name: "Kệ Hoa ",
       slug: "Kệ-Hoa",
-      img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=400",
+      img: "\image\danh sách\z7712149371585_d88442559cf2084b2b5adfe7492dff79.jpg",
     },
     {
       name: "Hoa Khai Trương",
