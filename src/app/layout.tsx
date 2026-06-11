@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Shop Hoa Tươi 1998 Flower - Giao Hoa Trong Ngày",
   description:
-    "Shop hoa tươi 1998 Flower đặt hoa online giao nhanh tận nơi trong nội thành. Giao Miễn Phí tại khực Tân Phú",
+    "Shop hoa tươi 1998 Flower đặt hoa online giao nhanh tận nơi trong nội thành. Giao Miễn Phí tại khu vực Tân Phú",
 };
 
 export default function RootLayout({
