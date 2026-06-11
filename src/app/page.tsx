@@ -1,439 +1,92 @@
-"use client";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ProductSection from "@/components/ProductSection";
+import { products } from "@/data/products";
 
-import Button from "@/components/Button";
-import Container from "@/components/Container";
-import FlowerCard from "@/components/FlowerCard";
-import { getFeaturedFlowers } from "@/lib/api";
-import { Flower } from "@/lib/types";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+const partners = ["Samsung","Nestle","Generali","Schneider","GFK","Yeah 1","KOVA","Midea","Tekcom","Acis","Seniart","Matxi"];
 
-const HomePage = () => {
-  const [bestSellers, setBestSellers] = useState<Flower[]>([]);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-
-  useEffect(() => {
-    getFeaturedFlowers().then((data) => {
-      setBestSellers(data);
-      setLoading(false);
-    });
-  }, []);
-
-  const occasions = [
-    {
-      name: "Kệ Hoa ",
-      slug: "Kệ-Hoa",
-      img: "bloom\public\image\danh sách\z7712149371585_d88442559cf2084b2b5adfe7492dff79.jpg",
-    },
-    {
-      name: "Hoa Khai Trương",
-      slug: "Hoa-Khai-trương",
-      img: "https://images.unsplash.com/photo-1496062031456-07b8f162a322?q=80&w=765&auto=format&fit=crop",
-    },
-    {
-      name: "Hoa Sinh Nhật",
-      slug: "Hoa-Sinh-nhật",
-      img: "https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?q=80&w=1171&auto=format&fit=crop",
-    },
-    {
-      name: "Hoa Chia Buồn",
-      slug: "Hoa-Chia-Buồn",
-      img: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&q=80&w=400",
-    },
-  ];
-
-  const commitments = [
-    {
-      title: "Cam kết Hoa Tươi 100%",
-      desc: "Hoa tươi được tuyển chọn và nhập mới mỗi ngày.",
-      icon: "🌸",
-    },
-    {
-      title: "Giao hàng đúng giờ",
-      desc: "Cam kết giao hoa tận nơi đúng người đúng thời điểm.",
-      icon: "🚚",
-    },
-    {
-      title: "Phối hoa theo sở thích",
-      desc: "Phối hoa theo phong cách và tone màu sở thích của khách hàng",
-      icon: "🎨",
-    },
-    {
-      title: "Hotline 0976 848 744",
-      desc: "Tư vấn chọn hoa phù hợp với ngân sách của bạn.",
-      icon: "📞",
-    },
-  ];
-
-  const flowerTypes = [
-    {
-      name: "Hoa Hồng",
-      count: "120+ mẫu",
-      img: "https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&q=80&w=300",
-    },
-    {
-      name: "Hoa Lan",
-      count: "45+ mẫu",
-      img: "https://images.unsplash.com/photo-1605996370592-b6f7a81e382e?q=80&w=735&auto=format&fit=crop",
-    },
-    {
-      name: "Hoa Tulip",
-      count: "30+ mẫu",
-      img: "https://images.unsplash.com/photo-1488928741225-2aaf732c96cc?q=80&w=1170&auto=format&fit=crop",
-    },
-    {
-      name: "Hoa Hướng Dương",
-      count: "25+ mẫu",
-      img: "https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&q=80&w=300",
-    },
-  ];
-
-  const reviews = [
-    {
-      name: "Chị Mai Anh",
-      content:
-        "Hoa ở đây rất tươi, thiết kế sang trọng đúng ý mình. Giao hàng cũng rất đúng giờ.",
-      role: "Khách hàng thân thiết",
-    },
-    {
-      name: "Anh Tuấn",
-      content:
-        "Dịch vụ đặt hoa cưới tuyệt vời. Nhân viên tư vấn rất nhiệt tình và chuyên nghiệp.",
-      role: "Khách hàng dự án",
-    },
-    {
-      name: "Chị Lan Phương",
-      content: "Mẫu mã đa dạng, giá cả hợp lý so với chất lượng hoa nhập khẩu.",
-      role: "Khách hàng lẻ",
-    },
-  ];
-
-  const faqs = [
-    {
-      q: "Shop có giao hoa vào ngày lễ không?",
-      a: "Chúng tôi phục vụ 24/7, kể cả ngày lễ và chủ nhật để đảm bảo bạn luôn có hoa đẹp đúng lúc.",
-    },
-    {
-      q: "Làm thế nào để giữ hoa tươi lâu?",
-      a: "Thay nước sạch mỗi ngày, cắt gốc xéo và để hoa ở nơi thoáng mát, tránh ánh nắng trực tiếp.",
-    },
-    {
-      q: "Shop có viết thiệp chúc mừng kèm theo không?",
-      a: "Tất cả đơn hàng đều được tặng kèm thiệp hoặc banner chúc mừng in theo yêu cầu.",
-    },
-  ];
-
+export default function HomePage() {
   return (
-    <main className="pt-0">
-      {/* Hero Section */}
-<section className="relative min-h-[60vh] md:min-h-[90vh] flex items-center overflow-hidden">
+    <>
+      <Header />
 
-{/* Background Image */}
-<div
-className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-style={{ backgroundImage: "url('/image/hero-image.jpg')" }}
-></div>
-
-{/* Overlay */}
-<div className="absolute inset-0 bg-black/40"></div>
-
-        <Container className="relative z-10">
-          <div className="max-w-2xl text-white">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Gửi trọn <br />
-              <span className="italic text-rose-200">Yêu thương</span> <br />
-              Qua từng bó hoa
-            </h1>
-            <p className="text-base md:text-lg mb-8">
-              Những bó hoa tươi được chăm chút tỉ mỉ,
-              mang đến vẻ đẹp và cảm xúc cho từng dịp đặc biệt.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
-              <Button size="lg" onClick={() => router.push("/flowers")}>
-                Danh mục hoa
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white/10" 
-                onClick={() => window.open("https://zalo.me/0976848744", "_blank")}
-              >
-                Liên hệ ngay
-              </Button>
-            </div>
-          </div>
-        </Container>
+      {/* HERO */}
+      <section className="hero">
+        <h1>Shop Hoa Tươi <span>1998 Flower</span><br />Giao Hoa Trong Ngày 🌹</h1>
+        <p>Hơn 100+ mẫu hoa tươi đẹp — Giao nhanh tận nơi tại TP HCM </p>
+        <div className="heroBadges">
+          <span className="badge">🚀 Giao nhanh nội thành</span>
+          <span className="badge">🎀 Tặng kèm thiệp + banner + túi giấy</span>
+          <span className="badge">📸 Gửi hình trước khi giao</span>
+          <span className="badge">🚛 Miễn ship khu vực Tân Phú</span>
+        </div>
+        <a href="tel:0976848744" className="btnPrimary">☎ Đặt Hoa Ngay — 0976 848 744</a>
       </section>
 
-      {/* 2. Hoa theo dịp */}
-      <section className="py-24 bg-white">
-        <Container>
-          <div className="text-center mb-16">
-            <span className="text-rose-500 font-bold tracking-widest uppercase text-xs mb-3">
-              Tìm hoa nhanh
-            </span>
-            <h2 className="text-4xl font-bold text-gray-800">
-              DANH MỤC NỔI BẬT
-            </h2>
-            <div className="w-16 h-1 bg-rose-200 mt-4 mx-auto rounded-full" />
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {occasions.map((occ) => (
-              <div
-                key={occ.slug}
-                onClick={() => router.push("/flowers")}
-                className="group relative h-80 rounded-3xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500"
-              >
-                <Image
-                  width={400}
-                  height={400}
-                  src={occ.img}
-                  alt={occ.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {occ.name}
-                  </h3>
-                  <span className="text-white/80 text-sm flex items-center group-hover:translate-x-2 transition-transform">
-                    Xem thêm{" "}
-                    <svg
-                      className="w-4 h-4 ml-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      ></path>
-                    </svg>
-                  </span>
-                </div>
-              </div>
+      {/* PRODUCT SECTIONS */}
+      <ProductSection
+        title="🔥 Đang Giảm Giá"
+        subtitle="Ưu đãi có hạn — đặt ngay kẻo hết!"
+        products={products.sale}
+      />
+      <ProductSection
+        title="⭐ Đặt Nhiều Nhất"
+        subtitle="Những mẫu hoa được yêu thích nhất"
+        products={products.popular}
+      />
+      <ProductSection
+        title="✨ Sản Phẩm Mới"
+        subtitle="Cập nhật mẫu hoa mới nhất từ FlowerCorner"
+        products={products.newProducts}
+      />
+      <ProductSection
+        title="🎂 Hoa Sinh Nhật"
+        subtitle="Mẫu hoa tặng sinh nhật đặc sắc"
+        products={products.birthday}
+      />
+      <ProductSection
+        title="🏮 Hoa Khai Trương"
+        subtitle="Chúc mừng khai trương, phồn vinh thịnh vượng"
+        products={products.opening}
+      />
+
+      {/* PARTNERS */}
+      <div className="partners">
+        <div className="partnersInner">
+          <h2>Khách Hàng Tiêu Biểu</h2>
+          <div className="partnerLogos">
+            {partners.map((name) => (
+              <div key={name} className="partnerLogo">{name}</div>
             ))}
           </div>
-        </Container>
-      </section>
+        </div>
+      </div>
 
-      {/* 3. Sản phẩm bán chạy */}
-      <section className="py-24 bg-[#FCF9F7]">
-        <Container>
-          <div className="flex flex-col items-center mb-16">
-            <span className="text-rose-500 font-bold tracking-widest uppercase text-xs mb-3">
-              Bán chạy nhất
-            </span>
-            <h2 className="text-4xl font-bold text-gray-800 text-center">
-              Tình Yêu Trong Từng Mẫu Hoa
-            </h2>
-            <div className="w-16 h-1 bg-rose-200 mt-4 rounded-full" />
-          </div>
+      {/* ABOUT */}
+      <div className="about">
+        <h2>Shop Hoa Tươi 1998 Flower</h2>
+        <p>
+          Bạn đang tìm kiếm một dịch vụ hoa tươi uy tín? 1998 Flower sẵn sàng hỗ trợ bạn với dịch vụ đặt hoa online và giao hàng tận nơi nhanh chóng.
+          Chúng tôi tập trung tối ưu trải nghiệm và chuyên phục vụ duy nhất trong khu vực nội thành TP.HCM, đảm bảo hoa luôn giữ được độ tươi mới hoàn hảo khi đến tay người nhận.
+        </p>
+        <p>
+          1998 Flower – Tiệm hoa tươi tại TP.HCM, nơi kết nối những cảm xúc trọn vẹn. Chỉ với vài thao tác đặt hoa online đơn giản, chúng tôi sẽ giao tận tay người thương của bạn những bó hoa tinh tế nhất.
+          Dịch vụ áp dụng giao nhanh tại các quận nội thành TP.HCM.
+        </p>
+        <h2 style={{ marginTop: 24 }}>Cam Kết Từ 1998 Flower</h2>
+        <ul>
+          <li>Hoa tươi mới nhập về trong ngày</li>
+          <li>Hoa đẹp và 90% giống như hình</li>
+          <li>Giao hoa nhanh, đúng giờ đúng người đúng thời điểm</li>
+          <li>Gửi hình hoa trước khi giao theo yêu cầu</li>
+          <li>Đội ngũ florists chuyên nghiệp với nhiều năm kinh nghiệm</li>
+        </ul>
+        <p style={{ marginTop: 20 }}>
+          📞 Gọi ngay <strong style={{ color: "var(--pink)" }}>0976 848 744</strong> để được tư vấn và đặt hoa!
+        </p>
+      </div>
 
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[...Array(4)].map((_, i) => (
-                <div
-                  key={i}
-                  className="animate-pulse bg-white rounded-2xl h-112.5 border border-gray-100"
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {bestSellers.slice(0, 4).map((flower) => (
-                <FlowerCard key={flower.id} flower={flower} />
-              ))}
-            </div>
-          )}
-        </Container>
-      </section>
-
-      {/* 4. Cam kết */}
-      <section className="py-24 bg-white border-y border-gray-50">
-        <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {commitments.map((item, idx) => (
-              <div
-                key={idx}
-                className="text-center group p-6 rounded-3xl hover:bg-rose-50 transition-colors"
-              >
-                <div className="text-5xl mb-6 inline-flex items-center justify-center bg-white w-20 h-20 rounded-2xl shadow-sm group-hover:scale-110 transition-transform">
-                  {item.icon}
-                </div>
-                <h4 className="text-lg font-bold text-gray-800 mb-3 uppercase tracking-wide">
-                  {item.title}
-                </h4>
-                <p className="text-gray-500 text-sm leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* 5. Hoa theo loại */}
-        {/* <section className="py-24 bg-[#FCF9F7]">
-          <Container>
-            <div className="text-center mb-16">
-              <span className="text-rose-500 font-bold tracking-widest uppercase text-xs mb-3">
-                Đa dạng lựa chọn
-              </span>
-              <h2 className="text-4xl font-bold text-gray-800">
-                Hoa Theo Chủng Loại
-              </h2>
-              <div className="w-16 h-1 bg-rose-200 mt-4 mx-auto rounded-full" />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {flowerTypes.map((type, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white rounded-3xl p-4 shadow-sm hover:shadow-lg transition-all text-center"
-                >
-                  <div className="aspect-square rounded-2xl overflow-hidden mb-4">
-                    <Image
-                      width={400}
-                      height={400}
-                      src={type.img}
-                      alt={type.name}
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <h4 className="font-bold text-gray-800 text-lg">{type.name}</h4>
-                  <p className="text-rose-400 text-sm mt-1">{type.count}</p>
-                </div>
-              ))}
-            </div>
-          </Container>
-        </section> */}
-
-      {/* 6. Review */}
-      <section className="py-24 bg-white">
-        <Container>
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800">
-              Khách Hàng Nói Gì?
-            </h2>
-            <div className="w-16 h-1 bg-rose-200 mt-4 mx-auto rounded-full" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {reviews.map((rev, idx) => (
-              <div
-                key={idx}
-                className="p-8 rounded-4xl bg-[#FCF9F7] border border-gray-100 italic relative"
-              >
-                <svg
-                  className="absolute top-6 left-6 w-8 h-8 text-rose-100"
-                  fill="currentColor"
-                  viewBox="0 0 32 32"
-                >
-                  <path d="M10 8v8H6v4h4v4H6a2 2 0 01-2-2V10a2 2 0 012-2h4m12 0v8h-4v4h4v4h-4a2 2 0 01-2-2V10a2 2 0 012-2h4"></path>
-                </svg>
-                <p className="text-gray-600 mb-6 mt-4 relative z-10">
-                  &quot;{rev.content}&quot;
-                </p>
-                <div className="flex items-center space-x-3 not-italic">
-                  <div className="w-10 h-10 bg-rose-200 rounded-full flex items-center justify-center text-rose-700 font-bold">
-                    {rev.name[0]}
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-gray-800 text-sm">
-                      {rev.name}
-                    </h5>
-                    <p className="text-xs text-gray-400">{rev.role}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* 7. Nội dung SEO */}
-      <section className="py-24 bg-rose-50/30">
-        <Container>
-          <div className="max-w-4xl mx-auto prose prose-rose text-gray-600 leading-relaxed text-justify">
-            <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">
-              Dịch Vụ Giao Hoa Tươi Uy Tín Tại 1998Flower            </h2>
-            <p>
-              <strong>1998Flower</strong> chuyên <strong>cung cấp</strong> các mẫu hoa tươi thiết kế tinh tế, phù hợp cho nhiều dịp như <strong>sinh nhật</strong>, <strong>khai trương</strong>, <strong>kỷ niệm</strong> hay <strong>chia buồn</strong>.{" "}
-              Hoa được <strong>tuyển chọn</strong> và nhập mới mỗi ngày từ các nông trại uy tín, mang đến sự tươi mới và chất lượng tốt nhất.
-              Mỗi sản phẩm đều được chăm chút tỉ mỉ bởi thợ cắm hoa giàu kinh nghiệm. Chúng tôi cung cấp dịch vụ đặt hoa online và giao hoa tận nơi nhanh chóng, giúp bạn dễ dàng gửi gắm những lời chúc và tình cảm đến người thân, bạn bè và đối tác.
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* 8. FAQ */}
-      <section className="py-24 bg-white">
-        <Container>
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-800">
-              Câu Hỏi Thường Gặp
-            </h2>
-            <div className="w-16 h-1 bg-rose-200 mt-4 mx-auto rounded-full" />
-          </div>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="border border-gray-100 rounded-2xl overflow-hidden hover:border-rose-200 transition-colors"
-              >
-                <div className="bg-gray-50 p-6 font-bold text-gray-800 flex justify-between items-center">
-                  {faq.q}
-                  <svg
-                    className="w-5 h-5 text-rose-300"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    ></path>
-                  </svg>
-                </div>
-                <div className="p-6 bg-white text-gray-500 text-sm">
-                  {faq.a}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* 9. CTA Section */}
-      <section className="py-24">
-        <Container>
-          <div className="bg-rose-100 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-rose-200/50 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/30 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
-
-            <h2 className="text-4xl md:text-5xl font-bold text-rose-800 mb-6 relative z-10">
-              Bạn muốn thiết kế hoa riêng
-            </h2>
-            <p className="text-rose-700/80 mb-10 text-lg relative z-10 max-w-xl mx-auto">
-              Hãy để chúng tôi lắng nghe câu chuyện của bạn và tạo ra món quà
-              hoàn hảo nhất theo yêu cầu cá nhân.
-            </p>
-            <Button
-              size="lg"
-              className="bg-rose-600 text-white hover:bg-rose-700 relative z-10 shadow-xl"
-              onClick={() => router.push("/contact")}
-            >
-              Liên Hệ Ngay
-            </Button>
-          </div>
-        </Container>
-      </section>
-    </main>
+      <Footer />
+    </>
   );
-};
-
-export default HomePage;
+}

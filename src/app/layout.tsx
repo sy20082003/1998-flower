@@ -1,33 +1,20 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import FloatingContact from "@/components/FloatingContact";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"], // chọn weight bạn cần
-});
 
 export const metadata: Metadata = {
-  title: "1998flower",
-  description: "Hoa tươi tân phú",
+  title: "Shop Hoa Tươi 1998 Flower - Giao Hoa Trong Ngày",
+  description:
+    "Shop hoa tươi 1998 Flower đặt hoa online giao nhanh tận nơi trong nội thành. Giao Miễn Phí tại khực Tân Phú",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`${roboto.className} antialiased`}>
-        <Navbar />
-        {children}
-        <FloatingContact />
-        <Footer />
-      </body>
+    <html lang="vi">
+      <body>{children}</body>
     </html>
   );
 }
