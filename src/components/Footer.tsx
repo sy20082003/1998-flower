@@ -36,7 +36,7 @@ export default function Footer() {
             <div className="socialLinks">
               <a className="socialLink" href="https://www.facebook.com/hoatuoi1998flower" target="_blank" rel="noreferrer">Facebook</a>
               <a className="socialLink" href="https://www.instagram.com/_1998flower?fbclid=IwY2xjawSX6qdleHRuA2FlbQIxMABicmlkETE4Q3IxMlFyejdUeUNsWDEwc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHuR0RD8zBkF3306jzHgnlUoJ6DoIj0l1_I4Esop7Fw2LOXoG0FMXhVQKSgTh_aem_1to7aKoHP_RKOdRCxt-SBw" target="_blank" rel="noreferrer">Instagram</a>
-              <a className="socialLink" href="https://www.tiktok.com/@1998flower_?fbclid=IwY2xjawSYHulleHRuA2FlbQIxMABicmlkETF1eFh3YWhXbFNaWW11S0prc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHs1-V1nSM04a7nKGEqLV9weZC9EbOyDl0ed4qoBKViy9YyLjnYkcgyn4lq82_aem_MTdCgtaeap5vK-uoB89dvQ" target="_blank" rel="noreferrer">Youtube</a>
+              <a className="socialLink" href="https://www.tiktok.com/@1998flower_?fbclid=IwY2xjawSYHulleHRuA2FlbQIxMABicmlkETF1eFh3YWhXbFNaWW11S0prc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHs1-V1nSM04a7nKGEqLV9weZC9EbOyDl0ed4qoBKViy9YyLjnYkcgyn4lq82_aem_MTdCgtaeap5vK-uoB89dvQ" target="_blank" rel="noreferrer">Tiktok</a>
               <a className="socialLink" href="https://zalo.me/0976848744" target="_blank" rel="noreferrer">Zalo</a>
             </div>
           </div>
