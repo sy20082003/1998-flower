@@ -368,7 +368,7 @@ a { text-decoration: none; color: inherit; }
   .productGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 8px;         /* Khoảng cách giữa các ô sản phẩm */
+    gap: 6px;         /* Khoảng cách giữa các ô sản phẩm */
     padding: 0 5px;   /* Khoảng cách cách 2 bên mép màn hình */
   }
 
@@ -376,7 +376,7 @@ a { text-decoration: none; color: inherit; }
   .productCard {
     background: var(--white);
     border-radius: var(--radius);
-    padding: 8px;      /* Thu nhỏ padding để nhường không gian cho ảnh */
+    padding: 5px;      /* Thu nhỏ padding để nhường không gian cho ảnh */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
