@@ -42,7 +42,7 @@ export default function OrderModal({ productName, onClose }: OrderModalProps) {
     style={{ width: '150px', height: '150px', objectFit: 'contain', margin: '0 auto' }} 
   />
   <span style={{ display: 'block', fontSize: '14px', color: 'var(--green)', marginTop: '5px' }}>
-    Nhấn hoặc quét mã để Chat Zalo
+    Nhấn hoặc quét mã QR để liên hệ đặt hoa!
   </span>
 </a>
         <button className="modalClose" onClick={onClose}>Đóng</button>
