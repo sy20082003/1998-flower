@@ -29,7 +29,6 @@ export default function Header() {
 
       <nav className="siteNav">
         <div className="navInner">
-          <div className="navItem"><Link href="/">Trang Chủ</Link></div>
           <div className="navItem">
             <a href="#">Hoa Sinh Nhật ▾</a>
             <div className="dropdown">

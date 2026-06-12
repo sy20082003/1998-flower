@@ -445,8 +445,8 @@ a { text-decoration: none; color: inherit; }
   .productGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 6px;         /* Khoảng cách giữa các ô sản phẩm */
-    padding: 0 0px;   /* Khoảng cách cách 2 bên mép màn hình */
+    gap: 7px;         /* Khoảng cách giữa các ô sản phẩm */
+    padding: 0px;   /* Khoảng cách cách 2 bên mép màn hình */
   }
 
   /* Định dạng lại từng ô sản phẩm cho gọn gàng */
