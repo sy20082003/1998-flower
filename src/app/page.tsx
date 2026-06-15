@@ -6,7 +6,7 @@ import { products } from "@/data/products";
 const partners = ["Samsung","Nestle","Generali","Schneider","GFK","Yeah 1","KOVA","Midea","Tekcom","Acis","Seniart","Matxi"];
 
 export default function HomePage() {
-  return (
+  return ( 
     <>
       <Header />
 

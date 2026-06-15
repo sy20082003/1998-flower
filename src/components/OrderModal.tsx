@@ -43,7 +43,7 @@ export default function OrderModal({ productName, onClose }: OrderModalProps) {
   />
   <span style={{ display: 'block', fontSize: '14px', color: 'var(--green)', marginTop: '5px' }}>
     Nhấn hoặc quét mã QR để liên hệ đặt hoa!
-  </span>
+  </span> 
 </a>
         <button className="modalClose" onClick={onClose}>Đóng</button>
       </div>

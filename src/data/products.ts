@@ -62,16 +62,16 @@ const birthdayProducts: Product[] = [
 ];
 
 const openingProducts: Product[] = [
-  { slug: "vang-danh",       name: "Vang Danh",        price: "1,370,000₫",                                 image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "vung-ben",        name: "Vững Bền",         price: "1,510,000₫", old: "1,660,000₫", disc: "9%",  image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "phon-vinh",       name: "Phồn Vinh",        price: "2,360,000₫",                                 image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "khai-hoan",       name: "Khải Hoàn",        price: "2,250,000₫",                                 image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "nhu-y-cat-tuong", name: "Như Ý Cát Tường",  price: "1,290,000₫", old: "1,670,000₫", disc: "23%", image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "vung-tin",        name: "Vững Tin",         price: "1,190,000₫", old: "1,370,000₫", disc: "13%", image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "good-luck",       name: "Good Luck",        price: "1,410,000₫", old: "1,520,000₫", disc: "7%",  image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "van-su-may-man",  name: "Vạn Sự May Mắn",  price: "2,160,000₫",                                 image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "nhat-ban-van-loi",name: "Nhất Bản Vạn Lợi", price: "2,010,000₫",                                 image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
-  { slug: "doanh-du-dac-loi",name: "Doanh Dư Đắc Lợi", price: "2,050,000₫",                                 image: "/products/bo/hong-ngot-ngao.jpg", category: "opening" },
+  { slug: "vang-danh",       name: "Vang Danh",        price: "1,370,000₫",                                 image: "/products/gio/td-1.jpg", category: "opening" },
+  { slug: "vung-ben",        name: "Vững Bền",         price: "1,510,000₫", old: "1,660,000₫", disc: "9%",  image: "/products/gio/td-2.jpg", category: "opening" },
+  { slug: "phon-vinh",       name: "Phồn Vinh",        price: "2,360,000₫",                                 image: "/products/gio/td-3.jpg", category: "opening" },
+  { slug: "khai-hoan",       name: "Khải Hoàn",        price: "2,250,000₫",                                 image: "/products/gio/th-1.jpg", category: "opening" },
+  { slug: "nhu-y-cat-tuong", name: "Như Ý Cát Tường",  price: "1,290,000₫", old: "1,670,000₫", disc: "23%", image: "/products/gio/th-2.jpg", category: "opening" },
+  { slug: "vung-tin",        name: "Vững Tin",         price: "1,190,000₫", old: "1,370,000₫", disc: "13%", image: "/products/gio/th-3.jpg", category: "opening" },
+  { slug: "good-luck",       name: "Good Luck",        price: "1,410,000₫", old: "1,520,000₫", disc: "7%",  image: "/products/gio/tv-1.jpg", category: "opening" },
+  { slug: "van-su-may-man",  name: "Vạn Sự May Mắn",  price: "2,160,000₫",                                 image: "/products/gio/tv-2.jpg", category: "opening" },
+  { slug: "nhat-ban-van-loi",name: "Nhất Bản Vạn Lợi", price: "2,010,000₫",                                 image: "/products/gio/tv-3.jpg", category: "opening" },
+  { slug: "doanh-du-dac-loi",name: "Doanh Dư Đắc Lợi", price: "2,050,000₫",                                 image: "/products/gio/tx-1.jpg", category: "opening" },
 ];
 
 export const products = {
