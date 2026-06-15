@@ -14,14 +14,14 @@ export interface Product {
 const saleProducts: Product[] = [
   { slug: "say-dam",          name: "Say Đắm",                price: "560,000₫", old: "620,000₫", disc: "10%", image: "/products/bo/nang-tho-pastel.jpg", category: "sale" },
   { slug: "moc-an",           name: "Mộc An",                 price: "375,000₫", old: "400,000₫", disc: "5%", image: "/products/bo/mocan-375k.jpg",       category: "sale" },
-  { slug: "doa-hoa-dinh-menh",name: "Đóa Hoa Định Mệnh 🌺",  price: "399,000₫", old: "440,000₫", disc: "10%",  image: "/products/bo/doa-hong-dinh-menh-400k.jpg", category: "sale" },
+  { slug: "doa-hoa-dinh-menh",name: "Đóa Hoa Định Mệnh 🌺",   price: "399,000₫", old: "440,000₫", disc: "10%",  image: "/products/bo/doa-hong-dinh-menh-400k.jpg", category: "sale" },
   { slug: "khe-thuong",       name: "Khẽ Thương💗💗",        price: "399,000₫", old: "456,000₫", disc: "14%", image: "/products/bo/khe-thuong-400k.jpg", category: "sale" },
   { slug: "ngot-ngao-cho-em", name: "Ngọt Ngào Cho Em",       price: "549,000₫", old: "600,000₫", disc: "9%",  image: "/products/bo/ngot-ngao-cho-em-550k.jpg", category: "sale" },
-  { slug: "naive",            name: "Naive",                  price: "510,000₫", old: "550,000₫", disc: "7%",  image: "/products/bo/nang-tho-pastel.jpg", category: "sale" },
-  { slug: "chao-em",          name: "Chào em!",           price: "450,000₫", old: "500,000₫", disc: "10%", image: "/products/bo/nang-tho-pastel.jpg", category: "sale" },
-  { slug: "caffeine",         name: "Caffeine",           price: "510,000₫", old: "580,000₫", disc: "12%", image: "/products/bo/nang-tho-pastel.jpg", category: "sale" },
-  { slug: "rieng-minh-em",    name: "Riêng Mình Em",      price: "710,000₫", old: "790,000₫", disc: "10%", image: "/products/bo/nang-tho-pastel.jpg", category: "sale" },
-  { slug: "ngat-huong",       name: "Ngát Hương",         price: "610,000₫", old: "660,000₫", disc: "8%",  image: "/products/bo/nang-tho-pastel.jpg", category: "sale" },
+  { slug: "hong-xinh-sizes",  name: "Hồng Xinh Size S",       price: "150,000₫", old: "200,000₫", disc: "30%",  image: "/products/bo/hong-xinh-sizes-150k.jpg", category: "sale" },
+  { slug: "sweetie-pie",      name: "Sweetie Pie💕",          price: "320,000₫", old: "385,000₫", disc: "20%", image: "/products/bo/sweetie-pie-320k.jpg", category: "sale" },
+  { slug: "nang-nhe-ben-em",  name: "Nặng Nhẹ Bên Em ☀️",     price: "400,000₫", old: "448,000₫", disc: "12%", image: "/products/bo/nang-nhe-ben-em-400k.jpg", category: "sale" },
+  { slug: "nu-hoang-anh-do",  name: "Nữ Hoàng Ánh Đỏ",        price: "400,000₫", old: "440,000₫", disc: "10%", image: "/products/bo/nu-hoang-anh-do-400k.jpg", category: "sale" },
+  { slug: "kem-vali",         name: "Kem Vali 💛",            price: "450,000₫", old: "486,000₫", disc: "8%",  image: "/products/bo/kem-vali-450k.jpg", category: "sale" },
 ];
 
 const popularProducts: Product[] = [
