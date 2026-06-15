@@ -39,14 +39,14 @@ const popularProducts: Product[] = [
 
 const newProducts: Product[] = [
   { slug: "mau-nang-nho",    name: "Màu nắng nhỏ",   price: "270,000₫",                              image: "/products/bo/mau-nang-nho-270k.jpg", category: "new" },
-  { slug: "magic",       name: "Magic",      price: "790,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
-  { slug: "touching-you",name: "Touching You",price: "730,000₫",                             image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
-  { slug: "men-thuong",  name: "Mến Thương", price: "730,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
-  { slug: "trang-nha",   name: "Trang Nhã",  price: "890,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
-  { slug: "tre-trung",   name: "Trẻ Trung",  price: "999,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
-  { slug: "rang-ngoi",   name: "Rạng Ngời",  price: "1,000,000₫",                            image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
-  { slug: "dac-biet",    name: "Đặc Biệt",   price: "1,660,000₫",                            image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
-  { slug: "nhu-y",       name: "Như Ý",      price: "730,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
+  { slug: "hoa-cho-nguoi-thuong",       name: "Hoa Cho Người Thương",      price: "790,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
+  { slug: "touching-you",     name: "Touching You",price: "730,000₫",                             image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
+  { slug: "men-thuong",       name: "Mến Thương", price: "730,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
+  { slug: "trang-nha",        name: "Trang Nhã",  price: "890,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
+  { slug: "tre-trung",        name: "Trẻ Trung",  price: "999,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
+  { slug: "rang-ngoi",        name: "Rạng Ngời",  price: "1,000,000₫",                            image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
+  { slug: "dac-biet",         name: "Đặc Biệt",   price: "1,660,000₫",                            image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
+  { slug: "nhu-y",            name: "Như Ý",      price: "730,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
 ];
 
 const birthdayProducts: Product[] = [
@@ -62,16 +62,16 @@ const birthdayProducts: Product[] = [
 ];
 
 const openingProducts: Product[] = [
-  { slug: "vang-danh",       name: "Vang Danh",        price: "1,370,000₫",                                 image: "/products/gio/td-1.jpg", category: "opening" },
-  { slug: "vung-ben",        name: "Vững Bền",         price: "1,510,000₫", old: "1,660,000₫", disc: "9%",  image: "/products/gio/td-2.jpg", category: "opening" },
-  { slug: "phon-vinh",       name: "Phồn Vinh",        price: "2,360,000₫",                                 image: "/products/gio/td-3.jpg", category: "opening" },
-  { slug: "khai-hoan",       name: "Khải Hoàn",        price: "2,250,000₫",                                 image: "/products/gio/th-1.jpg", category: "opening" },
-  { slug: "nhu-y-cat-tuong", name: "Như Ý Cát Tường",  price: "1,290,000₫", old: "1,670,000₫", disc: "23%", image: "/products/gio/th-2.jpg", category: "opening" },
-  { slug: "vung-tin",        name: "Vững Tin",         price: "1,190,000₫", old: "1,370,000₫", disc: "13%", image: "/products/gio/th-3.jpg", category: "opening" },
-  { slug: "good-luck",       name: "Good Luck",        price: "1,410,000₫", old: "1,520,000₫", disc: "7%",  image: "/products/gio/tv-1.jpg", category: "opening" },
-  { slug: "van-su-may-man",  name: "Vạn Sự May Mắn",  price: "2,160,000₫",                                 image: "/products/gio/tv-2.jpg", category: "opening" },
-  { slug: "nhat-ban-van-loi",name: "Nhất Bản Vạn Lợi", price: "2,010,000₫",                                 image: "/products/gio/tv-3.jpg", category: "opening" },
-  { slug: "doanh-du-dac-loi",name: "Doanh Dư Đắc Lợi", price: "2,050,000₫",                                 image: "/products/gio/tx-1.jpg", category: "opening" },
+  { slug: "vang-danh",       name: "Vang Danh",        price: "520,000₫",                                    image: "/products/gio/td-1.jpg", category: "opening" },
+  { slug: "vung-ben",        name: "Vững Bền",         price: "650,000₫",                                   image: "/products/gio/td-2.jpg", category: "opening" },
+  { slug: "phon-vinh",       name: "Phồn Vinh",        price: "700,000₫",                                   image: "/products/gio/td-3.jpg", category: "opening" },
+  { slug: "khai-hoan",       name: "Khải Hoàn",        price: "630,000₫",                                   image: "/products/gio/th-1.jpg", category: "opening" },
+  { slug: "nhu-y-cat-tuong", name: "Như Ý Cát Tường",  price: "1,880,000₫", old: "2,100,000₫", disc: "12%", image: "/products/gio/th-2.jpg", category: "opening" },
+  { slug: "vung-tin",        name: "Vững Tin",         price: "550,000₫",                                   image: "/products/gio/th-3.jpg", category: "opening" },
+  { slug: "good-luck",       name: "Good Luck",        price: "650,000₫",                                   image: "/products/gio/tv-1.jpg", category: "opening" },
+  { slug: "van-su-may-man",  name: "Vạn Sự May Mắn",  price: "650,000₫",                                  image: "/products/gio/tv-2.jpg", category: "opening" },
+  { slug: "nhat-ban-van-loi",name: "Nhất Bản Vạn Lợi", price: "500,000₫",                                 image: "/products/gio/tv-3.jpg", category: "opening" },
+  { slug: "doanh-du-dac-loi",name: "Doanh Dư Đắc Lợi", price: "1,050,000₫",                                 image: "/products/gio/tx-1.jpg", category: "opening" },
 ];
 
 export const products = {
