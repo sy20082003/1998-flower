@@ -12,7 +12,7 @@ export interface Product {
 }
 
 const saleProducts: Product[] = [
-  { slug: "say-dam",          name: "Say Đắm",                price: "560,000₫", old: "620,000₫", disc: "10%", image: "/products/bo/nang-tho-pastel.jpg", category: "sale" },
+  { slug: "lac-than-yeu-thuong",name: "Lạc Thần Yêu Thương",  price: "380,000₫", old: "418,000₫", disc: "10%", image: "/products/bo/lac-than-yeu-thuong-380k.jpg", category: "sale" },
   { slug: "moc-an",           name: "Mộc An",                 price: "375,000₫", old: "400,000₫", disc: "5%", image: "/products/bo/mocan-375k.jpg",       category: "sale" },
   { slug: "doa-hoa-dinh-menh",name: "Đóa Hoa Định Mệnh 🌺",   price: "399,000₫", old: "440,000₫", disc: "10%",  image: "/products/bo/doa-hong-dinh-menh-400k.jpg", category: "sale" },
   { slug: "khe-thuong",       name: "Khẽ Thương💗💗",        price: "399,000₫", old: "456,000₫", disc: "14%", image: "/products/bo/khe-thuong-400k.jpg", category: "sale" },
