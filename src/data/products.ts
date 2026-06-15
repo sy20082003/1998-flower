@@ -38,8 +38,8 @@ const popularProducts: Product[] = [
 ];
 
 const newProducts: Product[] = [
-  { slug: "phep-mau",    name: "Phép Màu",   price: "630,000₫", old: "690,000₫", disc: "9%", image: "/products/bo/kem-vali.jpg", category: "new" },
-  { slug: "magic",       name: "Magic",      price: "790,000₫",                              image: "/products/bo/kem-vali.jpg", category: "new" },
+  { slug: "mau-nang-nho",    name: "Màu nắng nhỏ",   price: "270,000₫",                              image: "/products/bo/mau-nang-nho-270k.jpg", category: "new" },
+  { slug: "magic",       name: "Magic",      price: "790,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
   { slug: "touching-you",name: "Touching You",price: "730,000₫",                             image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
   { slug: "men-thuong",  name: "Mến Thương", price: "730,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
   { slug: "trang-nha",   name: "Trang Nhã",  price: "890,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: "new" },
