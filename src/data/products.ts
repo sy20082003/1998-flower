@@ -50,15 +50,15 @@ const newProducts: Product[] = [
 ];
 
 const birthdayProducts: Product[] = [
-  { slug: "gio-hoa-ruc-ro", name: "Giỏ Hoa Ngày Rực Rỡ", price: "1,320,000₫",                                  image: "/products/bo/kem-vali.jpg", category: "birthday" },
-  { slug: "quyen-ru",       name: "Quyến Rũ",             price: "890,000₫",                                    image: "/products/bo/kem-vali.jpg", category: "birthday" },
-  { slug: "red-rose",       name: "Red Rose",             price: "1,000,000₫", old: "1,250,000₫", disc: "20%",  image: "/products/bo/kem-vali.jpg", category: "birthday" },
-  { slug: "luon-ben-em",    name: "Luôn Bên Em",          price: "490,000₫",   old: "520,000₫",   disc: "6%",   image: "/products/bo/kem-vali.jpg", category: "birthday" },
-  { slug: "mau-tinh-yeu",   name: "Màu Tình Yêu",         price: "950,000₫",                                    image: "/products/bo/kem-vali.jpg", category: "birthday" },
-  { slug: "elegant",        name: "Elegant",              price: "2,930,000₫",                                  image: "/products/bo/kem-vali.jpg", category: "birthday" },
-  { slug: "huong-nang-mai", name: "Hương Nắng Mai",       price: "1,290,000₫",                                  image: "/products/bo/kem-vali.jpg", category: "birthday" },
-  { slug: "malibu-sunset",  name: "Malibu Sunset",        price: "1,090,000₫",                                  image: "/products/bo/kem-vali.jpg", category: "birthday" },
-  { slug: "hy-vong",        name: "Hy Vọng",              price: "550,000₫",   old: "660,000₫",   disc: "17%",  image: "/products/bo/kem-vali.jpg", category: "birthday" },
+  { slug: "gio-hoa-ruc-ro", name: "Giỏ Hoa Ngày Rực Rỡ", price: "1,320,000₫",                                  image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
+  { slug: "quyen-ru",       name: "Quyến Rũ",             price: "890,000₫",                                    image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
+  { slug: "red-rose",       name: "Red Rose",             price: "1,000,000₫", old: "1,250,000₫", disc: "20%",  image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
+  { slug: "luon-ben-em",    name: "Luôn Bên Em",          price: "490,000₫",   old: "520,000₫",   disc: "6%",   image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
+  { slug: "mau-tinh-yeu",   name: "Màu Tình Yêu",         price: "950,000₫",                                    image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
+  { slug: "elegant",        name: "Elegant",              price: "2,930,000₫",                                  image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
+  { slug: "huong-nang-mai", name: "Hương Nắng Mai",       price: "1,290,000₫",                                  image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
+  { slug: "malibu-sunset",  name: "Malibu Sunset",        price: "1,090,000₫",                                  image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
+  { slug: "hy-vong",        name: "Hy Vọng",              price: "550,000₫",   old: "660,000₫",   disc: "17%",  image: "/products/bo/hong-ngot-ngao.jpg", category: "birthday" },
 ];
 
 const openingProducts: Product[] = [
