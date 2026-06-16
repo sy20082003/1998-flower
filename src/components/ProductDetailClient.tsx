@@ -72,7 +72,8 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             📞 Đặt Hoa Ngay — Gọi 0976 848 744
           </button>
           <p style={{ fontSize: 12, color: "#aaa", marginTop: 8 }}>
-            Hoặc Zalo: 09764 848 744 để được tư vấn miễn phí và đặt hoa nhanh chóng!
+            📌 Lưu ý: Do hoa tươi theo mùa và tình trạng nhập mỗi ngày,
+            sản phẩm thực tế có thể giống mẫu khoảng 90%. Shop cam kết phối hoa đúng tone màu, kiểu dáng và tổng thể thiết kế như hình, đảm bảo thành phẩm đẹp và hài hòa nhất khi giao đến khách hàng. 💐
           </p>
         </div>
       </div>
