@@ -74,12 +74,20 @@ const openingProducts: Product[] = [
   { slug: "doanh-du-dac-loi",name: "Doanh Dư Đắc Lợi", price: "1,050,000₫",                                 image: "/products/gio/tx-1.jpg", category: "opening" },
 ];
 
+const funeralProducts: Product[] = [
+  // TODO: Thay ảnh/giá thật khi có. Đây là dữ liệu tạm để trang "Hoa Tang Lễ" hoạt động.
+  { slug: "tang-le-kinh-vieng", name: "Kệ Hoa Kính Viếng", price: "850,000₫", image: "/products/gio/td-1.jpg", category: "funeral" },
+  { slug: "tang-le-vinh-biet",  name: "Vòng Hoa Vĩnh Biệt", price: "950,000₫", image: "/products/gio/td-2.jpg", category: "funeral" },
+  { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm", price: "1,200,000₫", image: "/products/gio/td-3.jpg", category: "funeral" },
+];
+
 export const products = {
   sale: saleProducts,
   popular: popularProducts,
   newProducts,
   birthday: birthdayProducts,
   opening: openingProducts,
+  funeral: funeralProducts,
 };
 
 export const allProducts: Record<string, Product> = {};

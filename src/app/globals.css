@@ -307,6 +307,15 @@ a { text-decoration: none; color: inherit; }
 .productDetailCta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,96,122,.5); }
 .breadcrumb { font-size: 13px; color: var(--mid); margin-bottom: 8px; }
 .breadcrumb a { color: var(--pink); }
+
+/* Thanh breadcrumb riêng cho trang danh mục (/danh-muc/[slug]) */
+.breadcrumbBar { background: var(--pink-lt); border-bottom: 1px solid #f3d9df; }
+.breadcrumbInner {
+  max-width: 1200px; margin: auto; padding: 10px 20px;
+  font-size: 13px; color: var(--mid); display: flex; gap: 6px; align-items: center;
+}
+.breadcrumbInner a { color: var(--pink); font-weight: 500; }
+.breadcrumbInner span { color: #bbb; }
 .detailBadges { display: flex; gap: 8px; flex-wrap: wrap; }
 .detailBadge {
   background: var(--pink-lt); border: 1px solid var(--pink);

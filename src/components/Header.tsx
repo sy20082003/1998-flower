@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { navGroups } from "@/data/categories";
 
 export default function Header() {
   return (
@@ -29,72 +30,26 @@ export default function Header() {
 
       <nav className="siteNav">
         <div className="navInner">
-          <div className="navItem">
-            <a href="#">Hoa Sinh Nhật ▾</a>
-            <div className="dropdown">
-              <a href="#">Hoa Sinh Nhật Sang Trọng</a>
-              <a href="#">Hoa Sinh Nhật Giá Rẻ</a>
-              <a href="#">Hoa Tặng Sinh Nhật Người Yêu</a>
-              <a href="#">Hoa Tặng Sinh Nhật Mẹ</a>
-              <a href="#">Lẵng Hoa Tặng Sinh Nhật</a>
-              <a href="#">Giỏ Hoa Sinh Nhật</a>
+          {navGroups.map((group) => (
+            <div className="navItem" key={group.slug}>
+              <Link href={`/danh-muc/${group.slug}`}>
+                {group.label}
+                {group.children && group.children.length > 0 ? " ▾" : ""}
+              </Link>
+              {group.children && group.children.length > 0 && (
+                <div className="dropdown">
+                  {group.children.map((child) => (
+                    <Link href={`/danh-muc/${child.slug}`} key={child.slug}>
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
+          ))}
+          <div className="navItem navSale">
+            <a href="tel:0976848744">🔥 Freeship Tân Phú!</a>
           </div>
-          <div className="navItem">
-            <a href="#">Hoa Khai Trương ▾</a>
-            <div className="dropdown">
-              <a href="#">Hoa Khai Trương Để Bàn</a>
-              <a href="#">Kệ Hoa Khai Trương</a>
-              <a href="#">Hoa Khai Trương Giá Rẻ</a>
-            </div>
-          </div>
-          <div className="navItem">
-            <a href="#">Lan Hồ Điệp ▾</a>
-            <div className="dropdown">
-              <a href="#">Lan Hồ Điệp Mini</a>
-              <a href="#">Lan Hồ Điệp Vàng</a>
-              <a href="#">Lan Hồ Điệp Trắng</a>
-              <a href="#">Chậu Lan 3 Cành</a>
-              <a href="#">Chậu Lan 5 Cành</a>
-            </div>
-          </div>
-          <div className="navItem"><a href="#">Hoa Tang Lễ</a></div>
-          <div className="navItem">
-            <a href="#">Chủ Đề ▾</a>
-            <div className="dropdown">
-              <a href="#">Hoa Chúc Mừng</a>
-              <a href="#">Hoa Cưới Cầm Tay</a>
-              <a href="#">Hoa Tình Yêu</a>
-              <a href="#">Hoa Valentine</a>
-              <a href="#">Ngày Của Mẹ</a>
-              <a href="#">Hoa 8-3 / 20-10</a>
-              <a href="#">Hoa Tốt Nghiệp</a>
-              <a href="#">Tết Âm Lịch</a>
-            </div>
-          </div>
-          <div className="navItem">
-            <a href="#">Thiết Kế ▾</a>
-            <div className="dropdown">
-              <a href="#">Bó Hoa</a>
-              <a href="#">Lẵng Hoa</a>
-              <a href="#">Giỏ Hoa</a>
-              <a href="#">Kệ Hoa</a>
-              <a href="#">Bình Hoa</a>
-              <a href="#">Hộp Hoa</a>
-            </div>
-          </div>
-          <div className="navItem">
-            <a href="#">Hoa Tươi ▾</a>
-            <div className="dropdown">
-              <a href="#">Hoa Hồng</a>
-              <a href="#">Hoa Hướng Dương</a>
-              <a href="#">Hoa Tulip</a>
-              <a href="#">Hoa Cúc Tana</a>
-              <a href="#">Hoa Thạch Thảo</a>
-              <a href="#">Hoa Ly</a>
-            </div>
-          </div>
-          <div className="navItem navSale"><a href="#">🔥 Freeship Tân Phú!</a></div>
         </div>
       </nav>
     </>
