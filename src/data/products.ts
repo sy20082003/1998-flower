@@ -76,10 +76,10 @@ const openingProducts: Product[] = [
 
 const funeralProducts: Product[] = [
   // TODO: Thay ảnh/giá thật khi có. Đây là dữ liệu tạm để trang "Hoa Tang Lễ" hoạt động.
-  { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 01", price: "2,800,000₫", image: "/products/ke/tang/hoatang01-2tr8.jpgg", category: "funeral" },
+  { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 01", price: "2,800,000₫", image: "/products/ke/tang/hoatang01-2tr8.jpg", category: "funeral" },
   { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 02", price: "1,800,000₫", image: "/products/ke/tang/hoatang02-1tr8.jpg", category: "funeral" },
   { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 03", price: "1,600,000₫", image: "/products/ke/tang/hoatang03-1tr6.jpg", category: "funeral" },
-  { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 04", price: "1,600,000₫", image: "/products/ke/tang/hoatang04-1tr6.jpgg", category: "funeral" },
+  { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 04", price: "1,600,000₫", image: "/products/ke/tang/hoatang04-1tr6.jpg", category: "funeral" },
   { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 05", price: "1,800,000₫", image: "/products/ke/tang/hoatang05-1tr8.jpg", category: "funeral" },
   { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 06", price: "1,000,000₫", image: "/products/ke/tang/hoatang06-1tr.jpg", category: "funeral" },
   { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 07", price: "2,000,000₫", image: "/products/ke/tang/hoatang07-2tr.jpg", category: "funeral" },
