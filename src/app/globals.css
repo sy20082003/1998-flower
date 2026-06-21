@@ -241,6 +241,16 @@ a { text-decoration: none; color: inherit; }
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 18px;
 }
+
+/* ── NÚT "XEM THÊM" (ProductSection) ── */
+.seeMoreWrap { display: flex; justify-content: center; margin-top: 28px; }
+.seeMoreBtn {
+  background: #fff; color: var(--pink); border: 1.5px solid var(--pink);
+  padding: 12px 32px; border-radius: 24px; font-size: 14px; font-weight: 600;
+  font-family: inherit; cursor: pointer; transition: all .2s;
+}
+.seeMoreBtn:hover { background: var(--pink); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(212,96,122,.3); }
+
 .productCard {
   background: var(--white); border-radius: 10px; overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,.06);
