@@ -90,6 +90,10 @@ const funeralProducts: Product[] = [
   { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 12", price: "1,200,000₫", image: "public/products/ke/tang/hoatang12-1tr2.jpg", category: "funeral" },
   { slug: "tang-le-tuong-niem", name: "Kệ Hoa Tưởng Niệm 13", price: "1,200,000₫", image: "public/products/ke/tang/hoatang13-1tr2.jpg", category: "funeral" },
 ];
+const graduationProducts: Product[] = [
+  { slug: "tot-nghiep-bo-hoa", name: "Bó Hoa Tốt Nghiệp", price: "550,000đ", image: "/products/ke/tang/...", category: "graduation" },
+  { slug: "tot-nghiep-gio-hoa", name: "Giỏ Hoa Tốt Nghiệp", price: "650,000đ", image: "/products/ke/tang/...", category: "graduation" },
+];
 
 export const products = {
   sale: saleProducts,
@@ -98,6 +102,7 @@ export const products = {
   birthday: birthdayProducts,
   opening: openingProducts,
   funeral: funeralProducts,
+  graduation: graduationProducts,
 };
 
 export const allProducts: Record<string, Product> = {};

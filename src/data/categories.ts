@@ -59,6 +59,7 @@ export const navGroups: NavGroup[] = [
     slug: "hoa-tang-le",
     label: "Hoa Tang Lễ",
     dataKey: "funeral",
+    
   },
   {
     slug: "chu-de",
@@ -70,7 +71,7 @@ export const navGroups: NavGroup[] = [
       { slug: "hoa-valentine", label: "Hoa Valentine", title: "Hoa Valentine" },
       { slug: "ngay-cua-me", label: "Ngày Của Mẹ", title: "Ngày Của Mẹ" },
       { slug: "hoa-8-3-20-10", label: "Hoa 8-3 / 20-10", title: "Hoa 8-3 / 20-10" },
-      { slug: "hoa-tot-nghiep", label: "Hoa Tốt Nghiệp", title: "Hoa Tốt Nghiệp" },
+      { slug: "hoa-tot-nghiep", label: "Hoa Tốt Nghiệp", title: "Hoa Tốt Nghiệp", dataKey: "graduation" },
       { slug: "tet-am-lich", label: "Tết Âm Lịch", title: "Tết Âm Lịch" },
     ],
   },
