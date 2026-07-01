@@ -41,20 +41,9 @@ export const navGroups: NavGroup[] = [
     children: [
       { slug: "hoa-khai-truong-de-ban", label: "Hoa Khai Trương Để Bàn", title: "Hoa Khai Trương Để Bàn" },
       { slug: "ke-hoa-khai-truong", label: "Kệ Hoa Khai Trương", title: "Kệ Hoa Khai Trương" },
-      { slug: "hoa-khai-truong-gia-re", label: "Hoa Khai Trương Giá Rẻ", title: "Hoa Khai Trương Giá Rẻ" },
     ],
   },
-  {
-    slug: "lan-ho-diep",
-    label: "Lan Hồ Điệp",
-    children: [
-      { slug: "lan-ho-diep-mini", label: "Lan Hồ Điệp Mini", title: "Lan Hồ Điệp Mini" },
-      { slug: "lan-ho-diep-vang", label: "Lan Hồ Điệp Vàng", title: "Lan Hồ Điệp Vàng" },
-      { slug: "lan-ho-diep-trang", label: "Lan Hồ Điệp Trắng", title: "Lan Hồ Điệp Trắng" },
-      { slug: "chau-lan-3-canh", label: "Chậu Lan 3 Cành", title: "Chậu Lan 3 Cành" },
-      { slug: "chau-lan-5-canh", label: "Chậu Lan 5 Cành", title: "Chậu Lan 5 Cành" },
-    ],
-  },
+  
   {
     slug: "hoa-tang-le",
     label: "Hoa Tang Lễ",
@@ -85,18 +74,6 @@ export const navGroups: NavGroup[] = [
       { slug: "ke-hoa", label: "Kệ Hoa", title: "Kệ Hoa" },
       { slug: "binh-hoa", label: "Bình Hoa", title: "Bình Hoa" },
       { slug: "hop-hoa", label: "Hộp Hoa", title: "Hộp Hoa" },
-    ],
-  },
-  {
-    slug: "hoa-tuoi",
-    label: "Hoa Tươi",
-    children: [
-      { slug: "hoa-hong", label: "Hoa Hồng", title: "Hoa Hồng" },
-      { slug: "hoa-huong-duong", label: "Hoa Hướng Dương", title: "Hoa Hướng Dương" },
-      { slug: "hoa-tulip", label: "Hoa Tulip", title: "Hoa Tulip" },
-      { slug: "hoa-cuc-tana", label: "Hoa Cúc Tana", title: "Hoa Cúc Tana" },
-      { slug: "hoa-thach-thao", label: "Hoa Thạch Thảo", title: "Hoa Thạch Thảo" },
-      { slug: "hoa-ly", label: "Hoa Ly", title: "Hoa Ly" },
     ],
   },
 ];
