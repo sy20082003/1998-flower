@@ -1,11 +1,21 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { navGroups } from "@/data/categories";
+import { searchProducts } from "@/lib/search";
 
 export default function Header() {
+  const router = useRouter();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+
+  const [query, setQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchWrapRef = useRef<HTMLDivElement>(null);
+
+  const suggestions = useMemo(() => searchProducts(query, 6), [query]);
 
   // Khoá cuộn trang khi menu mobile đang mở
   useEffect(() => {
@@ -15,6 +25,17 @@ export default function Header() {
     };
   }, [menuOpen]);
 
+  // Đóng gợi ý tìm kiếm khi bấm ra ngoài ô search
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (searchWrapRef.current && !searchWrapRef.current.contains(e.target as Node)) {
+        setShowSuggestions(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const closeMenu = () => {
     setMenuOpen(false);
     setOpenGroup(null);
@@ -22,6 +43,23 @@ export default function Header() {
 
   const toggleGroup = (slug: string) => {
     setOpenGroup((prev) => (prev === slug ? null : slug));
+  };
+
+  const goToSearchPage = (q: string) => {
+    const trimmed = q.trim();
+    if (!trimmed) return;
+    setShowSuggestions(false);
+    router.push(`/tim-kiem?q=${encodeURIComponent(trimmed)}`);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    goToSearchPage(query);
+  };
+
+  const handleSuggestionClick = () => {
+    setShowSuggestions(false);
+    setQuery("");
   };
 
   return (
@@ -52,9 +90,59 @@ export default function Header() {
             />
           </Link>
 
-          <div className="searchBar">
-            <input type="text" placeholder="Tìm kiếm mẫu hoa..." id="search-input" />
-            <button onClick={() => alert("Vui lòng gọi 0976 848 744 để được tư vấn trực tiếp!")}>🔍</button>
+          <div className="searchBar" ref={searchWrapRef}>
+            <form onSubmit={handleSearchSubmit} className="searchForm" role="search">
+              <input
+                type="text"
+                placeholder="Tìm kiếm mẫu hoa..."
+                id="search-input"
+                autoComplete="off"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => {
+                  if (query.trim()) setShowSuggestions(true);
+                }}
+              />
+              <button type="submit" aria-label="Tìm kiếm">🔍</button>
+            </form>
+
+            {showSuggestions && query.trim() && (
+              <div className="searchSuggestions">
+                {suggestions.length > 0 ? (
+                  <>
+                    {suggestions.map((p) => (
+                      <Link
+                        href={`/san-pham/${p.slug}`}
+                        key={p.slug}
+                        className="suggestionItem"
+                        onClick={handleSuggestionClick}
+                      >
+                        <img src={p.image} alt={p.name} className="suggestionImg" />
+                        <div className="suggestionInfo">
+                          <span className="suggestionName">{p.name}</span>
+                          <span className="suggestionPrice">{p.price}</span>
+                        </div>
+                      </Link>
+                    ))}
+                    <button
+                      type="button"
+                      className="suggestionSeeAll"
+                      onClick={() => goToSearchPage(query)}
+                    >
+                      Xem tất cả kết quả cho “{query.trim()}”
+                    </button>
+                  </>
+                ) : (
+                  <div className="suggestionEmpty">
+                    Không tìm thấy mẫu hoa phù hợp.<br />
+                    Gọi <a href="tel:0976848744">0976 848 744</a> để được tư vấn trực tiếp!
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="headerContact">

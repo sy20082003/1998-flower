@@ -75,19 +75,72 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: 1px; text-transform: uppercase;
 }
 .searchBar {
-  flex: 1; display: flex;
+  flex: 1; position: relative;
+}
+.searchForm {
+  display: flex;
   border: 1.5px solid #ddd;
   border-radius: 24px; overflow: hidden;
+  background: #fff;
 }
-.searchBar input {
+.searchForm input {
   flex: 1; border: none; outline: none;
   padding: 9px 16px; font-size: 13px;
   font-family: inherit; background: transparent;
 }
-.searchBar button {
+.searchForm button {
   background: var(--pink); border: none;
   color: #fff; padding: 0 18px; cursor: pointer; font-size: 14px;
 }
+
+/* ── GỢI Ý TÌM KIẾM (AUTOCOMPLETE) ── */
+.searchSuggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0; right: 0;
+  background: var(--white);
+  border: 1px solid #eee;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 28px rgba(0,0,0,.12);
+  z-index: 200;
+  overflow: hidden;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.suggestionItem {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 14px;
+  border-bottom: 1px solid #f5f5f5;
+  transition: background .15s;
+}
+.suggestionItem:hover { background: var(--pink-lt); }
+.suggestionImg {
+  width: 44px; height: 44px; border-radius: 6px;
+  object-fit: cover; flex-shrink: 0;
+  background: var(--pink-lt);
+}
+.suggestionInfo {
+  display: flex; flex-direction: column; gap: 3px;
+  overflow: hidden;
+}
+.suggestionName {
+  font-size: 13px; font-weight: 600; color: var(--dark);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.suggestionPrice { font-size: 12.5px; color: var(--pink); font-weight: 600; }
+.suggestionSeeAll {
+  display: block; width: 100%;
+  background: var(--pink-lt); border: none;
+  color: var(--pink); font-weight: 600; font-size: 12.5px;
+  padding: 11px 14px; cursor: pointer; text-align: center;
+  font-family: inherit;
+}
+.suggestionSeeAll:hover { background: var(--pink); color: #fff; }
+.suggestionEmpty {
+  padding: 18px 16px; font-size: 13px;
+  color: var(--mid); text-align: center; line-height: 1.7;
+}
+.suggestionEmpty a { color: var(--pink); font-weight: 600; }
 .headerContact { font-size: 12px; text-align: right; white-space: nowrap; }
 .headerContact strong { color: var(--pink); font-size: 14px; display: block; }
 
