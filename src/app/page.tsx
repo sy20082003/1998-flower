@@ -49,6 +49,11 @@ export default function HomePage() {
         subtitle="Chúc mừng khai trương, phồn vinh thịnh vượng"
         products={products.opening}
       />
+      <ProductSection
+        title="💐 Bó Hoa"
+        subtitle="Những bó hoa tươi được tuyển chọn kỹ lưỡng"
+        products={products.bo}
+      />
 
       {/* PARTNERS */}
       <div className="partners">

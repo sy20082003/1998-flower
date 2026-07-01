@@ -90,6 +90,26 @@ const funeralProducts: Product[] = [
   { slug: "tang-le-tuong-niem12", name: "Kệ Hoa Tưởng Niệm 12", price: "1,200,000₫", image: "/products/ke/tang/hoatang12-1tr2.jpg", category: "funeral" },
   { slug: "tang-le-tuong-niem13", name: "Kệ Hoa Tưởng Niệm 13", price: "1,200,000₫", image: "/products/ke/tang/hoatang13-1tr2.jpg", category: "funeral" },
 ];
+const boProducts: Product[] = [
+  { slug: "anh-hong-ruc-ro",      name: "Ánh Hồng Rực Rỡ",     price: "400,000₫",   image: "/products/bo/b-1-400.jpg",  category: "bo" },
+  { slug: "nang-tho",             name: "Nàng Thơ",             price: "500,000₫",   image: "/products/bo/b-2-500.jpg",  category: "bo" },
+  { slug: "nang-som-diu-dang",    name: "Nắng Sớm Dịu Dàng",    price: "200,000₫",   image: "/products/bo/b-3-200.jpg",  category: "bo" },
+  { slug: "yeu-thuong-vung-ve",   name: "Yêu Thương Vụng Về",   price: "400,000₫",   image: "/products/bo/b-4-400.jpg",  category: "bo" },
+  { slug: "hoang-hon-tim",        name: "Hoàng Hôn Tím",        price: "450,000₫",   image: "/products/bo/b-5-450.jpg",  category: "bo" },
+  { slug: "em-la-mua-xuan",       name: "Em Là Mùa Xuân",       price: "350,000₫",   image: "/products/bo/b-6-350.jpg",  category: "bo" },
+  { slug: "diu-dang-nhu-gio",     name: "Dịu Dàng Như Gió",     price: "350,000₫",   image: "/products/bo/b-7-350.jpg",  category: "bo" },
+  { slug: "sac-mau-hanh-phuc",    name: "Sắc Màu Hạnh Phúc",    price: "400,000₫",   image: "/products/bo/b-8-400.jpg",  category: "bo" },
+  { slug: "kieu-sa-long-lay",     name: "Kiêu Sa Lộng Lẫy",     price: "1,050,000₫", image: "/products/bo/b-9-1050.jpg", category: "bo" },
+  { slug: "vuong-mien-tinh-yeu",  name: "Vương Miện Tình Yêu",  price: "1,250,000₫", image: "/products/bo/b-10-1250.jpg",category: "bo" },
+  { slug: "thanh-xuan-ruc-ro",    name: "Thanh Xuân Rực Rỡ",    price: "450,000₫",   image: "/products/bo/b-11-450.jpg", category: "bo" },
+  { slug: "chom-yeu",             name: "Chớm Yêu",             price: "370,000₫",   image: "/products/bo/b-12-370.jpg", category: "bo" },
+  { slug: "ngay-nang-dep",        name: "Ngày Nắng Đẹp",        price: "350,000₫",   image: "/products/bo/b-13-350.jpg", category: "bo" },
+  { slug: "doa-hong-kieu-hanh",   name: "Đóa Hồng Kiêu Hãnh",   price: "850,000₫",   image: "/products/bo/b-14-850.jpg", category: "bo" },
+  { slug: "huong-sac-mua-yeu",    name: "Hương Sắc Mùa Yêu",    price: "500,000₫",   image: "/products/bo/b-15-500.jpg", category: "bo" },
+  { slug: "say-dam",              name: "Say Đắm",              price: "500,000₫",   image: "/products/bo/b-16-500.jpg", category: "bo" },
+  { slug: "loi-yeu-chua-noi",     name: "Lời Yêu Chưa Nói",     price: "650,000₫",   image: "/products/bo/b-17-650.jpg", category: "bo" },
+];
+
 const graduationProducts: Product[] = [
   { slug: "tot-nghiep-bo-hoa", name: "Bó Hoa Tốt Nghiệp", price: "550,000₫", image: "/products/ke/tang/...", category: "graduation" },
   { slug: "tot-nghiep-gio-hoa", name: "Giỏ Hoa Tốt Nghiệp", price: "650,000₫", image: "/products/ke/tang/...", category: "graduation" },
@@ -103,6 +123,7 @@ export const products = {
   opening: openingProducts,
   funeral: funeralProducts,
   graduation: graduationProducts,
+  bo: boProducts,
 };
 
 export const allProducts: Record<string, Product> = {};

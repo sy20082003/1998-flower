@@ -79,7 +79,7 @@ export const navGroups: NavGroup[] = [
     slug: "thiet-ke",
     label: "Thiết Kế",
     children: [
-      { slug: "bo-hoa", label: "Bó Hoa", title: "Bó Hoa" },
+      { slug: "bo-hoa", label: "Bó Hoa", title: "Bó Hoa", dataKey: "bo" },
       { slug: "lang-hoa", label: "Lẵng Hoa", title: "Lẵng Hoa" },
       { slug: "gio-hoa", label: "Giỏ Hoa", title: "Giỏ Hoa" },
       { slug: "ke-hoa", label: "Kệ Hoa", title: "Kệ Hoa" },
