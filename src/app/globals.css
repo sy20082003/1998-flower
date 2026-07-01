@@ -48,6 +48,22 @@ a { text-decoration: none; color: inherit; }
   display: flex; align-items: center;
   padding: 12px 20px; gap: 20px;
 }
+
+/* ── HAMBURGER BUTTON (chỉ hiện trên mobile) ── */
+.hamburgerBtn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px; height: 38px;
+  background: transparent; border: none;
+  cursor: pointer; padding: 0; flex-shrink: 0;
+}
+.hamburgerBtn span {
+  display: block; height: 2.5px; width: 100%;
+  background: var(--dark); border-radius: 2px;
+  transition: transform .2s, opacity .2s;
+}
 .logo {
   font-family: 'Playfair Display', serif;
   font-size: 22px; font-weight: 700;
@@ -160,29 +176,133 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ==========================================
-   🛠️ SỬA LỖI 3: TỐI ƯU RIÊNG CHO ĐIỆN THOẠI (MOBILE)
+   🛠️ MOBILE: ẨN NAV NGANG, DÙNG MENU HAMBURGER + DRAWER
    ========================================== */
 @media (max-width: 768px) {
-  .navInner {
-    /* Chuyển thanh cuộn ngang sang hiển thị tự động xuống dòng gọn gàng,
-       giúp menu con xổ xuống thoải mái mà không bao giờ bị cắt mất */
-    flex-wrap: wrap;
-    overflow: visible;
-    justify-content: center;
-    gap: 2px;
-    padding: 5px 10px;
-  }
-  
-  .navItem > a {
-    padding: 8px 12px; /* Thu nhỏ khoảng cách nút trên mobile cho vừa vặn */
-  }
+  .hamburgerBtn { display: flex; }
+  .siteNav { display: none; }
+}
 
-  .dropdown {
-    /* Căn menu thả xuống rớt ngay chính giữa nút cha trên mobile */
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  }
+/* ==========================================
+   MENU HAMBURGER — OVERLAY + DRAWER (MOBILE)
+   ========================================== */
+.mobileOverlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 400;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.mobileOverlay.active {
+  display: block;
+  opacity: 1;
+}
+
+.mobileDrawer {
+  position: fixed;
+  top: 0; right: 0;
+  height: 100%;
+  width: min(86vw, 340px);
+  background: var(--white);
+  z-index: 500;
+  box-shadow: -6px 0 24px rgba(0,0,0,.15);
+  transform: translateX(100%);
+  transition: transform .28s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.mobileDrawer.open {
+  transform: translateX(0);
+}
+
+.mobileDrawerHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px;
+  background: var(--pink);
+  color: #fff;
+  flex-shrink: 0;
+}
+.mobileDrawerTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 700;
+}
+.mobileCloseBtn {
+  background: rgba(255,255,255,.2); border: none;
+  color: #fff; width: 30px; height: 30px; border-radius: 50%;
+  font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.mobileCloseBtn:hover { background: rgba(255,255,255,.35); }
+
+.mobileDrawerBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 0 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobileGroup {
+  border-bottom: 1px solid #f2f2f2;
+}
+.mobileGroupRow {
+  display: flex; align-items: stretch;
+}
+.mobileGroupLink {
+  flex: 1;
+  padding: 14px 18px;
+  font-size: 14.5px; font-weight: 600;
+  color: var(--dark);
+}
+.mobileGroupLink:active { color: var(--pink); }
+
+.mobileGroupToggle {
+  width: 48px;
+  background: transparent; border: none;
+  color: var(--pink); font-size: 16px;
+  cursor: pointer;
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.mobileGroupToggle.rotated { transform: rotate(180deg); }
+
+.mobileSubList {
+  max-height: 0;
+  overflow: hidden;
+  background: var(--pink-lt);
+  transition: max-height .25s ease;
+}
+.mobileSubList.open {
+  max-height: 600px;
+}
+.mobileSubLink {
+  display: block;
+  padding: 11px 18px 11px 32px;
+  font-size: 13.5px;
+  color: var(--mid);
+  border-top: 1px solid rgba(0,0,0,.04);
+  position: relative;
+}
+.mobileSubLink::before {
+  content: '·';
+  position: absolute;
+  left: 20px;
+  color: var(--pink);
+  font-weight: 700;
+}
+.mobileSubLink:active { color: var(--pink); }
+
+.mobileHotlineBanner {
+  display: block;
+  margin: 16px 18px 0;
+  background: var(--green);
+  color: #fff;
+  text-align: center;
+  padding: 13px 12px;
+  border-radius: 8px;
+  font-size: 13px; font-weight: 600;
 }
 
 /* ── HERO ── */
@@ -449,9 +569,11 @@ a { text-decoration: none; color: inherit; }
   .productDetailImg { max-width: 320px; margin: auto; }
 }
 @media (max-width: 640px) {
-  .headerInner { flex-wrap: wrap; }
-  .headerContact { order: 1; }
-  .searchBar { order: 2; width: 100%; }
+  .headerInner { flex-wrap: wrap; gap: 10px; }
+  .hamburgerBtn { order: 0; }
+  .logo { order: 1; }
+  .headerContact { order: 2; margin-left: auto; }
+  .searchBar { order: 3; width: 100%; }
   .about { padding: 24px 16px; }
   .stickyHotline { bottom: 12px; right: 12px; }
   .hotlineBtn { padding: 10px 14px; font-size: 12px; }
