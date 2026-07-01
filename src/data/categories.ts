@@ -88,7 +88,7 @@ navGroups.forEach((group) => {
     slug: group.slug,
     label: group.label,
     title: group.label,
-    dataKey: group.dataKey,
+    dataKey: group.dataKey,v
   });
   group.children?.forEach((child) => {
     allCategories.push({
