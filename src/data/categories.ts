@@ -88,8 +88,9 @@ navGroups.forEach((group) => {
     slug: group.slug,
     label: group.label,
     title: group.label,
-    dataKey: group.dataKey,
+    dataKey: group.dataKey, // <-- Đã xóa chữ v ở đây, sạch sẽ và an toàn!
   });
+  
   group.children?.forEach((child) => {
     allCategories.push({
       ...child,
