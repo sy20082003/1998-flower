@@ -171,42 +171,33 @@ const openingSpThemProducts: Product[] = [
   { slug: "hong-phuc-te-thien", name: "Hồng Phúc Tề Thiên", price: "1,400,000₫", image: "/products/ke/khai-truong/hong-phuc-te-thien.jpg", category: ["opening"] },
 ];
 
+// Đã xoá 10 sản phẩm cũ dùng chung 1 ảnh placeholder (hong-ngot-ngao.jpg).
+// "Đặt Nhiều Nhất" giờ lấy từ các bó hoa có ảnh thật, đa dạng giá.
 const popularProducts: Product[] = [
-  { slug: "your-day",      name: "Your Day",       price: "490,000₫", old: "520,000₫", disc: "6%",  image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "pink-moon",     name: "Pink Moon",      price: "1,150,000₫",                             image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "khuc-tinh-ca",  name: "Khúc Tình Ca",   price: "760,000₫",                               image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "dam-me",        name: "Đam Mê",         price: "490,000₫", old: "520,000₫", disc: "6%",  image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "thien-than",    name: "Thiên Thần",     price: "410,000₫",                               image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "vintage-love",  name: "Vintage Love",   price: "460,000₫", old: "520,000₫", disc: "12%", image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "ngat-ngay",     name: "Ngất Ngây",      price: "550,000₫", old: "590,000₫", disc: "7%",  image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "ngay-tuoi-dep", name: "Ngày Tươi Đẹp",  price: "560,000₫", old: "630,000₫", disc: "11%", image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "bach-hop",      name: "Bách Hợp",       price: "550,000₫", old: "630,000₫", disc: "13%", image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
-  { slug: "ms-spring",     name: "Ms Spring",      price: "390,000₫", old: "420,000₫", disc: "7%",  image: "/products/bo/hong-ngot-ngao.jpg", category: ["popular"] },
+  boProducts[8],  // Kiêu Sa Lộng Lẫy
+  boProducts[9],  // Vương Miện Tình Yêu
+  boProducts[13], // Đóa Hồng Kiêu Hãnh
+  boProducts[15], // Say Đắm
+  boProducts[16], // Lời Yêu Chưa Nói
+  boProducts[0],  // Ánh Hồng Rực Rỡ
+  boProducts[4],  // Hoàng Hôn Tím
+  boProducts[7],  // Sắc Màu Hạnh Phúc
+  boProducts[14], // Hương Sắc Mùa Yêu
+  boProducts[10], // Thanh Xuân Rực Rỡ
+  saleProducts[9],  // Kem Vali (đã gắn sẵn tag popular)
+  saleProducts[4],  // Ngọt Ngào Cho Em
 ];
 
+// "Sản Phẩm Mới" — nơi có NHIỀU sản phẩm nhất, gồm toàn bộ 53 bó hoa vừa thêm
+// (đây đúng nghĩa là hàng mới nhất của shop) + 1 sản phẩm mới có ảnh thật từ trước.
 const newProducts: Product[] = [
-  { slug: "mau-nang-nho",    name: "Màu nắng nhỏ",   price: "270,000₫",                              image: "/products/bo/mau-nang-nho-270k.jpg", category: ["new"] },
-  { slug: "hoa-cho-nguoi-thuong",       name: "Hoa Cho Người Thương",      price: "280,000₫",     image: "/products/bo/hong-ngot-ngao.jpg", category: ["new"] },
-  { slug: "touching-you",     name: "Touching You",price: "730,000₫",                             image: "/products/bo/hong-ngot-ngao.jpg", category: ["new"] },
-  { slug: "men-thuong",       name: "Mến Thương", price: "730,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: ["new"] },
-  { slug: "trang-nha",        name: "Trang Nhã",  price: "890,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: ["new"] },
-  { slug: "tre-trung",        name: "Trẻ Trung",  price: "999,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: ["new"] },
-  { slug: "rang-ngoi",        name: "Rạng Ngời",  price: "1,000,000₫",                            image: "/products/bo/hong-ngot-ngao.jpg", category: ["new"] },
-  { slug: "dac-biet",         name: "Đặc Biệt",   price: "1,660,000₫",                            image: "/products/bo/hong-ngot-ngao.jpg", category: ["new"] },
-  { slug: "nhu-y",            name: "Như Ý",      price: "730,000₫",                              image: "/products/bo/hong-ngot-ngao.jpg", category: ["new"] },
+  { slug: "mau-nang-nho", name: "Màu nắng nhỏ", price: "270,000₫", image: "/products/bo/mau-nang-nho-270k.jpg", category: ["new"] },
+  ...boSpThemProducts,
 ];
 
-const birthdayProducts: Product[] = [
-  { slug: "gio-hoa-ruc-ro", name: "Giỏ Hoa Ngày Rực Rỡ", price: "1,320,000₫",                                  image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-  { slug: "quyen-ru",       name: "Quyến Rũ",             price: "890,000₫",                                    image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-  { slug: "red-rose",       name: "Red Rose",             price: "1,000,000₫", old: "1,250,000₫", disc: "20%",  image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-  { slug: "luon-ben-em",    name: "Luôn Bên Em",          price: "490,000₫",   old: "520,000₫",   disc: "6%",   image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-  { slug: "mau-tinh-yeu",   name: "Màu Tình Yêu",         price: "950,000₫",                                    image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-  { slug: "elegant",        name: "Elegant",              price: "2,930,000₫",                                  image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-  { slug: "huong-nang-mai", name: "Hương Nắng Mai",       price: "1,290,000₫",                                  image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-  { slug: "malibu-sunset",  name: "Malibu Sunset",        price: "1,090,000₫",                                  image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-  { slug: "hy-vong",        name: "Hy Vọng",              price: "550,000₫",   old: "660,000₫",   disc: "17%",  image: "/products/bo/hong-ngot-ngao.jpg", category: ["birthday"] },
-];
+// "Hoa Sinh Nhật" — cũng là nơi có nhiều sản phẩm nhất (đứng thứ 2 sau Sản Phẩm Mới),
+// dùng chung bộ ảnh bó hoa thật vì đều là mẫu phù hợp tặng sinh nhật.
+const birthdayProducts: Product[] = [...boSpThemProducts];
 
 const funeralProducts: Product[] = [
   // TODO: Thay ảnh/giá thật khi có. Đây là dữ liệu tạm để trang "Hoa Tang Lễ" hoạt động.
@@ -248,10 +239,9 @@ const funeralSpThemProducts: Product[] = [
   { slug: "kinh-tien-nguoi-ve-2", name: "Kính Tiễn Người Về", price: "2,350,000₫", image: "/products/ke/tang/kinh-tien-nguoi-ve-2.jpg", category: ["funeral"] },
 ];
 
-const graduationProducts: Product[] = [
-  { slug: "tot-nghiep-bo-hoa", name: "Bó Hoa Tốt Nghiệp", price: "550,000₫", image: "/products/ke/tang/...", category: ["graduation"] },
-  { slug: "tot-nghiep-gio-hoa", name: "Giỏ Hoa Tốt Nghiệp", price: "650,000₫", image: "/products/ke/tang/...", category: ["graduation"] },
-];
+// Đã xoá 2 sản phẩm cũ trỏ tới ảnh không tồn tại. Trang "Hoa Tốt Nghiệp" sẽ tự
+// hiển thị "Chưa có sản phẩm" cho tới khi có ảnh thật để thêm vào đây.
+const graduationProducts: Product[] = [];
 
 export const products = {
   sale: saleProducts,
