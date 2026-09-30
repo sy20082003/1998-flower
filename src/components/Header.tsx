@@ -5,6 +5,15 @@ import { useRouter } from "next/navigation";
 import { navGroups } from "@/data/categories";
 import { searchProducts } from "@/lib/search";
 
+// Icon hiển thị cạnh từng nhóm danh mục trong menu mobile
+const groupIcons: Record<string, string> = {
+  "hoa-sinh-nhat": "🎂",
+  "hoa-khai-truong": "🏮",
+  "hoa-tang-le": "🕊️",
+  "chu-de": "🎀",
+  "thiet-ke": "💐",
+};
+
 export default function Header() {
   const router = useRouter();
 
@@ -183,9 +192,15 @@ export default function Header() {
         onClick={closeMenu}
       />
 
-      <aside className={`mobileDrawer ${menuOpen ? "open" : ""}`}>
+      <aside
+        className={`mobileDrawer ${menuOpen ? "open" : ""}`}
+        aria-hidden={!menuOpen}
+      >
         <div className="mobileDrawerHeader">
-          <span className="mobileDrawerTitle">Danh mục sản phẩm</span>
+          <div>
+            <span className="mobileDrawerTitle">Danh mục sản phẩm</span>
+            <span className="mobileDrawerSub">1998 Flower · Giao hoa nhanh TP.HCM</span>
+          </div>
           <button className="mobileCloseBtn" aria-label="Đóng menu" onClick={closeMenu}>
             ✕
           </button>
@@ -195,30 +210,47 @@ export default function Header() {
           {navGroups.map((group) => {
             const hasChildren = !!group.children && group.children.length > 0;
             const isOpen = openGroup === group.slug;
-            return (
-              <div className="mobileGroup" key={group.slug}>
-                <div className="mobileGroupRow">
+            const icon = groupIcons[group.slug] ?? "🌸";
+
+            // Nhóm không có danh mục con -> bấm là đi thẳng tới trang danh mục
+            if (!hasChildren) {
+              return (
+                <div className="mobileGroup" key={group.slug}>
                   <Link
                     href={`/danh-muc/${group.slug}`}
-                    className="mobileGroupLink"
+                    className="mobileGroupRow"
                     onClick={closeMenu}
                   >
-                    {group.label}
+                    <span className="mobileGroupIcon">{icon}</span>
+                    <span className="mobileGroupLabel">{group.label}</span>
+                    <span className="mobileGroupChevron chevRight" aria-hidden="true">›</span>
                   </Link>
-                  {hasChildren && (
-                    <button
-                      className={`mobileGroupToggle ${isOpen ? "rotated" : ""}`}
-                      aria-label={`Xem danh mục con của ${group.label}`}
-                      aria-expanded={isOpen}
-                      onClick={() => toggleGroup(group.slug)}
-                    >
-                      ▾
-                    </button>
-                  )}
                 </div>
+              );
+            }
 
-                {hasChildren && (
-                  <div className={`mobileSubList ${isOpen ? "open" : ""}`}>
+            return (
+              <div className={`mobileGroup ${isOpen ? "open" : ""}`} key={group.slug}>
+                <button
+                  type="button"
+                  className="mobileGroupRow"
+                  aria-expanded={isOpen}
+                  onClick={() => toggleGroup(group.slug)}
+                >
+                  <span className="mobileGroupIcon">{icon}</span>
+                  <span className="mobileGroupLabel">{group.label}</span>
+                  <span className="mobileGroupChevron" aria-hidden="true">▾</span>
+                </button>
+
+                <div className={`mobileSubList ${isOpen ? "open" : ""}`}>
+                  <div className="mobileSubInner">
+                    <Link
+                      href={`/danh-muc/${group.slug}`}
+                      className="mobileSubLink mobileSubLinkAll"
+                      onClick={closeMenu}
+                    >
+                      Xem tất cả {group.label} →
+                    </Link>
                     {group.children!.map((child) => (
                       <Link
                         href={`/danh-muc/${child.slug}`}
@@ -230,13 +262,14 @@ export default function Header() {
                       </Link>
                     ))}
                   </div>
-                )}
+                </div>
               </div>
             );
           })}
 
           <a href="tel:0976848744" className="mobileHotlineBanner" onClick={closeMenu}>
-            🔥 Freeship Tân Phú! — Gọi ngay 0976 848 744
+            <span aria-hidden="true">📞</span>
+            <span>Freeship Tân Phú — Gọi ngay 0976 848 744</span>
           </a>
         </div>
       </aside>
