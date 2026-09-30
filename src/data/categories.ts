@@ -39,8 +39,8 @@ export const navGroups: NavGroup[] = [
     label: "Hoa Khai Trương",
     dataKey: "opening",
     children: [
-      { slug: "hoa-khai-truong-de-ban", label: "Hoa Khai Trương Để Bàn", title: "Hoa Khai Trương Để Bàn" },
-      { slug: "ke-hoa-khai-truong", label: "Kệ Hoa Khai Trương", title: "Kệ Hoa Khai Trương" },
+      { slug: "hoa-khai-truong-de-ban", label: "Hoa Khai Trương Để Bàn", title: "Hoa Khai Trương Để Bàn", dataKey: "gio" },
+      { slug: "ke-hoa-khai-truong", label: "Kệ Hoa Khai Trương", title: "Kệ Hoa Khai Trương", dataKey: "ke" },
     ],
   },
   
@@ -69,9 +69,9 @@ export const navGroups: NavGroup[] = [
     label: "Thiết Kế",
     children: [
       { slug: "bo-hoa", label: "Bó Hoa", title: "Bó Hoa", dataKey: "bo" },
-      { slug: "lang-hoa", label: "Lẵng Hoa", title: "Lẵng Hoa" },
-      { slug: "gio-hoa", label: "Giỏ Hoa", title: "Giỏ Hoa" },
-      { slug: "ke-hoa", label: "Kệ Hoa", title: "Kệ Hoa" },
+      { slug: "lang-hoa", label: "Lẵng Hoa", title: "Lẵng Hoa", dataKey: "gio" },
+      { slug: "gio-hoa", label: "Giỏ Hoa", title: "Giỏ Hoa", dataKey: "gio" },
+      { slug: "ke-hoa", label: "Kệ Hoa", title: "Kệ Hoa", dataKey: "ke" },
       { slug: "binh-hoa", label: "Bình Hoa", title: "Bình Hoa" },
       { slug: "hop-hoa", label: "Hộp Hoa", title: "Hộp Hoa" },
     ],

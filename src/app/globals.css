@@ -162,6 +162,7 @@ a { text-decoration: none; color: inherit; }
   margin: auto;
   display: flex; 
   align-items: stretch;
+  justify-content: center; /* căn giữa hàng danh mục */
   padding: 0 20px; 
   
   /* Mặc định trên máy tính để hiển thị tự nhiên */

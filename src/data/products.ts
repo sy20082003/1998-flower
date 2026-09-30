@@ -243,12 +243,21 @@ const funeralSpThemProducts: Product[] = [
 // hiển thị "Chưa có sản phẩm" cho tới khi có ảnh thật để thêm vào đây.
 const graduationProducts: Product[] = [];
 
+// Tách hoa khai trương theo loại (dựa vào thư mục ảnh):
+//  - gio: giỏ hoa / hoa để bàn  -> ảnh trong /products/gio/
+//  - ke : kệ hoa khai trương    -> ảnh trong /products/ke/khai-truong/
+const openingAll: Product[] = [...openingProducts, ...openingSpThemProducts];
+const gioProducts: Product[] = openingAll.filter((p) => p.image.startsWith("/products/gio/"));
+const keProducts: Product[] = openingAll.filter((p) => p.image.startsWith("/products/ke/khai-truong/"));
+
 export const products = {
   sale: saleProducts,
   popular: popularProducts,
   newProducts,
   birthday: birthdayProducts,
-  opening: [...openingProducts, ...openingSpThemProducts],
+  opening: openingAll,
+  gio: gioProducts,
+  ke: keProducts,
   funeral: [...funeralProducts, ...funeralSpThemProducts],
   graduation: graduationProducts,
   bo: [...boProducts, ...saleProducts, ...boSpThemProducts],
