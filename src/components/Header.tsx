@@ -3,7 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { navGroups } from "@/data/categories";
-import { searchProducts } from "@/lib/search";
+import type { Product } from "@/data/products";
+import { searchWithNearby } from "@/lib/search";
 
 // Icon hiển thị cạnh từng nhóm danh mục trong menu mobile
 const groupIcons: Record<string, string> = {
@@ -24,7 +25,24 @@ export default function Header() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchWrapRef = useRef<HTMLDivElement>(null);
 
-  const suggestions = useMemo(() => searchProducts(query, 6), [query]);
+  const outcome = useMemo(() => searchWithNearby(query, 6), [query]);
+  const suggestions = outcome.results;
+  const nearby = outcome.nearby.slice(0, 4);
+
+  const renderSuggestion = (p: Product) => (
+    <Link
+      href={`/san-pham/${p.slug}`}
+      key={p.slug}
+      className="suggestionItem"
+      onClick={handleSuggestionClick}
+    >
+      <img src={p.image} alt={p.name} className="suggestionImg" />
+      <div className="suggestionInfo">
+        <span className="suggestionName">{p.name}</span>
+        <span className="suggestionPrice">{p.price}</span>
+      </div>
+    </Link>
+  );
 
   // Khoá cuộn trang khi menu mobile đang mở
   useEffect(() => {
@@ -103,7 +121,7 @@ export default function Header() {
             <form onSubmit={handleSearchSubmit} className="searchForm" role="search">
               <input
                 type="text"
-                placeholder="Tìm mẫu hoa hoặc giá (vd: 500k)..."
+                placeholder="Tìm mẫu hoa hoặc giá (500k)..."
                 id="search-input"
                 autoComplete="off"
                 value={query}
@@ -122,26 +140,25 @@ export default function Header() {
               <div className="searchSuggestions">
                 {suggestions.length > 0 ? (
                   <>
-                    {suggestions.map((p) => (
-                      <Link
-                        href={`/san-pham/${p.slug}`}
-                        key={p.slug}
-                        className="suggestionItem"
-                        onClick={handleSuggestionClick}
-                      >
-                        <img src={p.image} alt={p.name} className="suggestionImg" />
-                        <div className="suggestionInfo">
-                          <span className="suggestionName">{p.name}</span>
-                          <span className="suggestionPrice">{p.price}</span>
-                        </div>
-                      </Link>
-                    ))}
+                    {suggestions.map(renderSuggestion)}
                     <button
                       type="button"
                       className="suggestionSeeAll"
                       onClick={() => goToSearchPage(query)}
                     >
                       Xem tất cả kết quả cho “{query.trim()}”
+                    </button>
+                  </>
+                ) : nearby.length > 0 ? (
+                  <>
+                    <div className="suggestionNote">{outcome.note}</div>
+                    {nearby.map(renderSuggestion)}
+                    <button
+                      type="button"
+                      className="suggestionSeeAll"
+                      onClick={() => goToSearchPage(query)}
+                    >
+                      Xem tất cả mẫu có giá gần nhất
                     </button>
                   </>
                 ) : (

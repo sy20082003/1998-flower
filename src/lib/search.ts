@@ -258,3 +258,71 @@ export function searchProducts(query: string, limit?: number): Product[] {
 
   return typeof limit === "number" ? results.slice(0, limit) : results;
 }
+
+/* ───────────────────────── GỢI Ý GẦN NHẤT ───────────────────────── */
+
+export interface SearchOutcome {
+  /** Kết quả khớp đúng yêu cầu */
+  results: Product[];
+  /** Khi không có kết quả: các mẫu có giá gần nhất với mức giá đã tìm */
+  nearby: Product[];
+  /** Câu giải thích hiển thị phía trên phần gợi ý (null nếu không có gợi ý) */
+  note: string | null;
+}
+
+const NEARBY_LIMIT = 12;
+const MIN_BARE_PRICE = 50_000; // số trơn nhỏ hơn mức này (vd "01") coi là tìm theo tên
+
+/**
+ * Giống searchProducts, nhưng nếu tìm theo giá mà không có mẫu nào khớp
+ * (vd gõ "480k") thì trả thêm các mẫu có giá gần nhất (mức giá thấp hơn
+ * và cao hơn sát nhất).
+ */
+export function searchWithNearby(query: string, limit?: number): SearchOutcome {
+  const results = searchProducts(query, limit);
+  const none: SearchOutcome = { results, nearby: [], note: null };
+  if (results.length > 0) return none;
+
+  const intent = parsePriceIntent(query);
+  if (!intent) return none;
+  if (intent.kind === "exact" && intent.bare && (intent.exact ?? 0) < MIN_BARE_PRICE) {
+    return none;
+  }
+
+  const pool = Object.values(allProducts).filter((p) => nameHasAllWords(p.name, intent.text));
+  const lo = intent.min ?? intent.exact; // cận dưới của mức giá cần tìm
+  const hi = intent.max ?? intent.exact; // cận trên
+
+  let lower: number | undefined; // giá gần nhất nhưng thấp hơn cận dưới
+  let upper: number | undefined; // giá gần nhất nhưng cao hơn cận trên
+  for (const p of pool) {
+    const price = priceToNumber(p.price);
+    if (lo !== undefined && price < lo && (lower === undefined || price > lower)) lower = price;
+    if (hi !== undefined && price > hi && (upper === undefined || price < upper)) upper = price;
+  }
+
+  const distance = (price: number) =>
+    lo !== undefined && price < lo ? lo - price : price - (hi ?? price);
+
+  // Lấy tối đa NEARBY_LIMIT/2 mẫu ở mỗi phía (thấp hơn / cao hơn) để gợi ý cân đối
+  const side = NEARBY_LIMIT / 2;
+  const below = pool.filter((p) => priceToNumber(p.price) === lower).slice(0, side);
+  const above = pool.filter((p) => priceToNumber(p.price) === upper).slice(0, side);
+  const nearby = [...below, ...above].sort(
+    (a, b) => distance(priceToNumber(a.price)) - distance(priceToNumber(b.price))
+  );
+
+  if (nearby.length === 0) return none;
+
+  let note: string;
+  if (intent.text) {
+    note = `Không có mẫu phù hợp với “${query.trim()}”. Gợi ý các mẫu có giá gần nhất:`;
+  } else if (intent.kind === "exact") {
+    note = `Không có mẫu hoa nào có giá ${formatVnd(intent.exact!)}. Gợi ý các mẫu có giá gần nhất:`;
+  } else {
+    const desc = describePriceSearch(query) ?? "có giá như bạn tìm";
+    note = `Không có mẫu hoa nào ${desc}. Gợi ý các mẫu có giá gần nhất:`;
+  }
+
+  return { results, nearby, note };
+}

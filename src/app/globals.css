@@ -136,6 +136,11 @@ a { text-decoration: none; color: inherit; }
   font-family: inherit;
 }
 .suggestionSeeAll:hover { background: var(--pink); color: #fff; }
+.suggestionNote {
+  padding: 10px 14px; font-size: 12.5px; line-height: 1.45;
+  color: var(--mid); background: var(--pink-lt);
+  border-bottom: 1px solid #f3d9df;
+}
 .suggestionEmpty {
   padding: 18px 16px; font-size: 13px;
   color: var(--mid); text-align: center; line-height: 1.7;
