@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
+
+// Google Analytics 4 (gtag.js)
+const GA_ID = "G-Z4YRFJKB9W";
 
 export const metadata: Metadata = {
   title: "Shop Hoa Tươi 1998 Flower - Giao Hoa Trong Ngày",
@@ -65,7 +69,20 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+
+        {/* Google tag (gtag.js) - tải sau khi trang đã tương tác để không làm chậm trang */}
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
