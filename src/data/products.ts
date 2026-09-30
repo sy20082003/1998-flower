@@ -143,7 +143,6 @@ const openingSpThemProducts: Product[] = [
   { slug: "thanh-cong-ruc-ro", name: "Thành Công Rực Rỡ", price: "600,000₫", image: "/products/gio/thanh-cong-ruc-ro.jpg", category: ["opening"] },
   { slug: "vuong-phat-truong-ton", name: "Vượng Phát Trường Tồn", price: "850,000₫", image: "/products/gio/vuong-phat-truong-ton.jpg", category: ["opening"] },
   { slug: "dai-phu-dai-quy", name: "Đại Phú Đại Quý", price: "750,000₫", image: "/products/gio/dai-phu-dai-quy.jpg", category: ["opening"] },
-  { slug: "vuong-phat-truong-ton-2", name: "Vượng Phát Trường Tồn", price: "1,200,000₫", image: "/products/ke/khai-truong/vuong-phat-truong-ton-2.jpg", category: ["opening"] },
   { slug: "dai-phu-dai-quy-2", name: "Đại Phú Đại Quý", price: "1,200,000₫", image: "/products/ke/khai-truong/dai-phu-dai-quy-2.jpg", category: ["opening"] },
   { slug: "tan-tai-tan-loc", name: "Tấn Tài Tấn Lộc", price: "1,650,000₫", image: "/products/ke/khai-truong/tan-tai-tan-loc.jpg", category: ["opening"] },
   { slug: "hoa-khai-phu-quy", name: "Hoa Khai Phú Quý", price: "1,650,000₫", image: "/products/ke/khai-truong/hoa-khai-phu-quy.jpg", category: ["opening"] },
@@ -237,6 +236,7 @@ const funeralSpThemProducts: Product[] = [
   { slug: "ngan-thu-yen-nghi", name: "Ngàn Thu Yên Nghỉ", price: "2,000,000₫", image: "/products/ke/tang/ngan-thu-yen-nghi.jpg", category: ["funeral"] },
   { slug: "nguyen-cau-sieu-thoat", name: "Nguyện Cầu Siêu Thoát", price: "1,300,000₫", image: "/products/ke/tang/nguyen-cau-sieu-thoat.jpg", category: ["funeral"] },
   { slug: "kinh-tien-nguoi-ve-2", name: "Kính Tiễn Người Về", price: "2,350,000₫", image: "/products/ke/tang/kinh-tien-nguoi-ve-2.jpg", category: ["funeral"] },
+  { slug: "tuong-niem-truong-ton", name: "Tưởng Niệm Trường Tồn", price: "1,200,000₫", image: "/products/ke/tang/tuong-niem-truong-ton.jpg", category: ["funeral"] },
 ];
 
 // Đã xoá 2 sản phẩm cũ trỏ tới ảnh không tồn tại. Trang "Hoa Tốt Nghiệp" sẽ tự
