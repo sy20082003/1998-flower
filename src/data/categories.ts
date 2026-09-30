@@ -27,7 +27,7 @@ export const navGroups: NavGroup[] = [
     dataKey: "birthday",
     children: [
       { slug: "hoa-sinh-nhat-sang-trong", label: "Hoa Sinh Nhật Sang Trọng", title: "Hoa Sinh Nhật Sang Trọng" },
-      { slug: "hoa-sinh-nhat-gia-re", label: "Hoa Sinh Nhật Giá Rẻ", title: "Hoa Sinh Nhật Giá Rẻ" },
+      { slug: "hoa-sinh-nhat-gia-re", label: "Hoa Sinh Nhật Giá Rẻ", title: "Hoa Sinh Nhật Giá Rẻ", dataKey: "birthdayCheap" },
       { slug: "hoa-tang-sinh-nhat-nguoi-yeu", label: "Hoa Tặng Sinh Nhật Người Yêu", title: "Hoa Tặng Sinh Nhật Người Yêu" },
       { slug: "hoa-tang-sinh-nhat-me", label: "Hoa Tặng Sinh Nhật Mẹ", title: "Hoa Tặng Sinh Nhật Mẹ" },
       { slug: "lang-hoa-tang-sinh-nhat", label: "Lẵng Hoa Tặng Sinh Nhật", title: "Lẵng Hoa Tặng Sinh Nhật" },
