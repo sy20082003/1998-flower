@@ -440,6 +440,70 @@ a { text-decoration: none; color: inherit; }
 }
 .btnPrimary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,96,122,.5); }
 
+/* ── HERO SLIDER (banner trượt) ── */
+.srOnly {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.heroSliderWrap { max-width: 1200px; margin: 18px auto 0; padding: 0 20px; }
+.heroSlider {
+  position: relative; overflow: hidden;
+  aspect-ratio: 16 / 5;
+  background: var(--pink-lt);
+  border: 3px solid #fff; border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.12);
+  outline: none;
+  touch-action: pan-y;
+}
+.heroSlider:focus-visible { box-shadow: 0 0 0 3px rgba(212,96,122,.5); }
+.heroTrack {
+  display: flex; height: 100%;
+  transition: transform .55s cubic-bezier(.22,.8,.3,1);
+}
+.heroSlide { flex: 0 0 100%; height: 100%; }
+.heroSlide a, .heroSlide picture { display: block; height: 100%; }
+.heroSlide img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; user-select: none; -webkit-user-drag: none;
+}
+.heroArrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.75); color: var(--dark);
+  border: none; cursor: pointer; font-size: 26px; line-height: 1; padding-bottom: 3px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  opacity: 0; transition: opacity .2s, background .2s;
+}
+.heroSlider:hover .heroArrow, .heroSlider:focus-within .heroArrow { opacity: 1; }
+.heroArrow:hover { background: #fff; color: var(--pink); }
+.heroArrowPrev { left: 12px; }
+.heroArrowNext { right: 12px; }
+.heroDots {
+  position: absolute; left: 0; right: 0; bottom: 10px;
+  display: flex; justify-content: center; gap: 7px;
+}
+.heroDot {
+  width: 9px; height: 9px; padding: 0; border-radius: 999px;
+  background: rgba(255,255,255,.7); border: none; cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.12);
+  transition: width .25s, background .25s;
+}
+.heroDot.active { width: 24px; background: var(--pink); }
+.heroPerks {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;
+  max-width: 1200px; margin: 14px auto 0; padding: 0 20px;
+}
+@media (max-width: 640px) {
+  .heroSliderWrap { padding: 0 12px; margin-top: 12px; }
+  .heroSlider { border-width: 2px; border-radius: 10px; }
+  .heroSliderTallMobile { aspect-ratio: 4 / 3; }
+  .heroArrow { opacity: 1; width: 32px; height: 32px; font-size: 22px; }
+  .heroArrowPrev { left: 6px; }
+  .heroArrowNext { right: 6px; }
+  .heroPerks { gap: 8px; padding: 0 12px; }
+}
+
 /* ── BENEFITS ── */
 .benefits { background: var(--green); color: #fff; }
 .benefitsInner {

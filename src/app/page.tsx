@@ -1,6 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HeroSlider from "@/components/HeroSlider";
 import HomeProducts from "@/components/HomeProducts";
+import { heroSlides } from "@/data/heroSlides";
 import { products } from "@/data/products";
 
 
@@ -9,7 +11,19 @@ export default function HomePage() {
     <>
       <Header />
 
-      {/* HERO */}
+      {/* HERO: banner trượt nếu đã có ảnh trong src/data/heroSlides.ts, không thì dùng hero chữ */}
+      {heroSlides.length > 0 ? (
+        <>
+          <h1 className="srOnly">Shop Hoa Tươi 1998 Flower — Giao Hoa Trong Ngày tại TP.HCM</h1>
+          <HeroSlider slides={heroSlides} />
+          <div className="heroPerks">
+            <span className="badge">🚀 Giao nhanh nội thành</span>
+            <span className="badge">🎀 Tặng kèm thiệp + banner + túi giấy</span>
+            <span className="badge">📸 Gửi hình trước khi giao</span>
+            <span className="badge">🚛 Miễn ship khu vực Tân Phú</span>
+          </div>
+        </>
+      ) : (
       <section className="hero">
         <h1>Shop Hoa Tươi <span>1998 Flower</span><br />Giao Hoa Trong Ngày 🌹</h1>
         <p>Hơn 100+ mẫu hoa tươi đẹp — Giao nhanh tận nơi tại TP HCM </p>
@@ -21,6 +35,7 @@ export default function HomePage() {
         </div>
         <a href="tel:0976848744" className="btnPrimary">☎ Đặt Hoa Ngay — 0976 848 744</a>
       </section>
+      )}
 
       {/* PRODUCT SECTIONS (có bộ lọc màu + giá dùng chung) */}
       <HomeProducts
