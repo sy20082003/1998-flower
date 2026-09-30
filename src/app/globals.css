@@ -460,8 +460,16 @@ a { text-decoration: none; color: inherit; }
   display: flex; height: 100%;
   transition: transform .55s cubic-bezier(.22,.8,.3,1);
 }
-.heroSlide { flex: 0 0 100%; height: 100%; }
-.heroSlide a, .heroSlide picture { display: block; height: 100%; }
+.heroSlide { position: relative; overflow: hidden; flex: 0 0 100%; height: 100%; }
+.heroSlide a, .heroSlide picture { position: relative; z-index: 1; display: block; height: 100%; }
+/* Nền mờ lấp phần thừa khi ảnh không đúng tỉ lệ khung */
+.heroSlide::before {
+  content: ""; position: absolute; inset: -12%; z-index: 0; display: none;
+  background-image: var(--bg); background-size: cover; background-position: center;
+  filter: blur(22px);
+}
+.heroSlide.fitContain::before { display: block; }
+.heroSlide.fitContain img { object-fit: contain; }
 .heroSlide img {
   display: block; width: 100%; height: 100%;
   object-fit: cover; user-select: none; -webkit-user-drag: none;
@@ -497,7 +505,10 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 640px) {
   .heroSliderWrap { padding: 0 12px; margin-top: 12px; }
   .heroSlider { border-width: 2px; border-radius: 10px; aspect-ratio: 16 / 9; }
-  .heroSliderTallMobile { aspect-ratio: 4 / 3; }
+  .heroSliderTallMobile { aspect-ratio: 4 / 5; }
+  /* Điện thoại: luôn hiện đủ ảnh, phần thừa lấp bằng ảnh mờ */
+  .heroSlide::before { display: block; background-image: var(--bgm, var(--bg)); }
+  .heroSlide img { object-fit: contain; object-position: center !important; }
   .heroArrow { opacity: 1; width: 32px; height: 32px; font-size: 22px; }
   .heroArrowPrev { left: 6px; }
   .heroArrowNext { right: 6px; }

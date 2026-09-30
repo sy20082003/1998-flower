@@ -36,7 +36,8 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
 
   if (count === 0) return null;
 
-  const allHaveMobile = slides.every((s) => s.mobileImage);
+  // Mọi ảnh đều có bản dùng được cho điện thoại -> khung 4:5 (ảnh đứng)
+  const allHaveMobile = slides.every((s) => s.mobileImage || s.fit === "contain");
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -86,7 +87,13 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             );
             return (
               <div
-                className="heroSlide"
+                className={`heroSlide ${s.fit === "contain" ? "fitContain" : ""}`}
+                style={
+                  {
+                    "--bg": `url(${s.image})`,
+                    "--bgm": `url(${s.mobileImage ?? s.image})`,
+                  } as React.CSSProperties
+                }
                 key={s.image}
                 role="group"
                 aria-roledescription="slide"
