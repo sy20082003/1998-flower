@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import ProductSection from "@/components/ProductSection";
 import { products } from "@/data/products";
 
-const partners = ["Samsung","Nestle","Generali","Schneider","GFK","Yeah 1","KOVA","Midea","Tekcom","Acis","Seniart","Matxi"];
 
 export default function HomePage() {
   return ( 
@@ -54,18 +53,6 @@ export default function HomePage() {
         subtitle="Những bó hoa tươi được tuyển chọn kỹ lưỡng"
         products={products.bo}
       />
-
-      {/* PARTNERS */}
-      <div className="partners">
-        <div className="partnersInner">
-          <h2>Khách Hàng Tiêu Biểu</h2>
-          <div className="partnerLogos">
-            {partners.map((name) => (
-              <div key={name} className="partnerLogo">{name}</div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* ABOUT */}
       <div className="about">
