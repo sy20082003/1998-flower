@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ProductSection from "@/components/ProductSection";
+import HomeProducts from "@/components/HomeProducts";
 import { products } from "@/data/products";
 
 
@@ -22,36 +22,16 @@ export default function HomePage() {
         <a href="tel:0976848744" className="btnPrimary">☎ Đặt Hoa Ngay — 0976 848 744</a>
       </section>
 
-      {/* PRODUCT SECTIONS */}
-      <ProductSection
-        title="🔥 Đang Giảm Giá"
-        subtitle="Ưu đãi có hạn — đặt ngay kẻo hết!"
-        products={products.sale}
-      />
-      <ProductSection
-        title="⭐ Đặt Nhiều Nhất"
-        subtitle="Những mẫu hoa được yêu thích nhất"
-        products={products.popular}
-      />
-      <ProductSection
-        title="✨ Sản Phẩm Mới"
-        subtitle="Cập nhật mẫu hoa mới nhất từ FlowerCorner"
-        products={products.newProducts}
-      />
-      <ProductSection
-        title="🎂 Hoa Sinh Nhật"
-        subtitle="Mẫu hoa tặng sinh nhật đặc sắc"
-        products={products.birthday}
-      />
-      <ProductSection
-        title="🏮 Hoa Khai Trương"
-        subtitle="Chúc mừng khai trương, phồn vinh thịnh vượng"
-        products={products.opening}
-      />
-      <ProductSection
-        title="💐 Bó Hoa"
-        subtitle="Những bó hoa tươi được tuyển chọn kỹ lưỡng"
-        products={products.bo}
+      {/* PRODUCT SECTIONS (có bộ lọc màu + giá dùng chung) */}
+      <HomeProducts
+        sections={[
+          { title: "🔥 Đang Giảm Giá", subtitle: "Ưu đãi có hạn — đặt ngay kẻo hết!", products: products.sale },
+          { title: "⭐ Đặt Nhiều Nhất", subtitle: "Những mẫu hoa được yêu thích nhất", products: products.popular },
+          { title: "✨ Sản Phẩm Mới", subtitle: "Cập nhật mẫu hoa mới nhất từ FlowerCorner", products: products.newProducts },
+          { title: "🎂 Hoa Sinh Nhật", subtitle: "Mẫu hoa tặng sinh nhật đặc sắc", products: products.birthday },
+          { title: "🏮 Hoa Khai Trương", subtitle: "Chúc mừng khai trương, phồn vinh thịnh vượng", products: products.opening },
+          { title: "💐 Bó Hoa", subtitle: "Những bó hoa tươi được tuyển chọn kỹ lưỡng", products: products.bo },
+        ]}
       />
 
       {/* ABOUT */}
