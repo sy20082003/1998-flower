@@ -56,9 +56,11 @@ export default function CategoryPage({ params }: Props) {
 
       {categoryProducts.length > 0 ? (
         <ProductSection
+          key={category.slug}
           title={category.title}
           subtitle={category.subtitle ?? `Những mẫu hoa đẹp nhất thuộc danh mục ${category.title}`}
           products={categoryProducts}
+          filterable
         />
       ) : (
         <EmptyState title={category.title} />

@@ -1,7 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
+import ProductFilterBar from "@/components/ProductFilterBar";
+import type { Product } from "@/data/products";
+import { applyFilter, colorCounts, ColorFilter, SortMode } from "@/lib/productFilter";
 import { describePriceSearch, searchWithNearby } from "@/lib/search";
 
 export default function SearchResults() {
@@ -32,11 +36,7 @@ export default function SearchResults() {
         </p>
 
         {results.length > 0 ? (
-          <div className="productGrid">
-            {results.map((p) => (
-              <ProductCard key={p.slug} product={p} />
-            ))}
-          </div>
+          <FilterableResults key={q} products={results} />
         ) : (
           <>
             {nearby.length > 0 && (
@@ -59,6 +59,37 @@ export default function SearchResults() {
           </>
         )}
       </div>
+    </>
+  );
+}
+
+// Lưới kết quả có thanh lọc màu + sắp xếp giá (key={q} để tự reset khi đổi từ khoá)
+function FilterableResults({ products }: { products: Product[] }) {
+  const [sort, setSort] = useState<SortMode>("default");
+  const [color, setColor] = useState<ColorFilter>("all");
+  const colors = useMemo(() => colorCounts(products), [products]);
+  const list = useMemo(() => applyFilter(products, sort, color), [products, sort, color]);
+
+  return (
+    <>
+      <ProductFilterBar
+        sort={sort}
+        color={color}
+        onSortChange={setSort}
+        onColorChange={setColor}
+        colors={colors}
+        total={products.length}
+        shown={list.length}
+      />
+      {list.length > 0 ? (
+        <div className="productGrid">
+          {list.map((p) => (
+            <ProductCard key={p.slug} product={p} />
+          ))}
+        </div>
+      ) : (
+        <p className="filterEmpty">Không có mẫu hoa nào ở tông màu này. Hãy thử chọn màu khác nhé!</p>
+      )}
     </>
   );
 }
