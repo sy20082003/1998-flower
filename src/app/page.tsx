@@ -46,6 +46,9 @@ export default function HomePage() {
           { title: "🎂 Hoa Sinh Nhật", subtitle: "Mẫu hoa tặng sinh nhật đặc sắc", products: products.birthday },
           { title: "🏮 Hoa Khai Trương", subtitle: "Chúc mừng khai trương, phồn vinh thịnh vượng", products: products.opening },
           { title: "💐 Bó Hoa", subtitle: "Những bó hoa tươi được tuyển chọn kỹ lưỡng", products: products.bo },
+          { title: "🧺 Giỏ Hoa", subtitle: "Giỏ hoa tươi xinh, tiện để bàn, làm quà tặng", products: products.gio },
+          { title: "🏵️ Kệ Hoa", subtitle: "Kệ hoa sang trọng cho khai trương và sự kiện", products: products.ke },
+          { title: "🕊️ Hoa Tang Lễ", subtitle: "Kệ hoa chia buồn, gửi trọn tấm lòng thành kính", products: products.funeral },
         ]}
       />
 
