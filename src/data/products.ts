@@ -250,9 +250,10 @@ const openingAll: Product[] = [...openingProducts, ...openingSpThemProducts];
 const gioProducts: Product[] = openingAll.filter((p) => p.image.startsWith("/products/gio/"));
 const keProducts: Product[] = openingAll.filter((p) => p.image.startsWith("/products/ke/khai-truong/"));
 
-// Hoa sinh nhật giá rẻ: các BÓ HOA có giá dưới 300,000₫, xếp từ giá thấp đến cao.
-// Tự cập nhật: thêm bó hoa mới dưới mức giá này (ảnh trong /products/bo/) là tự hiện ở đây.
-export const CHEAP_BIRTHDAY_LIMIT = 300000;
+// Hoa sinh nhật giá rẻ: các BÓ HOA có giá từ 350,000₫ trở xuống, xếp từ giá thấp đến cao.
+// Tự cập nhật: thêm bó hoa mới trong mức giá này (ảnh trong /products/bo/) là tự hiện ở đây.
+// Muốn đổi mức giá, chỉ cần sửa con số bên dưới.
+export const CHEAP_BIRTHDAY_LIMIT = 350000;
 const priceOf = (p: Product) => Number(p.price.replace(/\D/g, "")) || 0;
 const cheapBirthdayProducts: Product[] = (() => {
   const seen = new Set<string>();
@@ -260,7 +261,7 @@ const cheapBirthdayProducts: Product[] = (() => {
     .filter((p) => {
       if (seen.has(p.slug)) return false;
       seen.add(p.slug);
-      return p.image.startsWith("/products/bo/") && priceOf(p) < CHEAP_BIRTHDAY_LIMIT;
+      return p.image.startsWith("/products/bo/") && priceOf(p) <= CHEAP_BIRTHDAY_LIMIT;
     })
     .sort((a, b) => priceOf(a) - priceOf(b));
 })();
