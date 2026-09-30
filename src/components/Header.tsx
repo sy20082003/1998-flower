@@ -103,7 +103,7 @@ export default function Header() {
             <form onSubmit={handleSearchSubmit} className="searchForm" role="search">
               <input
                 type="text"
-                placeholder="Tìm kiếm mẫu hoa..."
+                placeholder="Tìm mẫu hoa hoặc giá (vd: 500k)..."
                 id="search-input"
                 autoComplete="off"
                 value={query}
