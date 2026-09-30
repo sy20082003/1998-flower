@@ -469,63 +469,78 @@ a { text-decoration: none; color: inherit; }
   gap: 18px;
 }
 
-/* ── BỘ LỌC MÀU + SẮP XẾP GIÁ ── */
+/* ── BỘ LỌC MÀU + SẮP XẾP GIÁ (gọn, 1 hàng trên máy tính) ── */
 .filterBar {
+  display: flex; align-items: center; gap: 12px;
   background: var(--white);
   border: 1px solid #f3e4e8;
-  border-radius: 14px;
-  padding: 12px 14px 10px;
-  margin-bottom: 22px;
-  box-shadow: 0 2px 10px rgba(212, 96, 122, .06);
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
 }
-.filterRow { display: flex; align-items: center; gap: 12px; padding: 5px 0; }
-.filterLabel {
-  flex-shrink: 0; width: 64px;
-  font-size: 13px; font-weight: 600; color: var(--mid);
-}
-.filterChips {
-  display: flex; gap: 8px; flex: 1;
-  overflow-x: auto; padding: 2px 2px 4px;
-  scrollbar-width: none; -webkit-overflow-scrolling: touch;
-}
-.filterChips::-webkit-scrollbar { display: none; }
-.filterChip {
-  display: inline-flex; align-items: center; gap: 7px;
-  flex-shrink: 0; white-space: nowrap;
-  padding: 7px 14px;
+.filterSort { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.filterSortLabel { font-size: 12.5px; font-weight: 600; color: var(--mid); }
+.filterSort select {
+  appearance: none; -webkit-appearance: none;
   font-family: inherit; font-size: 13px; font-weight: 500; color: var(--dark);
+  padding: 6px 28px 6px 12px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23d4607a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+  border: 1.5px solid #ead3d9; border-radius: 999px;
+  cursor: pointer;
+}
+.filterSort select:focus { outline: none; border-color: var(--pink); }
+
+.filterColors {
+  display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0;
+  padding: 2px 2px;
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  border-left: 1px solid #f0dde2; padding-left: 12px;
+}
+.filterColors::-webkit-scrollbar { display: none; }
+.swatchAll, .swatch {
+  flex-shrink: 0; white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 30px; font-family: inherit; font-size: 12.5px; font-weight: 500; color: var(--dark);
   background: #fff; border: 1.5px solid #ead3d9; border-radius: 999px;
-  cursor: pointer; transition: all .15s;
+  cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s;
   -webkit-tap-highlight-color: transparent;
 }
-.filterChip:hover { border-color: var(--pink); color: var(--pink); }
-.filterChip.active {
-  background: var(--pink); border-color: var(--pink); color: #fff;
-  box-shadow: 0 3px 10px rgba(212, 96, 122, .3);
+.swatchAll { padding: 0 12px; }
+.swatch { min-width: 30px; padding: 0 5px; }
+.swatchAll:hover, .swatch:hover { border-color: var(--pink); }
+.swatchAll.active {
+  background: var(--pink); border-color: var(--pink); color: #fff; font-weight: 600;
 }
-.colorDot {
-  width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+.swatch.active {
+  padding: 0 11px 0 5px;
+  background: var(--pink-lt); border-color: var(--pink); color: var(--pink); font-weight: 600;
+}
+.swatchDot {
+  width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
 }
-.colorDotLight { box-shadow: inset 0 0 0 1.5px #cfcfcf; }
-.filterChip.active .colorDot { box-shadow: 0 0 0 2px #fff; }
-.filterCount { font-size: 11.5px; opacity: .65; }
-.filterChip.active .filterCount { opacity: .9; }
-.filterMeta {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  margin-top: 6px; padding-top: 8px; border-top: 1px dashed #f0dde2;
-  font-size: 12.5px; color: var(--mid);
+.swatchDotLight { box-shadow: inset 0 0 0 1.5px #cfcfcf; }
+
+.filterInfo {
+  display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;
+  font-size: 12.5px; color: var(--mid); white-space: nowrap;
 }
 .filterClear {
-  background: transparent; border: none; cursor: pointer;
+  background: transparent; border: none; cursor: pointer; padding: 0;
   font-family: inherit; font-size: 12.5px; font-weight: 600; color: var(--pink);
 }
 .filterEmpty { text-align: center; color: var(--mid); padding: 36px 16px; font-size: 15px; }
+
 @media (max-width: 640px) {
-  .filterBar { padding: 10px 10px 8px; border-radius: 12px; }
-  .filterRow { flex-direction: column; align-items: flex-start; gap: 2px; }
-  .filterLabel { width: auto; font-size: 12px; }
-  .filterChips { width: 100%; }
+  .filterBar { flex-wrap: wrap; gap: 8px 10px; padding: 8px 10px; margin-bottom: 16px; }
+  .filterSort { order: 1; flex: 1; min-width: 0; }
+  .filterSort select { flex: 1; min-width: 0; }
+  .filterInfo { order: 2; }
+  .filterColors {
+    order: 3; flex-basis: 100%;
+    border-left: none; padding-left: 2px;
+    border-top: 1px dashed #f0dde2; padding-top: 8px;
+  }
 }
 
 /* ── NÚT "XEM THÊM" (ProductSection) ── */

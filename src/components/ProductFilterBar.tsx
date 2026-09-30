@@ -1,5 +1,5 @@
 "use client";
-// Thanh bộ lọc: sắp xếp theo giá + lọc theo tông màu.
+// Thanh bộ lọc gọn: sắp xếp theo giá (menu chọn) + lọc theo tông màu (chấm màu).
 import { COLOR_LABELS, COLOR_SWATCH, ColorKey } from "@/data/productColors";
 import type { ColorFilter, SortMode } from "@/lib/productFilter";
 
@@ -32,60 +32,61 @@ export default function ProductFilterBar({
 
   return (
     <div className="filterBar">
-      <div className="filterRow">
-        <span className="filterLabel">Sắp xếp</span>
-        <div className="filterChips" role="group" aria-label="Sắp xếp theo giá">
+      <label className="filterSort">
+        <span className="filterSortLabel">Sắp xếp</span>
+        <select
+          value={sort}
+          onChange={(e) => onSortChange(e.target.value as SortMode)}
+          aria-label="Sắp xếp theo giá"
+        >
           {SORTS.map((s) => (
-            <button
-              key={s.value}
-              type="button"
-              className={`filterChip ${sort === s.value ? "active" : ""}`}
-              aria-pressed={sort === s.value}
-              onClick={() => onSortChange(s.value)}
-            >
+            <option key={s.value} value={s.value}>
               {s.label}
-            </button>
+            </option>
           ))}
-        </div>
-      </div>
+        </select>
+      </label>
 
       {colors.length > 0 && (
-        <div className="filterRow">
-          <span className="filterLabel">Tông màu</span>
-          <div className="filterChips" role="group" aria-label="Lọc theo tông màu">
-            <button
-              type="button"
-              className={`filterChip ${color === "all" ? "active" : ""}`}
-              aria-pressed={color === "all"}
-              onClick={() => onColorChange("all")}
-            >
-              Tất cả
-            </button>
-            {colors.map(({ color: c, count }) => (
+        <div className="filterColors" role="group" aria-label="Lọc theo tông màu">
+          <button
+            type="button"
+            className={`swatchAll ${color === "all" ? "active" : ""}`}
+            aria-pressed={color === "all"}
+            onClick={() => onColorChange("all")}
+          >
+            Tất cả
+          </button>
+          {colors.map(({ color: c, count }) => {
+            const isActive = color === c;
+            return (
               <button
                 key={c}
                 type="button"
-                className={`filterChip ${color === c ? "active" : ""}`}
-                aria-pressed={color === c}
-                onClick={() => onColorChange(c)}
+                className={`swatch ${isActive ? "active" : ""}`}
+                title={`${COLOR_LABELS[c]} (${count})`}
+                aria-label={`${COLOR_LABELS[c]}, ${count} mẫu`}
+                aria-pressed={isActive}
+                onClick={() => onColorChange(isActive ? "all" : c)}
               >
                 <span
-                  className={`colorDot ${c === "white" ? "colorDotLight" : ""}`}
+                  className={`swatchDot ${c === "white" ? "swatchDotLight" : ""}`}
                   style={{ background: COLOR_SWATCH[c] }}
                   aria-hidden="true"
                 />
-                {COLOR_LABELS[c]}
-                <span className="filterCount">{count}</span>
+                {isActive && (
+                  <span className="swatchText">
+                    {COLOR_LABELS[c]} · {count}
+                  </span>
+                )}
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
       )}
 
-      <div className="filterMeta">
-        <span>
-          {active ? `Hiển thị ${shown}/${total} mẫu` : `${total} mẫu`}
-        </span>
+      <div className="filterInfo">
+        <span>{active ? `${shown}/${total} mẫu` : `${total} mẫu`}</span>
         {active && (
           <button
             type="button"
@@ -95,7 +96,7 @@ export default function ProductFilterBar({
               onColorChange("all");
             }}
           >
-            ✕ Xóa bộ lọc
+            ✕ Xóa lọc
           </button>
         )}
       </div>
