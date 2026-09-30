@@ -78,6 +78,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                   src={s.image}
                   alt={s.alt}
                   draggable={false}
+                  style={s.position ? { objectPosition: s.position } : undefined}
                   loading={i === 0 ? "eager" : "lazy"}
                   {...(i === 0 ? { fetchPriority: "high" as const } : {})}
                 />

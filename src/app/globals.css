@@ -448,7 +448,7 @@ a { text-decoration: none; color: inherit; }
 .heroSliderWrap { max-width: 1200px; margin: 18px auto 0; padding: 0 20px; }
 .heroSlider {
   position: relative; overflow: hidden;
-  aspect-ratio: 16 / 5;
+  aspect-ratio: 2 / 1;
   background: var(--pink-lt);
   border: 3px solid #fff; border-radius: 12px;
   box-shadow: 0 4px 18px rgba(0,0,0,.12);
@@ -496,7 +496,7 @@ a { text-decoration: none; color: inherit; }
 }
 @media (max-width: 640px) {
   .heroSliderWrap { padding: 0 12px; margin-top: 12px; }
-  .heroSlider { border-width: 2px; border-radius: 10px; }
+  .heroSlider { border-width: 2px; border-radius: 10px; aspect-ratio: 16 / 9; }
   .heroSliderTallMobile { aspect-ratio: 4 / 3; }
   .heroArrow { opacity: 1; width: 32px; height: 32px; font-size: 22px; }
   .heroArrowPrev { left: 6px; }
