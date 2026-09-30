@@ -30,6 +30,8 @@ export const navGroups: NavGroup[] = [
       { slug: "hoa-sinh-nhat-gia-re", label: "Hoa Sinh Nhật Giá Rẻ", title: "Hoa Sinh Nhật Giá Rẻ" },
       { slug: "hoa-tang-sinh-nhat-nguoi-yeu", label: "Hoa Tặng Sinh Nhật Người Yêu", title: "Hoa Tặng Sinh Nhật Người Yêu" },
       { slug: "hoa-tang-sinh-nhat-me", label: "Hoa Tặng Sinh Nhật Mẹ", title: "Hoa Tặng Sinh Nhật Mẹ" },
+      { slug: "lang-hoa-tang-sinh-nhat", label: "Lẵng Hoa Tặng Sinh Nhật", title: "Lẵng Hoa Tặng Sinh Nhật" },
+      { slug: "gio-hoa-sinh-nhat", label: "Giỏ Hoa Sinh Nhật", title: "Giỏ Hoa Sinh Nhật" },
     ],
   },
   {
@@ -37,8 +39,8 @@ export const navGroups: NavGroup[] = [
     label: "Hoa Khai Trương",
     dataKey: "opening",
     children: [
-      { slug: "hoa-khai-truong-de-ban", label: "Hoa Khai Trương Để Bàn", title: "Hoa Khai Trương Để Bàn", dataKey: "openingTable" },
-      { slug: "ke-hoa-khai-truong", label: "Kệ Hoa Khai Trương", title: "Kệ Hoa Khai Trương", dataKey: "openingStand" },
+      { slug: "hoa-khai-truong-de-ban", label: "Hoa Khai Trương Để Bàn", title: "Hoa Khai Trương Để Bàn" },
+      { slug: "ke-hoa-khai-truong", label: "Kệ Hoa Khai Trương", title: "Kệ Hoa Khai Trương" },
     ],
   },
   
