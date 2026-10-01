@@ -33,7 +33,7 @@ const boProducts: Product[] = [
   { slug: "em-la-mua-xuan",       name: "Em Là Mùa Xuân",       price: "350,000₫",   image: "/products/bo/b-6-350.jpg",  category: ["bo"] },
   { slug: "diu-dang-nhu-gio",     name: "Dịu Dàng Như Gió",     price: "350,000₫",   image: "/products/bo/b-7-350.jpg",  category: ["bo"] },
   { slug: "sac-mau-hanh-phuc",    name: "Sắc Màu Hạnh Phúc",    price: "400,000₫",   image: "/products/bo/b-8-400.jpg",  category: ["bo"] },
-  { slug: "kieu-sa-long-lay",     name: "Kiêu Sa Lộng Lẫy",     price: "1,050,000₫", image: "/products/bo/b-9-1050.jpg", category: ["bo"] },
+  { slug: "kieu-sa-long-lay",     name: "Kiêu Sa Lộng Lẫy",     price: "1,200,000₫", image: "/products/bo/b-9-1050.jpg", category: ["bo"] },
   { slug: "vuong-mien-tinh-yeu",  name: "Vương Miện Tình Yêu",  price: "1,250,000₫", image: "/products/bo/b-10-1250.jpg",category: ["bo"] },
   { slug: "thanh-xuan-ruc-ro",    name: "Thanh Xuân Rực Rỡ",    price: "450,000₫",   image: "/products/bo/b-11-450.jpg", category: ["bo"] },
   { slug: "chom-yeu",             name: "Chớm Yêu",             price: "370,000₫",   image: "/products/bo/b-12-370.jpg", category: ["bo"] },
