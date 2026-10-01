@@ -33,6 +33,9 @@ export const COLOR_SWATCH: Record<ColorKey, string> = {
 };
 
 export const productColors: Record<string, ColorKey[]> = {
+  "bien-xanh-diu-dang": ["blue"],
+  "duyen-dang-sac-hong": ["pink"],
+  "dao-hong-tho-mong": ["pink"],
   "lac-than-yeu-thuong": ["pink"],
   "moc-an": ["yellow"],
   "doa-hoa-dinh-menh": ["red", "pink"],

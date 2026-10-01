@@ -12,6 +12,9 @@ export interface Product {
 }
 
 const saleProducts: Product[] = [
+  { slug: "bien-xanh-diu-dang", name: "Biển Xanh Dịu Dàng", price: "420,000₫", old: "467,000₫", disc: "10%", image: "/products/bo/bien-xanh-diu-dang-420k.jpg", category: ["sale"] },
+  { slug: "duyen-dang-sac-hong", name: "Duyên Dáng Sắc Hồng", price: "500,000₫", old: "556,000₫", disc: "10%", image: "/products/bo/duyen-dang-sac-hong-500k.jpg", category: ["sale"] },
+  { slug: "dao-hong-tho-mong", name: "Đào Hồng Thơ Mộng", price: "380,000₫", old: "422,000₫", disc: "10%", image: "/products/bo/dao-hong-tho-mong-380k.jpg", category: ["sale"] },
   { slug: "lac-than-yeu-thuong",name: "Lạc Thần Yêu Thương",  price: "380,000₫", old: "418,000₫", disc: "10%", image: "/products/bo/lac-than-yeu-thuong-380k.jpg",  category: ["sale"] },
   { slug: "moc-an",           name: "Mộc An",                 price: "375,000₫", old: "400,000₫", disc: "5%", image: "/products/bo/mocan-375k.jpg",                 category: ["sale"] },
   { slug: "doa-hoa-dinh-menh",name: "Đóa Hoa Định Mệnh 🌺",   price: "400,000₫", old: "440,000₫", disc: "10%",  image: "/products/bo/doa-hong-dinh-menh-400k.jpg", category: ["sale"] },
@@ -183,8 +186,8 @@ const popularProducts: Product[] = [
   boProducts[7],  // Sắc Màu Hạnh Phúc
   boProducts[14], // Hương Sắc Mùa Yêu
   boProducts[10], // Thanh Xuân Rực Rỡ
-  saleProducts[9],  // Kem Vali (đã gắn sẵn tag popular)
-  saleProducts[4],  // Ngọt Ngào Cho Em
+  saleProducts.find((p) => p.slug === "kem-vali")!,          // Kem Vali (đã gắn sẵn tag popular)
+  saleProducts.find((p) => p.slug === "ngot-ngao-cho-em")!,  // Ngọt Ngào Cho Em
 ];
 
 // "Sản Phẩm Mới" — nơi có NHIỀU sản phẩm nhất, gồm toàn bộ 53 bó hoa vừa thêm
