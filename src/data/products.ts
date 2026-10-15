@@ -269,12 +269,47 @@ const cheapBirthdayProducts: Product[] = (() => {
     .sort((a, b) => priceOf(a) - priceOf(b));
 })();
 
+// Hoa 8-3 / 20-10: các bó hoa hồng đỏ và hồng ngọt ngào hợp tặng Ngày Phụ nữ.
+// Muốn thêm/bớt mẫu: sửa danh sách "slug" bên dưới (slug là phần sau /san-pham/ trên đường dẫn sản phẩm).
+const womenDaySlugs: string[] = [
+  "doa-hoa-dinh-menh",         // Đóa Hoa Định Mệnh 🌺 - 400,000₫
+  "nu-hoang-anh-do",           // Nữ Hoàng Ánh Đỏ - 400,000₫
+  "kieu-sa-long-lay",          // Kiêu Sa Lộng Lẫy - 1,200,000₫
+  "nang-hong-diu-em",          // Nắng Hồng Dịu Êm - 700,000₫
+  "diu-dang-thang-nam",        // Dịu Dàng Tháng Năm - 600,000₫
+  "anh-sao-lap-lanh",          // Ánh Sao Lấp Lánh - 350,000₫
+  "nong-nan-xuan-sac",         // Nồng Nàn Xuân Sắc - 350,000₫
+  "tron-doi-ben-nhau",         // Trọn Đời Bên Nhau - 450,000₫
+  "nang-tho",                  // Nàng Thơ - 500,000₫
+  "yeu-thuong-vung-ve",        // Yêu Thương Vụng Về - 400,000₫
+  "chom-yeu",                  // Chớm Yêu - 370,000₫
+  "huong-xua-nong-nan",        // Hương Xưa Nồng Nàn - 700,000₫
+  "dao-hong-tho-mong",         // Đào Hồng Thơ Mộng - 380,000₫
+  "lac-than-yeu-thuong",       // Lạc Thần Yêu Thương - 380,000₫
+  "anh-hong-ruc-ro",           // Ánh Hồng Rực Rỡ - 400,000₫
+  "tinh-ca-mua-ha",            // Tình Ca Mùa Hạ - 700,000₫
+  "net-duyen-tham",            // Nét Duyên Thầm - 500,000₫
+  "chuyen-tinh-lang-man",      // Chuyện Tình Lãng Mạn - 350,000₫
+  "tia-nang-ngay-moi",         // Tia Nắng Ngày Mới - 400,000₫
+  "mong-mo-thieu-nu",          // Mộng Mơ Thiếu Nữ - 450,000₫
+  "em-la-mua-xuan",            // Em Là Mùa Xuân - 350,000₫
+  "doa-hong-kieu-hanh",        // Đóa Hồng Kiêu Hãnh - 850,000₫
+  "mien-ky-uc-ngot",           // Miền Ký Ức Ngọt - 1,000,000₫
+];
+const womenDayProducts: Product[] = (() => {
+  const pool = [...boProducts, ...saleProducts, ...boSpThemProducts, ...popularProducts, ...newProducts];
+  return womenDaySlugs
+    .map((slug) => pool.find((p) => p.slug === slug))
+    .filter((p): p is Product => Boolean(p));
+})();
+
 export const products = {
   sale: saleProducts,
   popular: popularProducts,
   newProducts,
   birthday: birthdayProducts,
   birthdayCheap: cheapBirthdayProducts,
+  womenDay: womenDayProducts,
   opening: openingAll,
   gio: gioProducts,
   ke: keProducts,
