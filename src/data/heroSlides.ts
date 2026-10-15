@@ -33,6 +33,12 @@ export interface HeroSlide {
 
 export const heroSlides: HeroSlide[] = [
   {
+    image: "/banner/hoa-20-10.webp",
+    mobileImage: "/banner/hoa-20-10-m.webp",
+    alt: "20.10 Ngày Phụ nữ Việt Nam - đặt hoa trước ngay tại 1998 Flower, 272 Nguyễn Sơn, Tân Phú",
+    href: "/danh-muc/hoa-8-3-20-10",
+  },
+  {
     image: "/banner/tron-ven-yeu-thuong.webp",
     mobileImage: "/banner/tron-ven-yeu-thuong-m.webp",
     alt: "Trọn vẹn yêu thương, đong đầy tình cảm - combo quà tặng thiệp, banner, túi giấy tiện dụng",
