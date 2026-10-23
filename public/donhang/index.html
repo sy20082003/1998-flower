@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sổ Đơn Hoa 1998</title>
+<meta name="theme-color" content="#a8285f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sổ Đơn Hoa">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap">
+<style>
+body{margin:0}
+[hidden]{display:none!important}
+
+/* Layout: header bar + summary + filter row, then a list of order cards sorted by delivery time; form opens in a sheet */
+:root{
+  --bg:#f8f5f6; --surface:#ffffff; --ink:#2a2230; --muted:#6f6573; --line:#e7dfe3;
+  --rose:#a8285f; --rose-soft:#f6e3ec; --leaf:#2f6f50; --leaf-soft:#e2f0e8;
+  --fb:#2d5fd3; --fb-soft:#e3ebfb; --zalo:#0a7fb8; --zalo-soft:#dff1fa; --walk:#7a5a12; --walk-soft:#f5ecd6;
+  --warn:#b4540a; --warn-soft:#fcebdc;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17131a; --surface:#221c25; --ink:#f1eaf0; --muted:#a99fac; --line:#3a3140;
+  --rose:#ec7aaa; --rose-soft:#3d2030; --leaf:#7fcca2; --leaf-soft:#1d3329;
+  --fb:#8fb0ff; --fb-soft:#1f2a45; --zalo:#6fc8f0; --zalo-soft:#14303d; --walk:#e2c27a; --walk-soft:#3a2f17;
+  --warn:#f3a768; --warn-soft:#3d2615; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17131a; --surface:#221c25; --ink:#f1eaf0; --muted:#a99fac; --line:#3a3140;
+  --rose:#ec7aaa; --rose-soft:#3d2030; --leaf:#7fcca2; --leaf-soft:#1d3329;
+  --fb:#8fb0ff; --fb-soft:#1f2a45; --zalo:#6fc8f0; --zalo-soft:#14303d; --walk:#e2c27a; --walk-soft:#3a2f17;
+  --warn:#f3a768; --warn-soft:#3d2615; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding-block:20px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--display);font-size:1.9rem;margin:0;line-height:1.1;text-wrap:balance}
+h1 small{display:block;font-family:var(--body);font-size:.8rem;font-weight:500;color:var(--muted);letter-spacing:.04em;margin-top:4px}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:10px;font-weight:600}
+.btn:hover{border-color:var(--rose)}
+.btn.primary{background:var(--rose);border-color:var(--rose);color:var(--surface)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.small{padding:6px 10px;font-size:.85rem}
+.btn.danger{color:var(--warn)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.tab:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.stat b{display:block;font-size:1.35rem;font-variant-numeric:tabular-nums}
+.stat span{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px;flex-wrap:wrap}
+.tab{border:0;background:transparent;color:var(--muted);padding:6px 12px;border-radius:8px;font-weight:600;font-size:.88rem}
+.tab[aria-pressed="true"]{background:var(--rose-soft);color:var(--rose)}
+.controls input,.controls select{flex:1 1 180px;min-width:0}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:9px 11px;width:100%}
+textarea{resize:vertical;min-height:70px}
+
+.notice{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:10px 14px;font-size:.9rem}
+.list{display:flex;flex-direction:column;gap:10px}
+.day{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:8px 0 -2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:104px 1fr auto;gap:14px;align-items:start}
+.card.done{opacity:.6}
+.when{font-variant-numeric:tabular-nums;border-right:1px dashed var(--line);padding-right:12px}
+.when .t{font-size:1.2rem;font-weight:700;line-height:1.1;white-space:nowrap}
+.when .t small{font-size:.78rem;font-weight:700;color:var(--muted);margin-left:4px}
+.when .d{font-size:.8rem;color:var(--muted)}
+.when .late{font-size:.72rem;color:var(--warn);font-weight:700;margin-top:4px}
+.main{min-width:0;display:flex;flex-direction:column;gap:4px}
+.row1{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.flower{font-weight:700;font-size:1.02rem}
+.price{font-weight:700;color:var(--rose);font-variant-numeric:tabular-nums}
+.chip{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:99px;letter-spacing:.02em}
+.chip.facebook{background:var(--fb-soft);color:var(--fb)}
+.chip.zalo{background:var(--zalo-soft);color:var(--zalo)}
+.chip.ngoai{background:var(--walk-soft);color:var(--walk)}
+.chip.ok{background:var(--leaf-soft);color:var(--leaf)}
+.meta{font-size:.88rem;color:var(--muted);overflow-wrap:anywhere}
+.meta strong{color:var(--ink);font-weight:600}
+.card-text{margin-top:4px;background:var(--rose-soft);border-radius:8px;padding:6px 10px;font-size:.88rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.card-text::before{content:"In chữ: ";font-weight:700;color:var(--rose)}
+.acts{display:flex;flex-direction:column;gap:6px}
+.empty{text-align:center;padding:40px 16px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:14px}
+
+/* sheet */
+.overlay{position:fixed;inset:0;background:rgba(20,10,20,.45);display:flex;justify-content:center;align-items:flex-start;overflow-y:auto;z-index:20;padding:max(20px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 20px max(12px,env(safe-area-inset-left,0px))}
+.sheet{background:var(--surface);border-radius:16px;width:100%;max-width:620px;padding:20px;display:flex;flex-direction:column;gap:14px;border:1px solid var(--line)}
+.sheet h2{font-family:var(--display);margin:0;font-size:1.4rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.full{grid-column:1/-1}
+label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:600;color:var(--muted)}
+.src{display:flex;gap:8px;flex-wrap:wrap}
+.src label{flex-direction:row;align-items:center;gap:6px;border:1px solid var(--line);border-radius:9px;padding:8px 12px;cursor:pointer;color:var(--ink)}
+.src input{width:auto}
+.src label:has(input:checked){border-color:var(--rose);background:var(--rose-soft)}
+.dt{display:flex;gap:6px;align-items:center}
+.dt select{flex:1 1 0;min-width:0;padding:9px 6px;font-variant-numeric:tabular-nums}
+.dt select[id$="_y"]{flex:1.4 1 0}
+.dt .tbox{flex:1.6 1 0}
+.tbox{display:flex;align-items:center;gap:1px;min-width:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);padding:0 10px 0 4px;font-variant-numeric:tabular-nums}
+.tbox:focus-within{outline:2px solid var(--rose);outline-offset:2px}
+.tbox select{appearance:none;-webkit-appearance:none;border:0;background:transparent;padding:9px 2px;width:auto;flex:0 0 auto;text-align:center;font-weight:500;cursor:pointer;border-radius:4px}
+.tbox select:focus-visible{outline:0;background:var(--rose-soft)}
+.tbox select[id$="_ap"]{margin-left:6px}
+.tbox svg{width:16px;height:16px;margin-left:auto;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;flex:0 0 auto}
+@media (max-width:620px){.dt{flex-wrap:wrap}.dt .tbox{flex:1 1 100%}}
+.sep{color:var(--muted);font-weight:700}
+.checks{display:flex;gap:10px;flex-wrap:wrap}
+.checks label{flex-direction:row;align-items:center;gap:8px;border:1px solid var(--line);border-radius:9px;padding:9px 14px;cursor:pointer;color:var(--ink);font-size:.9rem}
+.checks input{width:18px;height:18px;accent-color:var(--rose)}
+.checks label:has(input:checked){border-color:var(--leaf);background:var(--leaf-soft);color:var(--leaf)}
+.calc{display:block;padding:9px 11px;border:1px dashed var(--line);border-radius:9px;color:var(--rose);font-weight:700;font-variant-numeric:tabular-nums}
+.coc{color:var(--leaf);font-weight:600}
+.chip.no{background:var(--warn-soft);color:var(--warn)}
+.foot{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.err{color:var(--warn);font-size:.85rem}
+.backup{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.backup label.btn{flex-direction:row;color:var(--ink);font-size:.85rem}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:10px;font-size:.9rem;z-index:30}
+
+@media (max-width:620px){
+  .card{grid-template-columns:1fr;gap:8px}
+  .when{border-right:0;padding-right:0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .acts{flex-direction:row;flex-wrap:wrap}
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat b{font-size:1.1rem}
+}
+@media (prefers-reduced-motion:no-preference){.card{transition:opacity .2s}}
+
+/* ===== Đăng nhập ===== */
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px max(16px,env(safe-area-inset-left,0px))}
+.login form{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;width:100%;max-width:380px;display:flex;flex-direction:column;gap:14px}
+.login h1{font-size:1.7rem}
+.userbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+.head-acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sync{display:inline-flex;align-items:center;gap:6px}
+.sync::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--leaf)}
+.sync.off::before{background:var(--warn)}
+/* ===== Hóa đơn A5 ===== */
+#printArea{display:none}
+.inv{width:132mm;margin:0 auto;color:#1d1a1f;background:#fff;font-family:var(--body);font-size:10.5pt;line-height:1.4}
+.inv-head{display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;border-bottom:1.5pt solid #1d1a1f;padding-bottom:3mm}
+.inv-shop b{font-family:var(--display);font-size:17pt;display:block;line-height:1.1}
+.inv-shop div{font-size:9pt;color:#4a4450}
+.inv-no{text-align:right;font-size:9pt;color:#4a4450;white-space:nowrap}
+.inv-no strong{display:block;font-size:12pt;color:#1d1a1f;letter-spacing:.04em}
+.inv h2{text-align:center;font-family:var(--display);font-size:15pt;margin:4mm 0 3mm;letter-spacing:.06em}
+.inv-info{display:grid;grid-template-columns:auto 1fr;gap:1mm 3mm;font-size:10pt;margin-bottom:3mm}
+.inv-info span{color:#4a4450;white-space:nowrap}
+.inv table{width:100%;border-collapse:collapse;font-size:10pt;margin-top:2mm}
+.inv th{background:#f1ecef;text-align:left;padding:1.8mm 2mm;border:.5pt solid #bdb4ba;font-weight:700}
+.inv td{padding:1.8mm 2mm;border:.5pt solid #bdb4ba;vertical-align:top}
+.inv .r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.inv .c{text-align:center}
+.inv-sum{margin-left:auto;width:72mm;margin-top:2mm;font-size:10pt}
+.inv-sum div{display:flex;justify-content:space-between;padding:1mm 2mm}
+.inv-sum .big{border-top:1pt solid #1d1a1f;font-weight:700;font-size:12pt;margin-top:1mm;padding-top:1.5mm}
+.inv-words{font-style:italic;font-size:9.5pt;margin-top:2mm}
+.inv-card{border:.8pt dashed #8a7f88;border-radius:2mm;padding:2mm 3mm;margin-top:3mm;font-size:10pt}
+.inv-card b{display:block;font-size:8.5pt;color:#4a4450;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5mm}
+.inv-sign{display:grid;grid-template-columns:1fr 1fr;text-align:center;margin-top:5mm;font-size:9.5pt}
+.inv-sign i{display:block;font-size:8.5pt;color:#4a4450;margin-bottom:14mm}
+.inv-foot{text-align:center;font-size:9pt;color:#4a4450;margin-top:4mm;border-top:.5pt solid #bdb4ba;padding-top:2mm}
+.inv-stamp{display:inline-block;border:1.2pt solid #1f7a4d;color:#1f7a4d;font-weight:700;padding:.5mm 2.5mm;border-radius:1.5mm;font-size:9pt;margin-left:2mm;transform:rotate(-3deg)}
+@page{size:A5 portrait;margin:8mm}
+@media print{
+  :root,body{background:#fff!important;color:#000!important;padding:0!important}
+  body > *:not(#printArea){display:none!important}
+  #printArea{display:block!important}
+  .inv{width:auto}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div id="loginView" class="login" hidden>
+  <form id="loginForm" novalidate>
+    <h1>Sổ đơn hoa<small>1998 FLOWER · ĐĂNG NHẬP</small></h1>
+    <label>Email<input id="l_email" type="email" autocomplete="username" required></label>
+    <label>Mật khẩu<input id="l_pass" type="password" autocomplete="current-password" required></label>
+    <div id="loginErr" class="err" hidden></div>
+    <button class="btn primary" type="submit" id="loginBtn">Đăng nhập</button>
+  </form>
+</div>
+
+<div id="bootView" class="login"><div class="meta">Đang kết nối…</div></div>
+
+<div class="wrap" id="appView" hidden>
+  <header>
+    <div>
+      <h1>Sổ đơn hoa<small>1998 FLOWER · GHI ĐƠN & LỊCH GIAO</small></h1>
+      <div class="userbar"><span id="syncState" class="sync">Đang đồng bộ</span><span>·</span><span id="userEmail"></span><button class="btn small" type="button" id="logoutBtn">Đăng xuất</button></div>
+    </div>
+    <button class="btn primary" id="addBtn" type="button">+ Thêm đơn</button>
+  </header>
+
+  <div id="notice" class="notice" hidden></div>
+
+  <section class="stats" aria-label="Tổng quan">
+    <div class="stat"><span>Giao hôm nay</span><b id="sToday">0</b></div>
+    <div class="stat"><span>Chưa giao</span><b id="sPending">0</b></div>
+    <div class="stat"><span>Doanh thu tháng</span><b id="sMonth">0đ</b></div>
+    <div class="stat"><span>Chưa thu tiền</span><b id="sUnpaid">0đ</b></div>
+  </section>
+
+  <div class="controls">
+    <div class="tabs" role="group" aria-label="Lọc theo trạng thái">
+      <button class="tab" type="button" data-f="upcoming" aria-pressed="true">Chưa giao</button>
+      <button class="tab" type="button" data-f="today" aria-pressed="false">Hôm nay</button>
+      <button class="tab" type="button" data-f="done" aria-pressed="false">Đã giao</button>
+      <button class="tab" type="button" data-f="unfinished" aria-pressed="false">Chưa xong</button>
+      <button class="tab" type="button" data-f="finished" aria-pressed="false">Xong đơn</button>
+      <button class="tab" type="button" data-f="unpaid" aria-pressed="false">Chưa TT</button>
+      <button class="tab" type="button" data-f="unprinted" aria-pressed="false">Chưa in</button>
+      <button class="tab" type="button" data-f="all" aria-pressed="false">Tất cả</button>
+    </div>
+    <select id="srcFilter" aria-label="Lọc theo nguồn khách">
+      <option value="">Mọi nguồn khách</option>
+      <option value="facebook">Facebook</option>
+      <option value="zalo">Zalo</option>
+      <option value="ngoai">Khách ngoài</option>
+    </select>
+    <input id="q" type="search" placeholder="Tìm tên, SĐT, loại hoa…" aria-label="Tìm kiếm">
+  </div>
+
+  <div id="list" class="list">
+    <div class="empty">Đang tải đơn hàng…</div>
+  </div>
+  <div class="backup">
+    <span>Dữ liệu lưu online, tự đồng bộ giữa điện thoại và máy tính.</span>
+    <button class="btn small" type="button" id="exportBtn">Sao lưu (.json)</button>
+    <label class="btn small" for="importFile">Nhập file sao lưu<input id="importFile" type="file" accept=".json,application/json" hidden></label>
+    <button class="btn small" type="button" id="exportCsvBtn">Xuất Excel (.csv)</button>
+    <button class="btn small" type="button" id="shopBtn">Thông tin cửa hàng (in hóa đơn)</button>
+  </div>
+</div>
+
+<div id="overlay" class="overlay" hidden>
+  <form id="form" class="sheet" novalidate>
+    <h2 id="formTitle">Đơn mới</h2>
+    <div class="grid">
+      <label class="full">Tên người đặt *<input id="f_nguoiDat" required autocomplete="off"></label>
+      <label class="full">Ngày giờ đặt<div class="dt"><select id="f_gioDat_d" aria-label="Ngày đặt"></select><span class="sep">/</span><select id="f_gioDat_m" aria-label="Tháng đặt"></select><span class="sep">/</span><select id="f_gioDat_y" aria-label="Năm đặt"></select><div class="tbox"><select id="f_gioDat_h" aria-label="Giờ đặt"></select><span>:</span><select id="f_gioDat_mi" aria-label="Phút đặt"></select><select id="f_gioDat_ap" aria-label="Sáng hay chiều"><option value="SA">SA</option><option value="CH">CH</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div></div></label>
+      <label class="full">Nguồn khách
+        <div class="src">
+          <label><input type="radio" name="nguon" value="facebook" checked> Facebook</label>
+          <label><input type="radio" name="nguon" value="zalo"> Zalo</label>
+          <label><input type="radio" name="nguon" value="ngoai"> Khách ngoài</label>
+        </div>
+      </label>
+      <label>Loại hoa *<input id="f_loaiHoa" required placeholder="VD: Bó hồng đỏ 20 bông" autocomplete="off"></label>
+      <label>Giá (đ) *<input id="f_gia" inputmode="numeric" required placeholder="VD: 450.000" autocomplete="off"></label>
+      <label>Tiền đã cọc (đ)<input id="f_coc" inputmode="numeric" placeholder="VD: 200.000" autocomplete="off"></label>
+      <label>Còn phải thu<output id="f_conLai" class="calc">0đ</output></label>
+      <label class="full">Ngày giờ giao *<div class="dt"><select id="f_giao_d" aria-label="Ngày giao"></select><span class="sep">/</span><select id="f_giao_m" aria-label="Tháng giao"></select><span class="sep">/</span><select id="f_giao_y" aria-label="Năm giao"></select><div class="tbox"><select id="f_giao_h" aria-label="Giờ giao"></select><span>:</span><select id="f_giao_mi" aria-label="Phút giao"></select><select id="f_giao_ap" aria-label="Sáng hay chiều"><option value="SA">SA</option><option value="CH">CH</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div></div></label>
+      <label>Tên người nhận<input id="f_nguoiNhan" autocomplete="off"></label>
+      <label>SĐT người nhận<input id="f_sdt" type="tel" inputmode="tel" autocomplete="off"></label>
+      <label class="full">Vị trí giao<input id="f_diaChi" placeholder="Số nhà, đường, phường, quận…" autocomplete="off"></label>
+      <label class="full">Nội dung in chữ<textarea id="f_inChu" placeholder="VD: Chúc mừng sinh nhật mẹ yêu"></textarea></label>
+      <div class="full checks">
+        <label><input type="checkbox" id="f_daXong"> Xong đơn</label>
+        <label><input type="checkbox" id="f_daIn"> Đã in chữ</label>
+        <label><input type="checkbox" id="f_daTT"> Đã thanh toán</label>
+      </div>
+    </div>
+    <div id="formErr" class="err" hidden></div>
+    <div class="foot">
+      <button class="btn" type="button" id="cancelBtn">Huỷ</button>
+      <button class="btn primary" type="submit" id="saveBtn">Lưu đơn</button>
+    </div>
+  </form>
+</div>
+
+<div id="shopOverlay" class="overlay" hidden>
+  <form id="shopForm" class="sheet" novalidate>
+    <h2>Thông tin cửa hàng</h2>
+    <p class="meta" style="margin:0">Phần này in ở đầu và cuối mỗi hóa đơn, dùng chung cho mọi máy.</p>
+    <div class="grid">
+      <label class="full">Tên cửa hàng<input id="s_ten" autocomplete="off"></label>
+      <label>Số điện thoại<input id="s_sdt" autocomplete="off"></label>
+      <label>Facebook / Zalo<input id="s_mxh" autocomplete="off" placeholder="VD: fb.com/1998flower"></label>
+      <label class="full">Địa chỉ<input id="s_diaChi" autocomplete="off"></label>
+      <label class="full">Lời cảm ơn cuối hóa đơn<input id="s_camOn" autocomplete="off"></label>
+    </div>
+    <div class="foot">
+      <button class="btn" type="button" id="shopCancel">Đóng</button>
+      <button class="btn primary" type="submit">Lưu thông tin</button>
+    </div>
+  </form>
+</div>
+
+<div id="printArea"></div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { firebaseConfig } from "./firebase-config.js";
+
+(function(){
+  const $ = id => document.getElementById(id);
+  const SRC = {facebook:"Facebook", zalo:"Zalo", ngoai:"Khách ngoài"};
+  let db = null, col = null, orders = [], filter = "upcoming", editingId = null, armedDelete = null;
+
+  const pad = n => String(n).padStart(2,"0");
+  const toLocalInput = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  const money = n => (Number(n)||0).toLocaleString("vi-VN") + "đ";
+  const parseMoney = s => Number(String(s).replace(/[^\d]/g,"")) || 0;
+  const dayKey = s => s ? s.slice(0,10) : "";
+  const todayKey = () => toLocalInput(new Date()).slice(0,10);
+  function ampm(hhmm){ if(!hhmm) return {t:"--:--",ap:""}; let h=+hhmm.slice(0,2); const m=hhmm.slice(3,5); return {t:`${pad(h)}:${m}`,ap:""}; }
+  const fmtTime = s => s ? s.slice(11,16) : "--:--";
+  const fmtDate = s => { if(!s) return ""; const [y,m,d]=s.slice(0,10).split("-"); return `${d}/${m}/${y}`; };
+  const WD = ["Chủ nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
+  function dayLabel(k){
+    if(!k) return "Chưa có ngày giao";
+    const t = todayKey(), d = new Date(k+"T00:00");
+    const tm = new Date(); tm.setDate(tm.getDate()+1);
+    if(k===t) return "Hôm nay · " + fmtDate(k);
+    if(k===toLocalInput(tm).slice(0,10)) return "Ngày mai · " + fmtDate(k);
+    return WD[d.getDay()] + " · " + fmtDate(k);
+  }
+  const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+  function toast(msg){ const t=$("toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast._t); toast._t=setTimeout(()=>t.hidden=true,2200); }
+
+  function render(){
+    const q = $("q").value.trim().toLowerCase(), src = $("srcFilter").value, tk = todayKey();
+    const nowStr = toLocalInput(new Date());
+    // stats
+    $("sToday").textContent = orders.filter(o=>dayKey(o.giao)===tk).length;
+    $("sPending").textContent = orders.filter(o=>!o.daGiao).length;
+    const mk = tk.slice(0,7);
+    $("sUnpaid").textContent = money(orders.filter(o=>!o.daThanhToan).reduce((a,o)=>a+Math.max((Number(o.gia)||0)-(Number(o.coc)||0),0),0));
+    $("sMonth").textContent = money(orders.filter(o=>(o.giao||"").slice(0,7)===mk).reduce((a,o)=>a+(Number(o.gia)||0),0));
+
+    let rows = orders.filter(o=>{
+      if(filter==="upcoming" && o.daGiao) return false;
+      if(filter==="done" && !o.daGiao) return false;
+      if(filter==="today" && dayKey(o.giao)!==tk) return false;
+      if(filter==="unpaid" && o.daThanhToan) return false;
+      if(filter==="unfinished" && (o.daXong || o.daGiao)) return false;
+      if(filter==="finished" && !o.daXong) return false;
+      if(filter==="unprinted" && o.daIn) return false;
+      if(src && o.nguon!==src) return false;
+      if(q){
+        const hay = [o.nguoiDat,o.loaiHoa,o.nguoiNhan,o.sdt,o.diaChi,o.inChu].join(" ").toLowerCase();
+        if(!hay.includes(q)) return false;
+      }
+      return true;
+    });
+    const desc = filter==="done" || filter==="all";
+    rows.sort((a,b)=> (a.giao||"9999").localeCompare(b.giao||"9999") * (desc?-1:1));
+
+    const list = $("list");
+    if(!rows.length){
+      list.innerHTML = `<div class="empty">${orders.length? "Không có đơn nào khớp bộ lọc." : "Chưa có đơn nào. Bấm <strong>+ Thêm đơn</strong> để ghi đơn đầu tiên."}</div>`;
+      return;
+    }
+    let html = "", lastDay = null;
+    for(const o of rows){
+      const k = dayKey(o.giao);
+      if(k!==lastDay){ html += `<div class="day">${esc(dayLabel(k))}</div>`; lastDay=k; }
+      const late = !o.daGiao && o.giao && o.giao < nowStr;
+      html += `<article class="card${o.daGiao?" done":""}">
+        <div class="when"><div class="t">${ampm((o.giao||"").slice(11,16)).t}<small>${ampm((o.giao||"").slice(11,16)).ap}</small></div><div class="d">${fmtDate(o.giao)}</div>${late?'<div class="late">QUÁ GIỜ</div>':""}</div>
+        <div class="main">
+          <div class="row1"><span class="flower">${esc(o.loaiHoa)}</span><span class="price">${money(o.gia)}</span>
+            <span class="chip ${esc(o.nguon)}">${esc(SRC[o.nguon]||"Khác")}</span>${o.daGiao?'<span class="chip ok">Đã giao</span>':""}
+            <span class="chip ${o.daXong?"ok":"no"}">${o.daXong?"Xong đơn":"Chưa xong đơn"}</span>
+            <span class="chip ${o.daThanhToan?"ok":"no"}">${o.daThanhToan?"Đã thanh toán":"Chưa thanh toán"}</span>
+            <span class="chip ${o.daIn?"ok":"no"}">${o.daIn?"Đã in":"Chưa in"}</span></div>
+          ${Number(o.coc)>0 || !o.daThanhToan ? `<div class="meta">${Number(o.coc)>0?`<span class="coc">Đã cọc ${money(o.coc)}</span> · `:""}${o.daThanhToan?"Đã thanh toán đủ":`Còn phải thu: <strong>${money(Math.max((Number(o.gia)||0)-(Number(o.coc)||0),0))}</strong>`}</div>` : ""}
+          <div class="meta">Người đặt: <strong>${esc(o.nguoiDat)}</strong>${o.gioDat?` · đặt lúc ${fmtTime(o.gioDat)} ${fmtDate(o.gioDat)}`:""}</div>
+          <div class="meta">Người nhận: <strong>${esc(o.nguoiNhan||"—")}</strong>${o.sdt?` · <strong>${esc(o.sdt)}</strong>`:""}</div>
+          ${o.diaChi?`<div class="meta">Giao tới: ${esc(o.diaChi)}</div>`:""}
+          ${o.inChu?`<div class="card-text">${esc(o.inChu)}</div>`:""}
+        </div>
+        <div class="acts">
+          <button class="btn small" type="button" data-act="toggle" data-id="${esc(o.id)}">${o.daGiao?"Bỏ đánh dấu":"✓ Đã giao"}</button>
+          <button class="btn small" type="button" data-act="finish" data-id="${esc(o.id)}">${o.daXong?"Bỏ xong đơn":"✿ Xong đơn"}</button>
+          <button class="btn small" type="button" data-act="pay" data-id="${esc(o.id)}">${o.daThanhToan?"Bỏ thanh toán":"₫ Đã thanh toán"}</button>
+          <button class="btn small" type="button" data-act="print" data-id="${esc(o.id)}">${o.daIn?"Bỏ đã in":"🖨 Đã in"}</button>
+          <button class="btn small" type="button" data-act="invoice" data-id="${esc(o.id)}">🧾 In hóa đơn</button>
+          <button class="btn small" type="button" data-act="edit" data-id="${esc(o.id)}">Sửa</button>
+          <button class="btn small danger" type="button" data-act="del" data-id="${esc(o.id)}">${armedDelete===o.id?"Bấm lần nữa để xoá":"Xoá"}</button>
+        </div>
+      </article>`;
+    }
+    list.innerHTML = html;
+  }
+
+  // chọn ngày/tháng/năm (mặc định tháng 10/2026) và giờ SA/CH
+  const DEF_Y=2026, DEF_M=10;
+  function opts(from,to,label){ let h=""; for(let i=from;i<=to;i++) h+=`<option value="${i}">${label?label(i):i}</option>`; return h; }
+  ["gioDat","giao"].forEach(k=>{
+    $("f_"+k+"_d").innerHTML=opts(1,31);
+    $("f_"+k+"_m").innerHTML=opts(1,12,i=>"Th "+i);
+    $("f_"+k+"_y").innerHTML=opts(2025,2030);
+    $("f_"+k+"_h").innerHTML=opts(1,12,i=>pad(i));
+    let mh=""; for(let i=0;i<60;i++) mh+=`<option value="${pad(i)}">${pad(i)}</option>`; $("f_"+k+"_mi").innerHTML=mh;
+    $("f_"+k+"_h").insertAdjacentHTML("afterbegin",'<option value="">--</option>');
+  });
+  function relabelHours(key){
+    const ch = $("f_"+key+"_ap").value==="CH";
+    [...$("f_"+key+"_h").options].forEach(o=>{ if(!o.value) return; const i=+o.value;
+      o.textContent = ch ? String(i===12?12:i+12) : pad(i===12?0:i); });
+  }
+  ["gioDat","giao"].forEach(k=>$("f_"+k+"_ap").addEventListener("change",()=>relabelHours(k)));
+  function setDT(key, val, useNow){
+    let y=DEF_Y, m=DEF_M, d=1, H=null, Mi="00";
+    const now=new Date();
+    if(val){ y=+val.slice(0,4); m=+val.slice(5,7); d=+val.slice(8,10); if(val.length>=16){ H=+val.slice(11,13); Mi=val.slice(14,16); } }
+    else {
+      if(now.getFullYear()===DEF_Y && now.getMonth()+1===DEF_M) d=now.getDate();
+      if(useNow){ H=now.getHours(); Mi=pad(now.getMinutes()); }
+    }
+    if(y<2025||y>2030){ $("f_"+key+"_y").insertAdjacentHTML("beforeend",`<option value="${y}">${y}</option>`); }
+    $("f_"+key+"_d").value=d; $("f_"+key+"_m").value=m; $("f_"+key+"_y").value=y;
+    const miSel=$("f_"+key+"_mi");
+    if(![...miSel.options].some(o=>o.value===Mi)){ miSel.insertAdjacentHTML("beforeend",`<option value="${Mi}">${Mi}</option>`); }
+    miSel.value=Mi;
+    if(H===null){ $("f_"+key+"_h").value=""; $("f_"+key+"_ap").value="SA"; }
+    else { $("f_"+key+"_h").value=(H%12||12); $("f_"+key+"_ap").value=H<12?"SA":"CH"; }
+    relabelHours(key);
+  }
+  function getDT(key){
+    const h=$("f_"+key+"_h").value; if(!h) return "";
+    const y=+$("f_"+key+"_y").value, m=+$("f_"+key+"_m").value;
+    const dim=new Date(y,m,0).getDate();
+    const d=Math.min(+$("f_"+key+"_d").value, dim);
+    let H=(+h)%12; if($("f_"+key+"_ap").value==="CH") H+=12;
+    return `${y}-${pad(m)}-${pad(d)}T${pad(H)}:${$("f_"+key+"_mi").value}`;
+  }
+
+  // form
+  function openForm(o){
+    editingId = o ? o.id : null;
+    $("formTitle").textContent = o ? "Sửa đơn" : "Đơn mới";
+    $("f_nguoiDat").value = o?.nguoiDat || "";
+    setDT("gioDat", o?.gioDat || "", true);
+    $("f_loaiHoa").value = o?.loaiHoa || "";
+    $("f_gia").value = o ? (Number(o.gia)||0).toLocaleString("vi-VN") : "";
+    $("f_coc").value = o && Number(o.coc) ? Number(o.coc).toLocaleString("vi-VN") : "";
+    setDT("giao", o?.giao || "", false);
+    $("f_daIn").checked = !!o?.daIn;
+    $("f_daXong").checked = !!o?.daXong;
+    $("f_daTT").checked = !!o?.daThanhToan;
+    updConLai();
+    $("f_nguoiNhan").value = o?.nguoiNhan || "";
+    $("f_sdt").value = o?.sdt || "";
+    $("f_diaChi").value = o?.diaChi || "";
+    $("f_inChu").value = o?.inChu || "";
+    const n = o?.nguon || "facebook";
+    document.querySelectorAll('input[name="nguon"]').forEach(r=>r.checked = r.value===n);
+    $("formErr").hidden = true;
+    $("overlay").hidden = false;
+    setTimeout(()=>$("f_nguoiDat").focus(),30);
+    $("formErr").hidden = true;
+  }
+  function closeForm(){ $("overlay").hidden = true; editingId = null; }
+
+  function updConLai(){ const g=parseMoney($("f_gia").value), c=parseMoney($("f_coc").value);
+    $("f_conLai").textContent = $("f_daTT").checked ? "0đ (đã thanh toán)" : money(Math.max(g-c,0)); }
+  ["f_gia","f_coc"].forEach(id=>$(id).addEventListener("input", e=>{
+    const n = parseMoney(e.target.value);
+    e.target.value = n ? n.toLocaleString("vi-VN") : "";
+    updConLai();
+  }));
+  $("f_daTT").addEventListener("change", updConLai);
+
+  $("form").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const data = {
+      nguoiDat: $("f_nguoiDat").value.trim(),
+      gioDat: getDT("gioDat"),
+      loaiHoa: $("f_loaiHoa").value.trim(),
+      gia: parseMoney($("f_gia").value),
+      coc: parseMoney($("f_coc").value),
+      giao: getDT("giao"),
+      daIn: $("f_daIn").checked,
+      daXong: $("f_daXong").checked,
+      daThanhToan: $("f_daTT").checked,
+      nguoiNhan: $("f_nguoiNhan").value.trim(),
+      sdt: $("f_sdt").value.trim(),
+      diaChi: $("f_diaChi").value.trim(),
+      inChu: $("f_inChu").value.trim(),
+      nguon: (document.querySelector('input[name="nguon"]:checked')||{}).value || "ngoai",
+    };
+    const miss = [];
+    if(!data.nguoiDat) miss.push("tên người đặt");
+    if(!data.loaiHoa) miss.push("loại hoa");
+    if(!data.gia) miss.push("giá");
+    if(data.coc > data.gia){ const er=$("formErr"); er.textContent="Tiền cọc đang lớn hơn giá đơn, kiểm tra lại giúp nhé."; er.hidden=false; return; }
+    if(!data.giao) miss.push("giờ giao");
+    if(miss.length){ const er=$("formErr"); er.textContent="Còn thiếu: "+miss.join(", ")+"."; er.hidden=false; return; }
+
+    let w;
+    if(editingId){
+      const old = orders.find(o=>o.id===editingId) || {};
+      const body = {...data, daGiao: !!old.daGiao, taoLuc: old.taoLuc || new Date().toISOString(), suaLuc: new Date().toISOString(), suaBoi: currentEmail};
+      w = col.doc(editingId).set(body);
+      toast("Đã lưu thay đổi");
+    } else {
+      const body = {...data, daGiao:false, taoLuc:new Date().toISOString(), taoBoi: currentEmail};
+      w = col.add(body);
+      toast("Đã thêm đơn");
+    }
+    closeForm();
+    w.catch(writeErr);
+  });
+
+  $("addBtn").addEventListener("click", ()=>openForm(null));
+  let cancelArmed=false;
+  $("cancelBtn").addEventListener("click", ()=>{
+    const typed = ["f_nguoiDat","f_loaiHoa","f_gia","f_nguoiNhan","f_sdt","f_diaChi","f_inChu"].some(id=>$(id).value.trim());
+    if(typed && !editingId && !cancelArmed){
+      cancelArmed=true; $("cancelBtn").textContent="Bấm lần nữa để bỏ đơn";
+      setTimeout(()=>{ cancelArmed=false; $("cancelBtn").textContent="Huỷ"; },3500);
+      return;
+    }
+    cancelArmed=false; $("cancelBtn").textContent="Huỷ"; closeForm();
+  });
+  // Không đóng khi bấm ra ngoài hoặc nhấn Esc: chỉ đóng bằng nút Huỷ / Lưu đơn
+
+  document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click", ()=>{
+    filter = t.dataset.f;
+    document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-pressed", x===t?"true":"false"));
+    render();
+  }));
+  $("q").addEventListener("input", render);
+  $("srcFilter").addEventListener("change", render);
+
+  $("list").addEventListener("click", async e=>{
+    const b = e.target.closest("button[data-act]"); if(!b) return;
+    const id = b.dataset.id, o = orders.find(x=>x.id===id); if(!o) return;
+    const act = b.dataset.act;
+    if(act==="edit"){ openForm(o); return; }
+    if(act==="invoice"){ printInvoice(o); return; }
+    const FLAGS = {
+      toggle:["daGiao","Đã đánh dấu giao xong","Đã bỏ đánh dấu giao"],
+      finish:["daXong","Đã đánh dấu xong đơn","Đã chuyển về chưa xong đơn"],
+      pay:["daThanhToan","Đã đánh dấu thanh toán","Đã bỏ đánh dấu thanh toán"],
+      print:["daIn","Đã đánh dấu in xong","Đã bỏ đánh dấu in"],
+    };
+    if(FLAGS[act]){
+      const [f,onMsg,offMsg]=FLAGS[act], nv=!o[f];
+      col.doc(id).update({[f]:nv}).catch(writeErr);
+      toast(nv?onMsg:offMsg);
+    } else if(act==="del"){
+      if(armedDelete!==id){ armedDelete=id; render(); setTimeout(()=>{ if(armedDelete===id){armedDelete=null;render();} },4000); return; }
+      armedDelete=null;
+      col.doc(id).delete().catch(writeErr);
+      toast("Đã xoá đơn");
+    }
+  });
+
+  // ===== Dữ liệu online (Firebase) =====
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const fdb = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+  const ordersRef = collection(fdb, "orders");
+  const shopRef = doc(fdb, "settings", "shop");
+  let currentEmail = "", unsubs = [], shopData = {};
+
+  function writeErr(err){
+    console.error(err);
+    if(err && err.code==="permission-denied") toast("Tài khoản này chưa được cấp quyền sửa dữ liệu");
+    else toast("Chưa lưu lên mạng được, sẽ tự gửi lại khi có mạng");
+  }
+  col = {
+    add: body => addDoc(ordersRef, body),
+    doc: id => ({
+      set: body => setDoc(doc(ordersRef, id), body),
+      update: patch => updateDoc(doc(ordersRef, id), patch),
+      delete: () => deleteDoc(doc(ordersRef, id)),
+    })
+  };
+
+  function showNotice(msg){ const n=$("notice"); n.textContent=msg; n.hidden=!msg; }
+  function setSync(online){ const el=$("syncState"); el.classList.toggle("off", !online); el.textContent = online ? "Đã đồng bộ" : "Đang offline – sẽ tự đồng bộ lại"; }
+
+  function startData(){
+    unsubs.push(onSnapshot(ordersRef, { includeMetadataChanges: true }, snap=>{
+      orders = snap.docs.map(d=>({id:d.id, ...d.data()}));
+      setSync(!snap.metadata.fromCache);
+      showNotice("");
+      render();
+    }, err=>{
+      console.error(err);
+      showNotice(err.code==="permission-denied"
+        ? "Tài khoản "+currentEmail+" chưa được cấp quyền xem đơn. Kiểm tra lại Firestore Rules đã dán và bấm Publish chưa (xem HUONG-DAN.md)."
+        : "Mất kết nối với dữ liệu. Tải lại trang để thử lại.");
+    }));
+    unsubs.push(onSnapshot(shopRef, snap=>{ shopData = snap.exists() ? snap.data() : {}; }, ()=>{}));
+  }
+  function stopData(){ unsubs.forEach(u=>u()); unsubs=[]; orders=[]; render(); }
+
+  onAuthStateChanged(auth, user=>{
+    $("bootView").hidden = true;
+    if(user){
+      currentEmail = user.email || "";
+      $("userEmail").textContent = currentEmail;
+      $("loginView").hidden = true; $("appView").hidden = false;
+      startData();
+    } else {
+      stopData();
+      $("appView").hidden = true; $("loginView").hidden = false;
+      setTimeout(()=>$("l_email").focus(), 30);
+    }
+  });
+  $("loginForm").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const er=$("loginErr"), btn=$("loginBtn"); er.hidden=true; btn.disabled=true; btn.textContent="Đang đăng nhập…";
+    try{ await signInWithEmailAndPassword(auth, $("l_email").value.trim(), $("l_pass").value); $("l_pass").value=""; }
+    catch(err){
+      const c=err&&err.code||"";
+      er.textContent = (c.includes("invalid-credential")||c.includes("wrong-password")||c.includes("user-not-found")||c.includes("invalid-email")) ? "Sai email hoặc mật khẩu."
+                     : c.includes("too-many-requests") ? "Đăng nhập sai quá nhiều lần, đợi vài phút rồi thử lại."
+                     : c.includes("network") ? "Không có mạng, kiểm tra kết nối rồi thử lại."
+                     : "Không đăng nhập được ("+c+").";
+      er.hidden=false;
+    } finally { btn.disabled=false; btn.textContent="Đăng nhập"; }
+  });
+  $("logoutBtn").addEventListener("click", ()=>signOut(auth));
+  window.addEventListener("online", ()=>setSync(true));
+  window.addEventListener("offline", ()=>setSync(false));
+
+  // sao lưu / khôi phục
+  $("exportBtn").addEventListener("click", ()=>{
+    const blob=new Blob([JSON.stringify(orders,null,2)],{type:"application/json"});
+    const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download="don-hoa-"+todayKey()+".json"; a.click(); URL.revokeObjectURL(a.href);
+  });
+  $("exportCsvBtn").addEventListener("click", ()=>{
+    const head=["Người đặt","Giờ đặt","Nguồn","Loại hoa","Giá","Đã cọc","Còn phải thu","Ngày giờ giao","Người nhận","SĐT","Vị trí giao","Nội dung in chữ","Xong đơn","Đã in","Đã thanh toán","Đã giao"];
+    const q=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+    const lines=[head.map(q).join(",")].concat(orders.map(o=>[o.nguoiDat,(o.gioDat||"").replace("T"," "),SRC[o.nguon]||"",o.loaiHoa,o.gia,Number(o.coc)||0,o.daThanhToan?0:Math.max((Number(o.gia)||0)-(Number(o.coc)||0),0),(o.giao||"").replace("T"," "),o.nguoiNhan,o.sdt,o.diaChi,o.inChu,o.daXong?"Có":"Chưa",o.daIn?"Có":"Chưa",o.daThanhToan?"Có":"Chưa",o.daGiao?"Có":"Chưa"].map(q).join(",")));
+    const blob=new Blob(["\ufeff"+lines.join("\n")],{type:"text/csv"});
+    const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+    a.download="don-hoa-"+todayKey()+".csv"; a.click(); URL.revokeObjectURL(a.href);
+  });
+  $("importFile").addEventListener("change", e=>{
+    const f=e.target.files[0]; if(!f) return;
+    const r=new FileReader(); r.onload=async ()=>{
+      e.target.value="";
+      let arr; try{ arr=JSON.parse(r.result); if(!Array.isArray(arr)) throw 0; }catch(_){ toast("File sao lưu không hợp lệ"); return; }
+      const ids=new Set(orders.map(o=>o.id));
+      const todo=arr.filter(o=>o && o.id && !ids.has(String(o.id)));
+      if(!todo.length){ toast("Không có đơn mới để nhập"); return; }
+      toast("Đang nhập "+todo.length+" đơn…");
+      try{
+        for(let i=0;i<todo.length;i+=400){
+          const batch=writeBatch(fdb);
+          todo.slice(i,i+400).forEach(o=>{ const {id,...body}=o; batch.set(doc(ordersRef, String(id).replace(/\//g,"_")), body); });
+          await batch.commit();
+        }
+        toast("Đã nhập "+todo.length+" đơn");
+      }catch(err){ writeErr(err); }
+    }; r.readAsText(f);
+  });
+
+  // ===== Thông tin cửa hàng & in hóa đơn A5 =====
+  const SHOP_DEF={ten:"1998 Flower", sdt:"", mxh:"shophoa1998flower.com", diaChi:"272 Nguyễn Sơn, Tân Phú, TP.HCM", camOn:"Cảm ơn quý khách đã tin chọn hoa của shop!"};
+  function getShop(){ return {...SHOP_DEF, ...shopData}; }
+  $("shopBtn").addEventListener("click", ()=>{
+    const sh=getShop(); $("s_ten").value=sh.ten; $("s_sdt").value=sh.sdt; $("s_mxh").value=sh.mxh; $("s_diaChi").value=sh.diaChi; $("s_camOn").value=sh.camOn;
+    $("shopOverlay").hidden=false;
+  });
+  $("shopCancel").addEventListener("click", ()=>$("shopOverlay").hidden=true);
+  $("shopForm").addEventListener("submit", e=>{
+    e.preventDefault();
+    const sh={ten:$("s_ten").value.trim()||SHOP_DEF.ten, sdt:$("s_sdt").value.trim(), mxh:$("s_mxh").value.trim(), diaChi:$("s_diaChi").value.trim(), camOn:$("s_camOn").value.trim()};
+    setDoc(shopRef, sh).catch(writeErr); shopData = sh; toast("Đã lưu thông tin cửa hàng");
+    $("shopOverlay").hidden=true;
+  });
+
+  const CS=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];
+  function doc3(n, full){
+    const tr=Math.floor(n/100), c=Math.floor(n%100/10), d=n%10, w=[];
+    if(full||tr>0) w.push(CS[tr]+" trăm");
+    if(c>1){ w.push(CS[c]+" mươi"); if(d===1) w.push("mốt"); else if(d===5) w.push("lăm"); else if(d>0) w.push(CS[d]); }
+    else if(c===1){ w.push("mười"); if(d===5) w.push("lăm"); else if(d>0) w.push(CS[d]); }
+    else if(d>0){ if(full||tr>0) w.push("lẻ"); w.push(CS[d]); }
+    return w.join(" ");
+  }
+  function docSo(n){
+    n=Math.round(Number(n)||0); if(n===0) return "Không đồng";
+    const U=["","nghìn","triệu","tỷ"], g=[]; let x=n; while(x>0){ g.push(x%1000); x=Math.floor(x/1000); }
+    const w=[]; let seen=false;
+    for(let i=g.length-1;i>=0;i--){ if(g[i]===0) continue; w.push(doc3(g[i], seen)+(U[i]?" "+U[i]:"")); seen=true; }
+    const s=w.join(" ")+" đồng"; return s.charAt(0).toUpperCase()+s.slice(1);
+  }
+  function invNo(o){
+    const d=(o.gioDat||o.giao||"").slice(2,10).replace(/-/g,"");
+    return "HĐ"+d+"-"+String(o.id).slice(-4).toUpperCase();
+  }
+  function printInvoice(o){
+    const sh=getShop(), gia=Number(o.gia)||0, coc=Number(o.coc)||0;
+    const conLai = o.daThanhToan ? 0 : Math.max(gia-coc,0);
+    const now=new Date();
+    const giao = o.giao ? `${fmtTime(o.giao)} · ${fmtDate(o.giao)}` : "—";
+    const contact=[sh.sdt?("ĐT: "+esc(sh.sdt)):"", sh.mxh?esc(sh.mxh):""].filter(Boolean).join(" · ");
+    $("printArea").innerHTML = `<div class="inv">
+      <div class="inv-head">
+        <div class="inv-shop"><b>${esc(sh.ten)}</b>${sh.diaChi?`<div>${esc(sh.diaChi)}</div>`:""}${contact?`<div>${contact}</div>`:""}</div>
+        <div class="inv-no">Số<strong>${esc(invNo(o))}</strong>Ngày in: ${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()}</div>
+      </div>
+      <h2>HÓA ĐƠN BÁN HÀNG</h2>
+      <div class="inv-info">
+        <span>Khách đặt:</span><div><strong>${esc(o.nguoiDat)}</strong>${o.gioDat?` · đặt lúc ${fmtTime(o.gioDat)} ${fmtDate(o.gioDat)}`:""}</div>
+        <span>Người nhận:</span><div><strong>${esc(o.nguoiNhan||"—")}</strong>${o.sdt?` · ${esc(o.sdt)}`:""}</div>
+        <span>Giao tới:</span><div>${esc(o.diaChi||"—")}</div>
+        <span>Thời gian giao:</span><div><strong>${esc(giao)}</strong></div>
+      </div>
+      <table>
+        <thead><tr><th class="c" style="width:9mm">STT</th><th>Sản phẩm</th><th class="c" style="width:10mm">SL</th><th class="r" style="width:26mm">Thành tiền</th></tr></thead>
+        <tbody><tr><td class="c">1</td><td>${esc(o.loaiHoa)}</td><td class="c">1</td><td class="r">${money(gia)}</td></tr></tbody>
+      </table>
+      <div class="inv-sum">
+        <div><span>Tổng tiền hàng</span><span class="r">${money(gia)}</span></div>
+        ${coc>0?`<div><span>Đã cọc</span><span class="r">− ${money(coc)}</span></div>`:""}
+        ${o.daThanhToan&&coc<gia?`<div><span>Đã thanh toán</span><span class="r">− ${money(gia-coc)}</span></div>`:""}
+        <div class="big"><span>Còn phải thu</span><span class="r">${money(conLai)}</span></div>
+      </div>
+      <div class="inv-words">Bằng chữ (còn phải thu): ${docSo(conLai)}${o.daThanhToan?'<span class="inv-stamp">ĐÃ THANH TOÁN</span>':""}</div>
+      ${o.inChu?`<div class="inv-card"><b>Nội dung thiệp</b>${esc(o.inChu).replace(/\n/g,"<br>")}</div>`:""}
+      <div class="inv-sign"><div>Khách hàng<i>(Ký, ghi rõ họ tên)</i></div><div>Người bán<i>(Ký, ghi rõ họ tên)</i></div></div>
+      ${sh.camOn?`<div class="inv-foot">${esc(sh.camOn)}</div>`:""}
+    </div>`;
+    const oldTitle=document.title; document.title=invNo(o)+" - "+(o.nguoiDat||"");
+    setTimeout(()=>{ window.print(); document.title=oldTitle; }, 50);
+  }
+  setInterval(render, 60000); // refresh "quá giờ" and "hôm nay" labels
+})();
+</script>
+
+</body>
+</html>
