@@ -33,6 +33,13 @@ export interface HeroSlide {
 
 export const heroSlides: HeroSlide[] = [
   {
+    // Chưa có bản dọc cho điện thoại -> hiện đủ ảnh ngang, phần thừa lấp bằng ảnh mờ
+    image: "/banner/hoa-20-11.webp",
+    fit: "contain",
+    alt: "20.11 Ngày Nhà Giáo Việt Nam - đặt hoa tri ân thầy cô ngay tại 1998 Flower, 272 Nguyễn Sơn, Tân Phú",
+    href: "/danh-muc/bo-hoa",
+  },
+  {
     image: "/banner/hoa-20-10.webp",
     mobileImage: "/banner/hoa-20-10-m.webp",
     alt: "20.10 Ngày Phụ nữ Việt Nam - đặt hoa trước ngay tại 1998 Flower, 272 Nguyễn Sơn, Tân Phú",
