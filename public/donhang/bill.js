@@ -43,8 +43,9 @@ const fmtPlaced = s => (s && s.length >= 16 ? `${s.slice(8, 10)}/${s.slice(5, 7)
 
 /**
  * HTML các tờ bill của một ngày: MỖI ĐƠN MỘT TỜ khổ A6 (105 x 148mm), xếp theo giờ giao.
- * Từ trên xuống: ngày đặt (nhỏ) + ô vuông "Đã xong đơn" để tự tích -> ngày giao + giờ giao (cùng cỡ chữ to, cùng hàng)
- * -> loại hoa + giá (cùng hàng, giá đậm) -> tên khách -> nội dung in -> địa chỉ giao.
+ * Từ trên xuống: ngày đặt (nhỏ) -> ngày giao + giờ giao (cùng cỡ chữ to, cùng hàng)
+ * -> loại hoa + giá (cùng hàng, giá đậm) -> tên khách -> nội dung in -> địa chỉ giao
+ * -> ô vuông trống "Đã xong đơn" ở dưới cùng để tự tích tay.
  * Mục nào đơn không có thì bỏ qua.
  */
 export function buildBill({ orders, dateKey }) {
@@ -53,13 +54,14 @@ export function buildBill({ orders, dateKey }) {
   const [, m, d] = dateKey.split("-");
   return list.map(o => {
     const placed = fmtPlaced(o.gioDat);
-    return `<div class="bill">
-  <div class="bill-top">${placed ? `<span class="bill-placed">Ngày đặt: ${placed}</span>` : ""}<span class="bill-done"><i class="bill-sq"></i>Đã xong đơn</span></div>
+    return `<div class="bill">${placed ? `
+  <div class="bill-placed">Ngày đặt: ${placed}</div>` : ""}
   <div class="bill-when"><span>${d}/${m}</span><span>${fmtHour(o.giao)}</span></div>
   <div class="bill-fp"><div class="bill-flower">${esc(o.loaiHoa)}</div><b class="bill-price">${shortMoney(o.gia)}</b></div>
   <div class="bill-who">${esc(who(o))}</div>${o.inChu ? `
   <div class="bill-blk"><div class="bill-lbl">Nội dung in</div><div class="bill-text">${esc(o.inChu)}</div></div>` : ""}${o.diaChi ? `
   <div class="bill-blk"><div class="bill-lbl">Địa chỉ giao</div><div class="bill-text">${esc(o.diaChi)}</div></div>` : ""}
+  <div class="bill-done"><i class="bill-sq"></i>Đã xong đơn</div>
 </div>`;
   }).join("");
 }
@@ -72,7 +74,7 @@ export function buildBlocks({ orders, dateKey }) {
   const [, m, d] = dateKey.split("-");
   return ordersOfDay(orders, dateKey).map(o => {
     const placed = fmtPlaced(o.gioDat);
-    return `<div class="cb"><div class="cb-top">${placed ? `<span class="cb-placed">Ngày đặt: ${placed}</span>` : ""}<span class="cb-done"><i class="cb-sq"></i>Đã xong đơn</span></div><div class="cb-when"><span>${d}/${m}</span><span>${fmtHour(o.giao)}</span></div><div class="cb-fp"><div class="cb-flower">${esc(o.loaiHoa)}</div><b class="cb-price">${shortMoney(o.gia)}</b></div><div class="cb-who">${esc(who(o))}</div>${o.inChu ? `<div class="cb-line"><span class="cb-lbl">Nội dung in:</span> ${esc(o.inChu)}</div>` : ""}${o.diaChi ? `<div class="cb-line"><span class="cb-lbl">Địa chỉ giao:</span> ${esc(o.diaChi)}</div>` : ""}</div>`;
+    return `<div class="cb">${placed ? `<div class="cb-placed">Ngày đặt: ${placed}</div>` : ""}<div class="cb-when"><span>${d}/${m}</span><span>${fmtHour(o.giao)}</span></div><div class="cb-fp"><div class="cb-flower">${esc(o.loaiHoa)}</div><b class="cb-price">${shortMoney(o.gia)}</b></div><div class="cb-who">${esc(who(o))}</div>${o.inChu ? `<div class="cb-line"><span class="cb-lbl">Nội dung in:</span> ${esc(o.inChu)}</div>` : ""}${o.diaChi ? `<div class="cb-line"><span class="cb-lbl">Địa chỉ giao:</span> ${esc(o.diaChi)}</div>` : ""}<div class="cb-done"><i class="cb-sq"></i>Đã xong đơn</div></div>`;
   });
 }
 

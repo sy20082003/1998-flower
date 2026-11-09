@@ -147,10 +147,9 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
 .sync.off::before{background:var(--warn)}
 /* ===== Bill giao hoa: mỗi đơn 1 tờ A6 (105 x 148mm) ===== */
 .bill{width:105mm;height:148mm;box-sizing:border-box;margin:0 auto;padding:7mm 8mm;background:#fff;color:#000;font-family:var(--body);text-align:left;display:flex;flex-direction:column;justify-content:flex-start;gap:3.5mm;overflow:hidden}
-.bill-top,.cb-top{display:flex;justify-content:space-between;align-items:center;gap:3mm}
 .bill-placed{font-size:8pt;color:#444;line-height:1.1}
-.bill-done,.cb-done{margin-left:auto;display:inline-flex;align-items:center;white-space:nowrap;font-weight:600}
-.bill-done{gap:2mm;font-size:9pt}
+.bill-done,.cb-done{display:flex;justify-content:flex-end;align-items:center;white-space:nowrap;font-weight:600}
+.bill-done{gap:2mm;font-size:9pt;margin-top:auto} /* ô vuông nằm sát đáy tờ */
 .bill-sq{display:inline-block;width:6mm;height:6mm;box-sizing:border-box;border:1.2pt solid #000;border-radius:.6mm;flex:0 0 auto}
 .bill-when{display:flex;justify-content:space-between;align-items:center;gap:4mm;font-size:38pt;font-weight:800;line-height:1;padding:2.5mm 0;border-top:1.2pt solid #000;border-bottom:1.2pt solid #000}
 .bill-fp{display:flex;justify-content:space-between;align-items:baseline;gap:4mm}
@@ -169,7 +168,7 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
 .cb{padding:1.8mm 0 2mm;border-bottom:.6pt dashed #777;break-inside:avoid;color:#000;font-family:var(--body)}
 .cb:last-child{border-bottom:0}
 .cb-placed{font-size:6.5pt;color:#444;line-height:1.1}
-.cb-done{gap:1.5mm;font-size:8pt}
+.cb-done{gap:1.5mm;font-size:8pt;margin-top:1.2mm}
 .cb-sq{display:inline-block;width:4.5mm;height:4.5mm;box-sizing:border-box;border:1pt solid #000;border-radius:.5mm;flex:0 0 auto}
 .cb-when{display:flex;justify-content:space-between;align-items:center;gap:3mm;font-size:21pt;font-weight:800;line-height:1.05;padding:.8mm 0;border-top:.9pt solid #000;border-bottom:.9pt solid #000;margin-top:.8mm}
 .cb-fp{display:flex;justify-content:space-between;align-items:baseline;gap:3mm;margin-top:1mm}
