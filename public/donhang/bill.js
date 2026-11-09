@@ -38,21 +38,30 @@ export function ordersOfDay(orders, dateKey) {
 /** "Facebook: Hoài Vy" / "Zalo: Đức Trọng" / "Khách ngoài: ..." */
 export const who = o => `${SRC[o.nguon] || "Khác"}: ${o.nguoiDat || "—"}`;
 
+/** "2026-11-02T20:05" -> "02/11/2026 · 20:05" */
+const fmtPlaced = s => (s && s.length >= 16 ? `${s.slice(8, 10)}/${s.slice(5, 7)}/${s.slice(0, 4)} · ${s.slice(11, 16)}` : "");
+
 /**
  * HTML các tờ bill của một ngày: MỖI ĐƠN MỘT TỜ khổ A6 (105 x 148mm), xếp theo giờ giao.
- * Mỗi tờ chỉ gồm: ngày, giờ giao (chữ to), loại hoa, giá, tên khách.
+ * Từ trên xuống: ngày đặt (nhỏ) -> ngày giao + giờ giao (cùng cỡ chữ to, cùng hàng)
+ * -> loại hoa + giá (cùng hàng, giá đậm) -> tên khách -> nội dung in -> địa chỉ giao.
+ * Mục nào đơn không có thì bỏ qua.
  */
 export function buildBill({ orders, dateKey }) {
   const list = ordersOfDay(orders, dateKey);
   if (!list.length) return `<div class="bill-empty">Không có đơn nào giao trong ngày này.</div>`;
-  const [y, m, d] = dateKey.split("-");
-  return list.map(o => `<div class="bill">
-  <div class="bill-date">${d}/${m}/${y}</div>
-  <div class="bill-time">${fmtHour(o.giao)}</div>
-  <div class="bill-flower">${esc(o.loaiHoa)}</div>
-  <div class="bill-price">${shortMoney(o.gia)}</div>
-  <div class="bill-who">${esc(who(o))}</div>
-</div>`).join("");
+  const [, m, d] = dateKey.split("-");
+  return list.map(o => {
+    const placed = fmtPlaced(o.gioDat);
+    return `<div class="bill">${placed ? `
+  <div class="bill-placed">Ngày đặt: ${placed}</div>` : ""}
+  <div class="bill-when"><span>${d}/${m}</span><span>${fmtHour(o.giao)}</span></div>
+  <div class="bill-fp"><div class="bill-flower">${esc(o.loaiHoa)}</div><b class="bill-price">${shortMoney(o.gia)}</b></div>
+  <div class="bill-who">${esc(who(o))}</div>${o.inChu ? `
+  <div class="bill-blk"><div class="bill-lbl">Nội dung in</div><div class="bill-text">${esc(o.inChu)}</div></div>` : ""}${o.diaChi ? `
+  <div class="bill-blk"><div class="bill-lbl">Địa chỉ giao</div><div class="bill-text">${esc(o.diaChi)}</div></div>` : ""}
+</div>`;
+  }).join("");
 }
 
 /* ---------- Nhắc trước giờ giao ---------- */
