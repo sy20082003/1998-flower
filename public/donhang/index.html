@@ -110,7 +110,6 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
 .tbox:focus-within{outline:2px solid var(--rose);outline-offset:2px}
 .tbox select{appearance:none;-webkit-appearance:none;border:0;background:transparent;padding:9px 2px;width:auto;flex:0 0 auto;text-align:center;font-weight:500;cursor:pointer;border-radius:4px}
 .tbox select:focus-visible{outline:0;background:var(--rose-soft)}
-.tbox select[id$="_ap"]{margin-left:6px}
 .tbox svg{width:16px;height:16px;margin-left:auto;fill:none;stroke:var(--muted);stroke-width:2;stroke-linecap:round;flex:0 0 auto}
 @media (max-width:620px){.dt{flex-wrap:wrap}.dt .tbox{flex:1 1 100%}}
 .sep{color:var(--muted);font-weight:700}
@@ -295,7 +294,7 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
     <h2 id="formTitle">Đơn mới</h2>
     <div class="grid">
       <label class="full">Tên người đặt *<input id="f_nguoiDat" required autocomplete="off"></label>
-      <label class="full">Ngày giờ đặt<div class="dt"><select id="f_gioDat_d" aria-label="Ngày đặt"></select><span class="sep">/</span><select id="f_gioDat_m" aria-label="Tháng đặt"></select><span class="sep">/</span><select id="f_gioDat_y" aria-label="Năm đặt"></select><div class="tbox"><select id="f_gioDat_h" aria-label="Giờ đặt"></select><span>:</span><select id="f_gioDat_mi" aria-label="Phút đặt"></select><select id="f_gioDat_ap" aria-label="Sáng hay chiều"><option value="SA">SA</option><option value="CH">CH</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div></div></label>
+      <label class="full">Ngày giờ đặt<div class="dt"><select id="f_gioDat_d" aria-label="Ngày đặt"></select><span class="sep">/</span><select id="f_gioDat_m" aria-label="Tháng đặt"></select><span class="sep">/</span><select id="f_gioDat_y" aria-label="Năm đặt"></select><div class="tbox"><select id="f_gioDat_h" aria-label="Giờ đặt"></select><span>:</span><select id="f_gioDat_mi" aria-label="Phút đặt"></select><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div></div></label>
       <label class="full">Nguồn khách
         <div class="src">
           <label><input type="radio" name="nguon" value="facebook" checked> Facebook</label>
@@ -307,7 +306,7 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
       <label>Giá (đ) *<input id="f_gia" inputmode="numeric" required placeholder="VD: 450.000" autocomplete="off"></label>
       <label>Tiền đã cọc (đ)<input id="f_coc" inputmode="numeric" placeholder="VD: 200.000" autocomplete="off"></label>
       <label>Còn phải thu<output id="f_conLai" class="calc">0đ</output></label>
-      <label class="full">Ngày giờ giao *<div class="dt"><select id="f_giao_d" aria-label="Ngày giao"></select><span class="sep">/</span><select id="f_giao_m" aria-label="Tháng giao"></select><span class="sep">/</span><select id="f_giao_y" aria-label="Năm giao"></select><div class="tbox"><select id="f_giao_h" aria-label="Giờ giao"></select><span>:</span><select id="f_giao_mi" aria-label="Phút giao"></select><select id="f_giao_ap" aria-label="Sáng hay chiều"><option value="SA">SA</option><option value="CH">CH</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div></div></label>
+      <label class="full">Ngày giờ giao *<div class="dt"><select id="f_giao_d" aria-label="Ngày giao"></select><span class="sep">/</span><select id="f_giao_m" aria-label="Tháng giao"></select><span class="sep">/</span><select id="f_giao_y" aria-label="Năm giao"></select><div class="tbox"><select id="f_giao_h" aria-label="Giờ giao"></select><span>:</span><select id="f_giao_mi" aria-label="Phút giao"></select><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div></div></label>
       <label>Tên người nhận<input id="f_nguoiNhan" autocomplete="off"></label>
       <label>SĐT người nhận<input id="f_sdt" type="tel" inputmode="tel" autocomplete="off"></label>
       <label class="full">Vị trí giao<input id="f_diaChi" placeholder="Số nhà, đường, phường, quận…" autocomplete="off"></label>
@@ -477,16 +476,10 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     $("f_"+k+"_d").innerHTML=opts(1,31);
     $("f_"+k+"_m").innerHTML=opts(1,12,i=>"Th "+i);
     $("f_"+k+"_y").innerHTML=opts(2025,2030);
-    $("f_"+k+"_h").innerHTML=opts(1,12,i=>pad(i));
+    $("f_"+k+"_h").innerHTML=opts(0,23,i=>pad(i));
     let mh=""; for(let i=0;i<60;i++) mh+=`<option value="${pad(i)}">${pad(i)}</option>`; $("f_"+k+"_mi").innerHTML=mh;
     $("f_"+k+"_h").insertAdjacentHTML("afterbegin",'<option value="">--</option>');
   });
-  function relabelHours(key){
-    const ch = $("f_"+key+"_ap").value==="CH";
-    [...$("f_"+key+"_h").options].forEach(o=>{ if(!o.value) return; const i=+o.value;
-      o.textContent = ch ? String(i===12?12:i+12) : pad(i===12?0:i); });
-  }
-  ["gioDat","giao"].forEach(k=>$("f_"+k+"_ap").addEventListener("change",()=>relabelHours(k)));
   function setDT(key, val, useNow){
     let y=DEF_Y, m=DEF_M, d=1, H=null, Mi="00";
     const now=new Date();
@@ -500,29 +493,38 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     const miSel=$("f_"+key+"_mi");
     if(![...miSel.options].some(o=>o.value===Mi)){ miSel.insertAdjacentHTML("beforeend",`<option value="${Mi}">${Mi}</option>`); }
     miSel.value=Mi;
-    if(H===null){ $("f_"+key+"_h").value=""; $("f_"+key+"_ap").value="SA"; }
-    else { $("f_"+key+"_h").value=(H%12||12); $("f_"+key+"_ap").value=H<12?"SA":"CH"; }
-    relabelHours(key);
+    $("f_"+key+"_h").value = H===null ? "" : String(H); // giờ 0-23
   }
   function getDT(key){
-    const h=$("f_"+key+"_h").value; if(!h) return "";
+    const h=$("f_"+key+"_h").value; if(h==="") return "";
     const y=+$("f_"+key+"_y").value, m=+$("f_"+key+"_m").value;
     const dim=new Date(y,m,0).getDate();
     const d=Math.min(+$("f_"+key+"_d").value, dim);
-    let H=(+h)%12; if($("f_"+key+"_ap").value==="CH") H+=12;
+    const H=+h;
     return `${y}-${pad(m)}-${pad(d)}T${pad(H)}:${$("f_"+key+"_mi").value}`;
   }
+
+  // Đơn mới: ngày giờ giao tự đi theo ngày giờ đặt cho tới khi bạn tự chỉnh ngày giờ giao
+  let giaoTouched = false;
+  document.querySelectorAll('[id^="f_giao_"]').forEach(el=>el.addEventListener("change", ()=>{ giaoTouched = true; }));
+  document.querySelectorAll('[id^="f_gioDat_"]').forEach(el=>el.addEventListener("change", ()=>{
+    if(editingId || giaoTouched) return;
+    const v = getDT("gioDat"); if(v) setDT("giao", v, false);
+  }));
 
   // form
   function openForm(o){
     editingId = o ? o.id : null;
     $("formTitle").textContent = o ? "Sửa đơn" : "Đơn mới";
     $("f_nguoiDat").value = o?.nguoiDat || "";
-    setDT("gioDat", o?.gioDat || "", true);
+    const nowStr = toLocalInput(new Date());          // giờ hiện tại, dạng YYYY-MM-DDTHH:MM
+    const gioDatVal = o?.gioDat || nowStr;
+    giaoTouched = false;
+    setDT("gioDat", gioDatVal, true);
     $("f_loaiHoa").value = o?.loaiHoa || "";
     $("f_gia").value = o ? (Number(o.gia)||0).toLocaleString("vi-VN") : "";
     $("f_coc").value = o && Number(o.coc) ? Number(o.coc).toLocaleString("vi-VN") : "";
-    setDT("giao", o?.giao || "", false);
+    setDT("giao", o ? (o.giao || "") : gioDatVal, false); // đơn mới: giờ giao mặc định = giờ đặt
     $("f_daIn").checked = !!o?.daIn;
     $("f_daXong").checked = !!o?.daXong;
     $("f_daTT").checked = !!o?.daThanhToan;
