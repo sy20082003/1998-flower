@@ -903,20 +903,30 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     updSoundBar();
   }
   ["pointerdown","touchstart","keydown"].forEach(ev=>document.addEventListener(ev, unlockAudio, { passive:true }));
-  function tone(c, freq, t, dur){
+  function tone(c, freq, t, dur, out){
     const o = c.createOscillator(), g = c.createGain();
-    o.type = "triangle"; o.frequency.value = freq; o.connect(g); g.connect(c.destination);
+    o.type = "triangle"; o.frequency.value = freq; o.connect(g); g.connect(out);
     g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.5, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
     o.start(t); o.stop(t + dur + .03);
   }
-  // Chuông "ti-ti" lặp 3 lần (~2 giây). Trả về true nếu đã phát được, false nếu trình duyệt đang chặn.
-  async function beep(){
+  // Chuông "ti-ti" cứ ~1,2 giây một lần. RING_SEC = thời gian chuông kêu khi tới giờ nhắc (mặc định 15 giây).
+  const RING_SEC = 15, RING_PERIOD = 1.2;
+  let ringOut = null;
+  function stopRing(){ // dừng chuông (và rung) ngay
+    try{ if(ringOut && actx){ const t = actx.currentTime; ringOut.gain.cancelScheduledValues(t); ringOut.gain.setValueAtTime(0, t); ringOut.disconnect(); } }catch(_){}
+    ringOut = null;
+    try{ navigator.vibrate && navigator.vibrate(0); }catch(_){}
+  }
+  // Phát chuông sec giây. Trả về true nếu đã phát được, false nếu trình duyệt đang chặn tiếng.
+  async function beep(sec = 3){
     if(!soundOn) return false;
     const c = getCtx(); if(!c) return false;
     try{ if(c.state !== "running") await c.resume(); }catch(_){}
     if(c.state !== "running") return false;
-    const t0 = c.currentTime + .03;
-    for(let i = 0; i < 3; i++){ tone(c, 880, t0 + i*.7, .16); tone(c, 1175, t0 + i*.7 + .2, .16); }
+    stopRing();
+    const out = c.createGain(); out.gain.value = 1; out.connect(c.destination); ringOut = out;
+    const t0 = c.currentTime + .03, rings = Math.floor((sec - .4) / RING_PERIOD) + 1;
+    for(let i = 0; i < rings; i++){ tone(c, 880, t0 + i*RING_PERIOD, .16, out); tone(c, 1175, t0 + i*RING_PERIOD + .2, .16, out); }
     return true;
   }
   function updSoundBar(){
@@ -926,6 +936,7 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
   }
   $("soundBtn").addEventListener("click", ()=>{
     soundOn = !soundOn; try{ localStorage.setItem(SOUND_KEY, soundOn ? "on" : "off"); }catch(_){}
+    if(!soundOn) stopRing();
     unlockAudio(); updSoundBar();
     toast(soundOn ? "Đã bật âm báo nhắc giờ giao" : "Đã tắt âm báo (vẫn hiện khung nhắc)");
     if(soundOn) beep();
@@ -970,8 +981,8 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     remindList = due;
     renderRemind(now);
     if(fresh.length){
-      beep().then(ok=>{ if(!ok) updSoundBar(); }); // nếu bị chặn tiếng thì hiện thanh nhắc chạm để bật
-      try{ navigator.vibrate && navigator.vibrate([200,100,200]); }catch(_){}
+      beep(RING_SEC).then(ok=>{ if(!ok) updSoundBar(); }); // chuông ~15 giây; nếu bị chặn tiếng thì hiện thanh nhắc chạm để bật
+      try{ navigator.vibrate && navigator.vibrate(Array.from({ length: 19 }, () => [500, 300]).flat()); }catch(_){} // rung ~15 giây
       fresh.forEach(o=>{ const t = reminderText(o, now); pushNotify(t.title, t.body, reminderKey(o)); });
     }
   }
@@ -981,7 +992,7 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     updNotifBar();
   });
   $("remind").addEventListener("click", e=>{
-    if(e.target.closest("[data-remind-close]")){ remindList.forEach(o=>dismissed.add(reminderKey(o))); renderRemind(Date.now()); }
+    if(e.target.closest("[data-remind-close]")){ stopRing(); remindList.forEach(o=>dismissed.add(reminderKey(o))); renderRemind(Date.now()); }
   });
   updNotifBar();
   setInterval(checkReminders, 20000);
