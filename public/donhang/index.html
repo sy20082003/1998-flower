@@ -191,6 +191,7 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
 .inv{width:132mm;margin:0 auto;color:#1d1a1f;background:#fff;font-family:var(--body);font-size:10.5pt;line-height:1.4}
 .inv-head{display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;border-bottom:1.5pt solid #1d1a1f;padding-bottom:3mm}
 .inv-shop b{font-family:var(--display);font-size:17pt;display:block;line-height:1.1}
+.inv-logo{display:block;height:16mm;width:auto;max-width:64mm;margin:0 0 1.5mm -.5mm}
 .inv-shop div{font-size:9pt;color:#4a4450}
 .inv-no{text-align:right;font-size:9pt;color:#4a4450;white-space:nowrap}
 .inv-no strong{display:block;font-size:12pt;color:#1d1a1f;letter-spacing:.04em}
@@ -786,6 +787,7 @@ import { buildBill, buildBlocks, composeSheets, reminderEvents, reminderText } f
     const d=(o.gioDat||o.giao||"").slice(2,10).replace(/-/g,"");
     return "HĐ"+d+"-"+String(o.id).slice(-4).toUpperCase();
   }
+  new Image().src = "logo-hoadon.png"; // tải trước logo hóa đơn
   function printInvoice(o){
     document.getElementById("billPageStyle")?.remove(); // bỏ cỡ giấy của bill (nếu còn sót)
     const sh=getShop(), gia=Number(o.gia)||0, coc=Number(o.coc)||0;
@@ -795,7 +797,7 @@ import { buildBill, buildBlocks, composeSheets, reminderEvents, reminderText } f
     const contact=[sh.sdt?("ĐT: "+esc(sh.sdt)):"", sh.mxh?esc(sh.mxh):""].filter(Boolean).join(" · ");
     $("printArea").innerHTML = `<div class="inv">
       <div class="inv-head">
-        <div class="inv-shop"><b>${esc(sh.ten)}</b>${sh.diaChi?`<div>${esc(sh.diaChi)}</div>`:""}${contact?`<div>${contact}</div>`:""}</div>
+        <div class="inv-shop"><img class="inv-logo" src="logo-hoadon.png" alt="${esc(sh.ten)}" onerror="var b=document.createElement('b');b.textContent=this.alt;this.replaceWith(b)">${sh.diaChi?`<div>${esc(sh.diaChi)}</div>`:""}${contact?`<div>${contact}</div>`:""}</div>
         <div class="inv-no">Số<strong>${esc(invNo(o))}</strong>Ngày in: ${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()}</div>
       </div>
       <h2>HÓA ĐƠN BÁN HÀNG</h2>
@@ -821,7 +823,12 @@ import { buildBill, buildBlocks, composeSheets, reminderEvents, reminderText } f
       ${sh.camOn?`<div class="inv-foot">${esc(sh.camOn)}</div>`:""}
     </div>`;
     const oldTitle=document.title; document.title=invNo(o)+" - "+(o.nguoiDat||"");
-    setTimeout(()=>{ window.print(); document.title=oldTitle; }, 50);
+    // đợi logo tải xong (tối đa 2 giây) rồi mới in, tránh in ra khung trống
+    const logo = $("printArea").querySelector("img.inv-logo");
+    const ready = logo && !logo.complete
+      ? new Promise(r=>{ logo.addEventListener("load", r, {once:true}); logo.addEventListener("error", r, {once:true}); setTimeout(r, 2000); })
+      : Promise.resolve();
+    ready.then(()=>setTimeout(()=>{ window.print(); document.title=oldTitle; }, 50));
   }
   // ===== Bill giao hoa khổ A6 (105 x 148mm): nhiều đơn / tờ hoặc 1 đơn / tờ =====
   const MODE_KEY = "dh_billmode";
