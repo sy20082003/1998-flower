@@ -64,6 +64,41 @@ export function buildBill({ orders, dateKey }) {
   }).join("");
 }
 
+/**
+ * Kiểu NHIỀU ĐƠN TRÊN MỘT TỜ A6: mỗi đơn là một khối nhỏ (cùng bố cục với tờ lớn nhưng cỡ chữ nhỏ hơn).
+ * Trả về mảng HTML, mỗi phần tử một đơn, đã xếp theo giờ giao.
+ */
+export function buildBlocks({ orders, dateKey }) {
+  const [, m, d] = dateKey.split("-");
+  return ordersOfDay(orders, dateKey).map(o => {
+    const placed = fmtPlaced(o.gioDat);
+    return `<div class="cb">${placed ? `<div class="cb-placed">Ngày đặt: ${placed}</div>` : ""}<div class="cb-when"><span>${d}/${m}</span><span>${fmtHour(o.giao)}</span></div><div class="cb-fp"><div class="cb-flower">${esc(o.loaiHoa)}</div><b class="cb-price">${shortMoney(o.gia)}</b></div><div class="cb-who">${esc(who(o))}</div>${o.inChu ? `<div class="cb-line"><span class="cb-lbl">Nội dung in:</span> ${esc(o.inChu)}</div>` : ""}${o.diaChi ? `<div class="cb-line"><span class="cb-lbl">Địa chỉ giao:</span> ${esc(o.diaChi)}</div>` : ""}</div>`;
+  });
+}
+
+/**
+ * Chia các khối vào từng tờ theo thứ tự: đầy tờ này (capacity = chiều cao dùng được, mm) thì sang tờ mới.
+ * heights: chiều cao từng khối (mm). Trả về mảng các tờ, mỗi tờ là mảng chỉ số khối.
+ * Khối cao hơn cả tờ vẫn được đặt riêng một tờ.
+ */
+export function paginate(heights, capacity) {
+  const pages = [];
+  let cur = [], used = 0;
+  heights.forEach((h, i) => {
+    if (cur.length && used + h > capacity) { pages.push(cur); cur = []; used = 0; }
+    cur.push(i); used += h;
+  });
+  if (cur.length) pages.push(cur);
+  return pages;
+}
+
+/** Ghép các khối thành các tờ A6 (mỗi tờ cao 148mm, trừ lề trên/dưới 5mm = 138mm, chừa 1mm cho chắc) */
+export function composeSheets(blocks, heights, capacity = 137) {
+  return paginate(heights, capacity)
+    .map(idxs => `<div class="sheet6">${idxs.map(i => blocks[i]).join("")}</div>`)
+    .join("");
+}
+
 /* ---------- Nhắc trước giờ giao ---------- */
 
 /** Đơn chưa giao mà còn tối đa leadMin phút nữa là tới giờ giao (chưa quá giờ hơn 1 phút) */

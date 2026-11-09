@@ -159,8 +159,20 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
 .bill-text{font-size:13pt;line-height:1.3;overflow-wrap:anywhere;white-space:pre-line}
 .bill-empty{text-align:center;padding:6mm 0;color:#444;background:#fff;border-radius:6px}
 #billPreview{background:#e9e4e8;border-radius:10px;padding:10px;overflow:auto;max-height:62vh;display:flex;flex-direction:column;gap:12px}
-#billPreview .bill{box-shadow:0 2px 10px rgba(0,0,0,.25);flex:0 0 auto}
-@media (max-width:480px){#billPreview .bill{zoom:.78}}
+#billPreview .bill,#billPreview .sheet6{box-shadow:0 2px 10px rgba(0,0,0,.25);flex:0 0 auto}
+@media (max-width:480px){#billPreview .bill,#billPreview .sheet6{zoom:.78}}
+/* nhiều đơn / tờ A6: mỗi đơn là một khối nhỏ */
+.sheet6{width:105mm;height:148mm;box-sizing:border-box;margin:0 auto;padding:5mm;background:#fff;color:#000;font-family:var(--body);overflow:hidden}
+.cb{padding:1.8mm 0 2mm;border-bottom:.6pt dashed #777;break-inside:avoid;color:#000;font-family:var(--body)}
+.cb:last-child{border-bottom:0}
+.cb-placed{font-size:6.5pt;color:#444;line-height:1.1}
+.cb-when{display:flex;justify-content:space-between;align-items:center;gap:3mm;font-size:21pt;font-weight:800;line-height:1.05;padding:.8mm 0;border-top:.9pt solid #000;border-bottom:.9pt solid #000;margin-top:.8mm}
+.cb-fp{display:flex;justify-content:space-between;align-items:baseline;gap:3mm;margin-top:1mm}
+.cb-flower{flex:1;font-size:11pt;font-weight:600;line-height:1.2;overflow-wrap:anywhere}
+.cb-price{font-size:14pt;font-weight:800;white-space:nowrap}
+.cb-who{font-size:10pt;font-weight:500;margin-top:.4mm;overflow-wrap:anywhere}
+.cb-line{font-size:8.5pt;line-height:1.25;margin-top:.5mm;overflow-wrap:anywhere;white-space:pre-line}
+.cb-lbl{font-weight:700}
 .billopts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .billopts input[type="date"]{padding:8px 10px}
 .billcount{font-size:.88rem;color:var(--muted)}
@@ -203,6 +215,8 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
   .inv{width:auto}
   .bill{width:105mm;height:147.5mm;margin:0;break-after:page;page-break-after:always}
   .bill:last-child{break-after:auto;page-break-after:auto}
+  .sheet6{width:105mm;height:147.5mm;margin:0;break-after:page;page-break-after:always}
+  .sheet6:last-child{break-after:auto;page-break-after:auto}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
@@ -333,7 +347,11 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
 <div id="billOverlay" class="overlay" hidden>
   <div class="sheet">
     <h2>In bill giao hoa trong ngày</h2>
-    <p class="meta" style="margin:0">Khổ A6 (105 × 148mm), mỗi đơn một tờ, xếp theo giờ giao.</p>
+    <p class="meta" style="margin:0">Khổ A6 (105 × 148mm), các đơn xếp theo giờ giao. Chọn cách xếp bên dưới.</p>
+    <div class="src" role="group" aria-label="Cách xếp bill">
+      <label><input type="radio" name="billmode" value="multi" checked> Nhiều đơn / tờ (hết chỗ tự sang tờ mới)</label>
+      <label><input type="radio" name="billmode" value="single"> 1 đơn / tờ (chữ to)</label>
+    </div>
     <div class="billopts">
       <input type="date" id="b_date" aria-label="Chọn ngày giao">
       <button class="btn small" type="button" data-bd="0">Hôm nay</button>
@@ -357,7 +375,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { buildBill, dueReminders, reminderKey, reminderText } from "./bill.js";
+import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, reminderText } from "./bill.js";
 
 (function(){
   const $ = id => document.getElementById(id);
@@ -796,22 +814,52 @@ import { buildBill, dueReminders, reminderKey, reminderText } from "./bill.js";
     const oldTitle=document.title; document.title=invNo(o)+" - "+(o.nguoiDat||"");
     setTimeout(()=>{ window.print(); document.title=oldTitle; }, 50);
   }
-  // ===== Bill giao hoa: mỗi đơn 1 tờ A6 (105 x 148mm) =====
+  // ===== Bill giao hoa khổ A6 (105 x 148mm): nhiều đơn / tờ hoặc 1 đơn / tờ =====
+  const MODE_KEY = "dh_billmode";
+  let billMode = "multi";
+  try{ billMode = localStorage.getItem(MODE_KEY) === "single" ? "single" : "multi"; }catch(_){}
+  document.querySelectorAll('input[name="billmode"]').forEach(r=>{ r.checked = r.value === billMode; });
   const billDate = () => $("b_date").value || todayKey();
-  const billHtml = () => buildBill({ orders, dateKey: billDate() });
+  // đo chiều cao thật (mm) của từng khối khi rộng đúng phần ruột tờ A6 (95mm) để biết xếp được mấy đơn/tờ
+  function measureMm(blocks){
+    const probe = document.createElement("div");
+    probe.style.cssText = "position:absolute;left:-9999px;top:0;width:95mm;visibility:hidden";
+    probe.innerHTML = blocks.join("");
+    document.body.appendChild(probe);
+    const hs = [...probe.children].map(el => el.offsetHeight * 25.4 / 96);
+    probe.remove();
+    return hs;
+  }
+  function billHtml(){
+    const key = billDate();
+    if(billMode === "single") return buildBill({ orders, dateKey: key });
+    const blocks = buildBlocks({ orders, dateKey: key });
+    if(!blocks.length) return buildBill({ orders, dateKey: key }); // thông báo "không có đơn"
+    return composeSheets(blocks, measureMm(blocks));
+  }
   function renderBill(){
-    $("billPreview").innerHTML = billHtml();
-    const n = $("billPreview").querySelectorAll(".bill").length;
-    $("billCount").textContent = n ? `${n} đơn = ${n} tờ A6` : "";
+    const pv = $("billPreview");
+    pv.innerHTML = billHtml();
+    const n = pv.querySelectorAll(".bill, .cb").length, pages = pv.querySelectorAll(".bill, .sheet6").length;
+    $("billCount").textContent = n ? `${n} đơn · ${pages} tờ A6` : "";
   }
   function shiftDay(n){ const d = new Date(); d.setDate(d.getDate()+n); $("b_date").value = toLocalInput(d).slice(0,10); renderBill(); }
-  $("billBtn").addEventListener("click", ()=>{ if(!$("b_date").value) $("b_date").value = todayKey(); renderBill(); $("billOverlay").hidden = false; });
+  $("billBtn").addEventListener("click", ()=>{
+    if(!$("b_date").value) $("b_date").value = todayKey();
+    renderBill(); $("billOverlay").hidden = false;
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>{ if(!$("billOverlay").hidden) renderBill(); }); // đo lại khi font đã tải xong
+  });
   $("billClose").addEventListener("click", ()=>{ $("billOverlay").hidden = true; });
   $("b_date").addEventListener("change", renderBill);
+  document.querySelectorAll('input[name="billmode"]').forEach(r=>r.addEventListener("change", ()=>{
+    if(!r.checked) return;
+    billMode = r.value; try{ localStorage.setItem(MODE_KEY, billMode); }catch(_){}
+    renderBill();
+  }));
   document.querySelectorAll("[data-bd]").forEach(b=>b.addEventListener("click", ()=>shiftDay(+b.dataset.bd)));
   $("billPrint").addEventListener("click", ()=>{
     document.getElementById("billPageStyle")?.remove();
-    if(!$("billPreview").querySelector(".bill")){ toast("Ngày này chưa có đơn nào để in"); return; }
+    if(!$("billPreview").querySelector(".bill, .sheet6")){ toast("Ngày này chưa có đơn nào để in"); return; }
     const st = document.createElement("style"); st.id = "billPageStyle";
     st.textContent = "@page{size:105mm 148mm;margin:0}"; // A6 dọc, không lề
     document.head.appendChild(st);
