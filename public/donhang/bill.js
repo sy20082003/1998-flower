@@ -2,7 +2,6 @@
 // Không đụng tới Firebase hay giao diện, nên dễ kiểm tra riêng.
 
 export const SRC = { facebook: "Facebook", zalo: "Zalo", ngoai: "Khách ngoài" };
-const WD = ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
 const pad = n => String(n).padStart(2, "0");
 export const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const moneyFull = n => (Number(n) || 0).toLocaleString("vi-VN") + "đ";
@@ -39,32 +38,21 @@ export function ordersOfDay(orders, dateKey) {
 /** "Facebook: Hoài Vy" / "Zalo: Đức Trọng" / "Khách ngoài: ..." */
 export const who = o => `${SRC[o.nguon] || "Khác"}: ${o.nguoiDat || "—"}`;
 
-/** HTML của tờ bill tổng hợp (khổ A6, rộng 105mm, dài tuỳ số đơn) */
-export function buildBill({ orders, dateKey, shop = {}, withAddr = false, now = new Date() }) {
+/**
+ * HTML các tờ bill của một ngày: MỖI ĐƠN MỘT TỜ khổ A6 (105 x 148mm), xếp theo giờ giao.
+ * Mỗi tờ chỉ gồm: ngày, giờ giao (chữ to), loại hoa, giá, tên khách.
+ */
+export function buildBill({ orders, dateKey }) {
   const list = ordersOfDay(orders, dateKey);
+  if (!list.length) return `<div class="bill-empty">Không có đơn nào giao trong ngày này.</div>`;
   const [y, m, d] = dateKey.split("-");
-  const wd = WD[new Date(+y, +m - 1, +d).getDay()];
-  const total = list.reduce((a, o) => a + (Number(o.gia) || 0), 0);
-
-  const head = `<div class="bill-head">
-    <b class="bill-shop">${esc(shop.ten || "1998 Flower")}</b>
-    <div class="bill-title">BILL TỔNG HỢP ĐƠN</div>
-    <div class="bill-date">${wd} · ${d}/${m}/${y}</div>
-    <div class="bill-count">${list.length} đơn${list.length ? ` · ${shortMoney(total)}` : ""}</div>
-  </div>`;
-
-  const body = list.length
-    ? list.map((o, i) => `<div class="bill-o${o.daGiao ? " done" : ""}">
-    <div class="bill-r1"><span><b>Đơn ${pad(i + 1)}</b> · <b>${fmtHour(o.giao)}</b></span><i class="bill-box${o.daGiao ? " on" : ""}" title="${o.daGiao ? "Đã giao" : "Chưa giao"}"></i></div>
-    <div class="bill-r2"><span class="bill-p">${esc(o.loaiHoa)}</span><b class="bill-m">${shortMoney(o.gia)}</b></div>
-    <div class="bill-r3">${esc(who(o))}</div>${withAddr && o.diaChi ? `
-    <div class="bill-r4">Giao: ${esc(o.diaChi)}</div>` : ""}
-  </div>`).join("")
-    : `<div class="bill-empty">Không có đơn nào giao trong ngày này.</div>`;
-
-  const foot = list.length ? `<div class="bill-total"><span>Tổng ${list.length} đơn</span><b>${moneyFull(total)}</b></div>` : "";
-  const printed = `In lúc ${pad(now.getHours())}:${pad(now.getMinutes())} ${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()}`;
-  return `<div class="bill">${head}${body}${foot}<div class="bill-end">${printed}</div></div>`;
+  return list.map(o => `<div class="bill">
+  <div class="bill-date">${d}/${m}/${y}</div>
+  <div class="bill-time">${fmtHour(o.giao)}</div>
+  <div class="bill-flower">${esc(o.loaiHoa)}</div>
+  <div class="bill-price">${shortMoney(o.gia)}</div>
+  <div class="bill-who">${esc(who(o))}</div>
+</div>`).join("");
 }
 
 /* ---------- Nhắc trước giờ giao ---------- */
