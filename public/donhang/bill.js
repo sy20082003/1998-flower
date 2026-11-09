@@ -103,27 +103,34 @@ export function composeSheets(blocks, heights, capacity = 137) {
 
 /* ---------- Nhắc trước giờ giao ---------- */
 
-/** Đơn chưa giao mà còn tối đa leadMin phút nữa là tới giờ giao (chưa quá giờ hơn 1 phút) */
-export function dueReminders(orders, nowMs, leadMin = 30) {
-  return orders
-    .filter(o => {
-      if (o.daGiao || !o.giao) return false;
-      const t = parseLocal(o.giao);
-      if (!Number.isFinite(t)) return false;
-      const diff = t - nowMs;
-      return diff <= leadMin * 60000 && diff > -60000;
-    })
-    .sort((a, b) => a.giao.localeCompare(b.giao));
+/**
+ * Các lần nhắc cho đơn chưa giao, mỗi đơn có 2 lần:
+ *  - "pre": còn tối đa leadMin phút (mặc định 30) nữa là tới giờ giao;
+ *  - "now": đã tới giờ giao (và chưa quá graceMin phút, mặc định 10 phút).
+ * Trả về [{ o, stage, key }] xếp theo giờ giao. Đơn đã giao hoặc không có giờ giao thì bỏ qua.
+ */
+export function reminderEvents(orders, nowMs, leadMin = 30, graceMin = 10) {
+  const ev = [];
+  for (const o of orders) {
+    if (o.daGiao || !o.giao) continue;
+    const t = parseLocal(o.giao);
+    if (!Number.isFinite(t)) continue;
+    const diff = t - nowMs; // còn bao nhiêu ms nữa tới giờ giao (âm = đã quá giờ)
+    if (diff > 0 && diff <= leadMin * 60000) ev.push({ o, stage: "pre", key: reminderKey(o, "pre") });
+    else if (diff <= 0 && diff > -graceMin * 60000) ev.push({ o, stage: "now", key: reminderKey(o, "now") });
+  }
+  return ev.sort((a, b) => a.o.giao.localeCompare(b.o.giao));
 }
 
-/** Khoá để mỗi đơn chỉ báo 1 lần; đổi giờ giao thì được báo lại */
-export const reminderKey = o => `${o.id}|${o.giao}`;
+/** Khoá để mỗi lần nhắc chỉ báo 1 lần; đổi giờ giao thì được báo lại. Khoá "pre" giữ nguyên dạng cũ. */
+export const reminderKey = (o, stage = "pre") => (stage === "pre" ? `${o.id}|${o.giao}` : `${o.id}|${o.giao}|${stage}`);
 
-export function reminderText(o, nowMs) {
-  const mins = Math.max(0, Math.ceil((parseLocal(o.giao) - nowMs) / 60000));
-  const when = mins <= 0 ? "đến giờ giao" : `còn ${mins} phút`;
-  return {
-    title: `⏰ Giao lúc ${fmtHour(o.giao)} (${when})`,
-    body: `${o.loaiHoa} · ${shortMoney(o.gia)} · ${who(o)}`,
-  };
+export function reminderText(o, nowMs, stage = "pre") {
+  const body = `${o.loaiHoa} · ${shortMoney(o.gia)} · ${who(o)}`;
+  if (stage === "now") {
+    const late = Math.max(0, Math.floor((nowMs - parseLocal(o.giao)) / 60000));
+    return { title: `🔔 ĐẾN GIỜ GIAO ${fmtHour(o.giao)}${late >= 1 ? ` (trễ ${late} phút)` : ""}`, body };
+  }
+  const mins = Math.max(1, Math.ceil((parseLocal(o.giao) - nowMs) / 60000));
+  return { title: `⏰ Giao lúc ${fmtHour(o.giao)} (còn ${mins} phút)`, body };
 }

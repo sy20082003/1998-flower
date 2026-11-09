@@ -184,6 +184,7 @@ label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:60
 .notifbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--rose-soft);color:var(--rose);border-radius:10px;padding:9px 14px;font-size:.88rem}
 .remind{position:sticky;top:8px;z-index:10;background:var(--warn-soft);color:var(--warn);border:1px solid var(--warn);border-radius:12px;padding:10px 14px;font-size:.92rem;display:flex;flex-direction:column;gap:4px;box-shadow:0 4px 14px rgba(0,0,0,.15)}
 .remind .remind-i{color:var(--ink)}
+.remind .remind-i.now{font-weight:600}
 .remind .btn{align-self:flex-end}
 /* ===== Hóa đơn A5 ===== */
 #printArea{display:none}
@@ -380,7 +381,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, reminderText } from "./bill.js";
+import { buildBill, buildBlocks, composeSheets, reminderEvents, reminderText } from "./bill.js";
 
 (function(){
   const $ = id => document.getElementById(id);
@@ -879,7 +880,7 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
 
   // ===== Nhắc trước giờ giao 30 phút =====
   // Chạy khi mở app (tab hoặc app cài trên màn hình chính): hiện khung nhắc + bíp + rung + thông báo hệ thống.
-  const LEAD_MIN = 30, SEEN_KEY = "dh_nhac_v1";
+  const LEAD_MIN = 30, GRACE_MIN = 10, SEEN_KEY = "dh_nhac_v1"; // báo trước 30 phút và báo lại khi đúng giờ giao (còn hiệu lực 10 phút)
   let swReg = null, remindList = [];
   const dismissed = new Set();
   if("serviceWorker" in navigator){ navigator.serviceWorker.register("sw.js").then(r=>{ swReg = r; }).catch(()=>{}); }
@@ -909,7 +910,7 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.5, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
     o.start(t); o.stop(t + dur + .03);
   }
-  // Chuông "ti-ti" cứ ~1,2 giây một lần. RING_SEC = thời gian chuông kêu khi tới giờ nhắc (mặc định 15 giây).
+  // Chuông cứ ~1,2 giây một lần. RING_SEC = thời gian chuông kêu khi tới giờ nhắc (mặc định 15 giây).
   const RING_SEC = 15, RING_PERIOD = 1.2;
   let ringOut = null;
   function stopRing(){ // dừng chuông (và rung) ngay
@@ -918,7 +919,7 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     try{ navigator.vibrate && navigator.vibrate(0); }catch(_){}
   }
   // Phát chuông sec giây. Trả về true nếu đã phát được, false nếu trình duyệt đang chặn tiếng.
-  async function beep(sec = 3){
+  async function beep(sec = 3, kind = "pre"){
     if(!soundOn) return false;
     const c = getCtx(); if(!c) return false;
     try{ if(c.state !== "running") await c.resume(); }catch(_){}
@@ -926,7 +927,9 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     stopRing();
     const out = c.createGain(); out.gain.value = 1; out.connect(c.destination); ringOut = out;
     const t0 = c.currentTime + .03, rings = Math.floor((sec - .4) / RING_PERIOD) + 1;
-    for(let i = 0; i < rings; i++){ tone(c, 880, t0 + i*RING_PERIOD, .16, out); tone(c, 1175, t0 + i*RING_PERIOD + .2, .16, out); }
+    // trước 30 phút: "ti-ti" (2 nốt); đúng giờ giao: "ti-ti-ti" cao hơn (3 nốt) để phân biệt
+    const notes = kind === "now" ? [[1047, 0], [1319, .16], [1568, .32]] : [[880, 0], [1175, .2]];
+    for(let i = 0; i < rings; i++) notes.forEach(([f, dt]) => tone(c, f, t0 + i*RING_PERIOD + dt, .13, out));
     return true;
   }
   function updSoundBar(){
@@ -961,11 +964,11 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
   }
   function renderRemind(now){
     const el = $("remind");
-    const items = remindList.filter(o=>!dismissed.has(reminderKey(o)));
+    const items = remindList.filter(e=>!dismissed.has(e.key));
     if(!items.length){ el.hidden = true; el.innerHTML = ""; return; }
-    el.innerHTML = "<b>⏰ Sắp đến giờ giao</b>" + items.map(o=>{
-      const t = reminderText(o, now);
-      return `<div class="remind-i"><strong>${esc(t.title.replace("⏰ ",""))}</strong><br>${esc(t.body)}</div>`;
+    el.innerHTML = "<b>⏰ Nhắc giờ giao</b>" + items.map(e=>{
+      const t = reminderText(e.o, now, e.stage);
+      return `<div class="remind-i${e.stage === "now" ? " now" : ""}"><strong>${esc(t.title)}</strong><br>${esc(t.body)}</div>`;
     }).join("") + '<button class="btn small" type="button" data-remind-close>Đã biết</button>';
     el.hidden = false;
   }
@@ -974,16 +977,16 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     const now = Date.now(), seen = loadSeen();
     let changed = false;
     for(const k in seen){ if(now - seen[k] > 3*864e5){ delete seen[k]; changed = true; } } // dọn bản ghi cũ
-    const due = dueReminders(orders, now, LEAD_MIN);
-    const fresh = due.filter(o=>!seen[reminderKey(o)]);
-    fresh.forEach(o=>{ seen[reminderKey(o)] = now; changed = true; });
+    const evs = reminderEvents(orders, now, LEAD_MIN, GRACE_MIN); // mỗi đơn: 1 lần trước 30 phút + 1 lần đúng giờ giao
+    const fresh = evs.filter(e=>!seen[e.key]);
+    fresh.forEach(e=>{ seen[e.key] = now; changed = true; });
     if(changed) saveSeen(seen);
-    remindList = due;
+    remindList = evs;
     renderRemind(now);
     if(fresh.length){
-      beep(RING_SEC).then(ok=>{ if(!ok) updSoundBar(); }); // chuông ~15 giây; nếu bị chặn tiếng thì hiện thanh nhắc chạm để bật
+      beep(RING_SEC, fresh.some(e=>e.stage === "now") ? "now" : "pre").then(ok=>{ if(!ok) updSoundBar(); }); // chuông ~15 giây; nếu bị chặn tiếng thì hiện thanh nhắc chạm để bật
       try{ navigator.vibrate && navigator.vibrate(Array.from({ length: 19 }, () => [500, 300]).flat()); }catch(_){} // rung ~15 giây
-      fresh.forEach(o=>{ const t = reminderText(o, now); pushNotify(t.title, t.body, reminderKey(o)); });
+      fresh.forEach(e=>{ const t = reminderText(e.o, now, e.stage); pushNotify(t.title, t.body, e.key); });
     }
   }
   function updNotifBar(){ $("notifBar").hidden = !("Notification" in window) || Notification.permission !== "default"; }
@@ -992,7 +995,7 @@ import { buildBill, buildBlocks, composeSheets, dueReminders, reminderKey, remin
     updNotifBar();
   });
   $("remind").addEventListener("click", e=>{
-    if(e.target.closest("[data-remind-close]")){ stopRing(); remindList.forEach(o=>dismissed.add(reminderKey(o))); renderRemind(Date.now()); }
+    if(e.target.closest("[data-remind-close]")){ stopRing(); remindList.forEach(e=>dismissed.add(e.key)); renderRemind(Date.now()); }
   });
   updNotifBar();
   setInterval(checkReminders, 20000);
