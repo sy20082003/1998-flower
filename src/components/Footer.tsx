@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AREAS } from "@/data/areas";
 
 export default function Footer() {
   return (
@@ -43,6 +44,13 @@ export default function Footer() {
           <div className="footerCol">
             <h4>Cửa Hàng</h4>
             <p><strong>Địa Chỉ Cửa Hàng:</strong><br />272 Nguyễn Sơn, Phú Thọ Hòa, Tân Phú, TP.HCM</p>
+            <p style={{ marginTop: 10 }}><strong>Giờ mở cửa:</strong><br />6h – 22h, tất cả các ngày trong tuần</p>
+            <h4 style={{ marginTop: 16 }}>Khu Vực Giao Hoa</h4>
+            {AREAS.map((a) => (
+              <Link key={a.slug} href={`/${a.slug}`}>
+                Hoa tươi {a.name} ({a.fee === 0 ? "freeship" : `ship ${a.fee / 1000}K`})
+              </Link>
+            ))}
           </div>
         </div>
         <div className="footerBottom">

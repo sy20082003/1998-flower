@@ -58,10 +58,7 @@ const florist: Record<string, unknown> = {
     addressRegion: SITE.address.city,
     addressCountry: "VN",
   },
-  areaServed: [
-    { "@type": "AdministrativeArea", name: SITE.address.district },
-    { "@type": "City", name: SITE.address.city },
-  ],
+  areaServed: SITE.serviceAreas.map((name) => ({ "@type": "AdministrativeArea", name })),
   sameAs: [SITE.social.facebook, SITE.social.instagram, SITE.social.tiktok, SITE.social.zalo],
   ...(SITE.geo ? { geo: { "@type": "GeoCoordinates", latitude: SITE.geo.lat, longitude: SITE.geo.lng } } : {}),
   ...(SITE.mapUrl ? { hasMap: SITE.mapUrl } : {}),

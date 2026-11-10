@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { allProducts, products } from "@/data/products";
 import { allCategories, canonicalSlug } from "@/data/categories";
+import { AREAS } from "@/data/areas";
 import { SITE_URL } from "@/lib/site";
 
 // Sơ đồ trang web: trang chủ + các danh mục CÓ sản phẩm (và là trang chính, không trùng nội dung) + tất cả sản phẩm.
@@ -25,5 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [{ url: SITE_URL, lastModified: now, changeFrequency: "daily", priority: 1 }, ...categories, ...items];
+  const areas = AREAS.map((a) => ({
+    url: `${SITE_URL}/${a.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.9,
+  }));
+
+  return [{ url: SITE_URL, lastModified: now, changeFrequency: "daily", priority: 1 }, ...areas, ...categories, ...items];
 }
