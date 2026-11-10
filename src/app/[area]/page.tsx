@@ -150,6 +150,9 @@ export default function AreaPage({ params }: Props) {
         <section className="section areaBlock">
           <h2 className="areaH2">Bản đồ cửa hàng 1998 Flower</h2>
           <p className="areaNote">{SITE.fullAddress} · Mở cửa {OPEN_HOURS_TEXT}</p>
+          <p className="areaNote">
+            <a href={SITE.directionsUrl} target="_blank" rel="noopener noreferrer" className="areaDir">📍 Chỉ đường tới cửa hàng bằng Google Maps</a>
+          </p>
           <iframe
             className="areaMap"
             src={mapEmbed}

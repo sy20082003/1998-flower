@@ -28,9 +28,11 @@ export const SITE = {
   // Giờ mở cửa, ví dụ: [{ days: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], opens: "07:00", closes: "21:00" }]
   openingHours: [{ days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "06:00", closes: "22:00" }] as undefined | { days: string[]; opens: string; closes: string }[],
   // Tọa độ cửa hàng, ví dụ: { lat: 10.78, lng: 106.62 }
-  geo: undefined as undefined | { lat: number; lng: number },
+  geo: { lat: 10.78334393746477, lng: 106.62548326441804 } as undefined | { lat: number; lng: number }, // từ Google Maps (Plus Code QJMG+954)
   // Liên kết Google Maps của cửa hàng
-  mapUrl: "https://www.google.com/maps/search/?api=1&query=272+Nguy%E1%BB%85n+S%C6%A1n%2C+Ph%C3%BA+Th%E1%BB%8D+H%C3%B2a%2C+T%C3%A2n+Ph%C3%BA%2C+TP.HCM" as undefined | string,
+  mapUrl: "https://www.google.com/maps/place/?q=place_id:ChIJLc02JAMsdTER42edrkSo7XU" as undefined | string,
+  // Liên kết chỉ đường (Google Maps) tới cửa hàng
+  directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=10.78334393746477%2C106.62548326441804&destination_place_id=ChIJLc02JAMsdTER42edrkSo7XU",
   // Khu vực giao hoa (cửa hàng xác nhận: chỉ giao 3 khu vực này)
   serviceAreas: ["Tân Phú", "Tân Bình", "Bình Tân"],
   // Địa chỉ đầy đủ dạng chữ, dùng cho bản đồ nhúng
