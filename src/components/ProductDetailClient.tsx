@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Product } from "@/data/products";
 import OrderModal from "./OrderModal";
 
@@ -20,23 +21,27 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               {product.disc} GIẢM
             </div>
           )}
-{/* Thay thế đoạn emoji cũ bằng đoạn hiển thị ảnh sản phẩm này */}
-{product.image && (
-  <div className="product-detail-image" style={{ textAlign: 'center', marginBottom: '20px' }}>
-    <img 
-      src={product.image} 
-      alt={product.name} 
-      style={{ 
-        width: '100%', 
-        maxWidth: '450px', // Giới hạn chiều rộng tối đa để ảnh không bị quá to
-        height: 'auto', 
-        objectFit: 'cover', 
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)' // Thêm chút bóng mờ cho ảnh đẹp hơn
-      }} 
-    />
-  </div>
-)}
+          {/* Ảnh sản phẩm: tải ưu tiên vì là ảnh lớn đầu trang (giúp điểm tốc độ LCP) */}
+          {product.image && (
+            <div className="product-detail-image" style={{ textAlign: "center", marginBottom: "20px" }}>
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={900}
+                height={1200}
+                priority
+                sizes="(max-width: 640px) 100vw, 450px"
+                style={{
+                  width: "100%",
+                  maxWidth: "450px", // Giới hạn chiều rộng tối đa để ảnh không bị quá to
+                  height: "auto",
+                  objectFit: "cover",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                }}
+              />
+            </div>
+          )}
         </div>
 
         {/* Info */}

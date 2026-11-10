@@ -1,8 +1,17 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/" },
-    sitemap: "https://www.shophoa1998flower.com/sitemap.xml",
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        // Trang nội bộ (sổ đơn hàng) và kết quả tìm kiếm không cần Google lập chỉ mục
+        disallow: ["/donhang", "/donhang/"],
+      },
+    ],
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

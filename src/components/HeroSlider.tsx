@@ -96,6 +96,7 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 {s.image && s.mobileImage && (
                   <source media="(max-width: 640px)" srcSet={s.mobileImage} />
                 )}
+                {/* eslint-disable-next-line @next/next/no-img-element -- dùng <picture> chọn ảnh theo thiết bị; ảnh banner đã là WebP nhẹ */}
                 <img
                   src={main}
                   alt={s.alt}

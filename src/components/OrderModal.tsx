@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import Image from "next/image";
 
 interface OrderModalProps {
   productName: string;
@@ -36,10 +37,12 @@ export default function OrderModal({ productName, onClose }: OrderModalProps) {
   rel="noopener noreferrer"
   style={{ display: 'block', marginTop: '10px', textAlign: 'center' }}
 >
-  <img 
-    src="/zaloqrcode.png" 
-    alt="QR Code Zalo" 
-    style={{ width: '150px', height: '150px', objectFit: 'contain', margin: '0 auto' }} 
+  <Image
+    src="/zaloqrcode.png"
+    alt="QR Code Zalo"
+    width={150}
+    height={150}
+    style={{ objectFit: "contain", margin: "0 auto" }}
   />
   <span style={{ display: 'block', fontSize: '14px', color: 'var(--green)', marginTop: '5px' }}>
     Nhấn hoặc quét mã QR để liên hệ đặt hoa!

@@ -105,3 +105,25 @@ export const categoryBySlug: Record<string, CategoryMeta> = {};
 allCategories.forEach((c) => {
   categoryBySlug[c.slug] = c;
 });
+
+// ---------------------------------------------------------------------------------------
+// SEO: nhiều danh mục đang dùng CHUNG một danh sách sản phẩm (vd 6 trang sinh nhật cùng 53 mẫu).
+// Google coi các trang giống nhau là nội dung trùng lặp nên chỉ cần 1 trang "chính" cho mỗi danh sách:
+// các trang còn lại trỏ canonical về trang chính và không đưa vào sitemap.
+// Khi nào bạn có nội dung/sản phẩm riêng cho một danh mục (gán dataKey riêng), nó tự thành trang chính của mình.
+// ---------------------------------------------------------------------------------------
+const PREFERRED_CANONICAL: Record<string, string> = {
+  birthday: "hoa-sinh-nhat",
+  gio: "gio-hoa",
+  ke: "ke-hoa-khai-truong",
+};
+
+/** Slug của trang chính (canonical) cho một danh mục */
+export function canonicalSlug(slug: string): string {
+  const c = categoryBySlug[slug];
+  if (!c || !c.dataKey) return slug;
+  const preferred = PREFERRED_CANONICAL[c.dataKey];
+  if (preferred && categoryBySlug[preferred]) return preferred;
+  const first = allCategories.find((x) => x.dataKey === c.dataKey);
+  return first ? first.slug : slug;
+}

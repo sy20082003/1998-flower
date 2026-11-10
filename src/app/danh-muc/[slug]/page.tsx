@@ -4,7 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductSection from "@/components/ProductSection";
 import { products } from "@/data/products";
-import { allCategories, categoryBySlug } from "@/data/categories";
+import { allCategories, canonicalSlug, categoryBySlug } from "@/data/categories";
+import { SITE, clip } from "@/lib/site";
 
 interface Props {
   params: { slug: string };
@@ -17,10 +18,23 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = categoryBySlug[params.slug];
-  if (!category) return { title: "Không tìm thấy danh mục — 1998 Flower" };
+  if (!category) return { title: "Không tìm thấy danh mục — 1998 Flower", robots: { index: false } };
+
+  const list = products as Record<string, unknown[]>;
+  const hasProducts = !!category.dataKey && (list[category.dataKey]?.length ?? 0) > 0;
+  const canonical = canonicalSlug(category.slug); // danh mục trùng nội dung thì trỏ về trang chính
+  const title = clip(`${category.title} | Shop Hoa Tươi 1998 Flower`, 60);
+  const description = clip(
+    `Xem các mẫu ${category.title} đẹp, giá tốt tại 1998 Flower: hoa tươi giao nhanh trong ngày tại Tân Phú, TP.HCM. Hotline ${SITE.phoneDisplay}.`,
+    155
+  );
   return {
-    title: `${category.title} — Shop Hoa Tươi 1998 Flower`,
-    description: `Xem các mẫu ${category.title} đẹp nhất tại 1998 Flower. Giao hoa nhanh trong ngày tại TP.HCM.`,
+    title,
+    description,
+    alternates: { canonical: `/danh-muc/${canonical}` },
+    // Danh mục chưa có sản phẩm: không cho Google lập chỉ mục (tránh trang rỗng bị đánh giá thấp)
+    robots: hasProducts ? undefined : { index: false, follow: true },
+    openGraph: { title, description, url: `/danh-muc/${canonical}`, type: "website", locale: "vi_VN", siteName: SITE.name },
   };
 }
 

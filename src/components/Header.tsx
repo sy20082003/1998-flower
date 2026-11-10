@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { navGroups } from "@/data/categories";
 import type { Product } from "@/data/products";
 import { searchWithNearby } from "@/lib/search";
+import Image from "next/image";
 
 // Icon hiển thị cạnh từng nhóm danh mục trong menu mobile
 const groupIcons: Record<string, string> = {
@@ -36,7 +37,7 @@ export default function Header() {
       className="suggestionItem"
       onClick={handleSuggestionClick}
     >
-      <img src={p.image} alt={p.name} className="suggestionImg" />
+      <Image src={p.image} alt={p.name} width={44} height={44} sizes="44px" className="suggestionImg" />
       <div className="suggestionInfo">
         <span className="suggestionName">{p.name}</span>
         <span className="suggestionPrice">{p.price}</span>
@@ -110,9 +111,12 @@ export default function Header() {
           </button>
 
           <Link href="/" className="logo" onClick={closeMenu}>
-            <img
+            <Image
               src="/logoweb.png"
               alt="1998 Flower"
+              width={108}
+              height={40}
+              priority
               style={{ height: "40px", width: "auto", objectFit: "contain" }}
             />
           </Link>
