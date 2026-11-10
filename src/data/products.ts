@@ -244,7 +244,6 @@ const funeralSpThemProducts: Product[] = [
 
 // Đã xoá 2 sản phẩm cũ trỏ tới ảnh không tồn tại. Trang "Hoa Tốt Nghiệp" sẽ tự
 // hiển thị "Chưa có sản phẩm" cho tới khi có ảnh thật để thêm vào đây.
-const graduationProducts: Product[] = [];
 
 // Tách hoa khai trương theo loại (dựa vào thư mục ảnh):
 //  - gio: giỏ hoa / hoa để bàn  -> ảnh trong /products/gio/
@@ -299,6 +298,42 @@ const womenDaySlugs: string[] = [
 const womenDayProducts: Product[] = (() => {
   const pool = [...boProducts, ...saleProducts, ...boSpThemProducts, ...popularProducts, ...newProducts];
   return womenDaySlugs
+    .map((slug) => pool.find((p) => p.slug === slug))
+    .filter((p): p is Product => Boolean(p));
+})();
+
+// Hoa Tốt Nghiệp: các bó hoa tông hồng phấn và vàng (tươi sáng, hợp tặng ngày tốt nghiệp).
+// Muốn thêm/bớt mẫu: sửa danh sách "slug" bên dưới (slug là phần sau /san-pham/ trên đường dẫn sản phẩm).
+const graduationSlugs: string[] = [
+  "dieu-ky-sac-hoa",               // Diệu Kỳ Sắc Hoa - 350,000₫ (vàng)
+  "hong-xinh-sizes",               // Hồng Xinh Size S - 150,000₫ (hồng phấn)
+  "moc-an",                        // Mộc An - 375,000₫ (vàng)
+  "chuyen-tinh-lang-man",          // Chuyện Tình Lãng Mạn - 350,000₫ (hồng phấn)
+  "dieu-valse-tinh-yeu",           // Điệu Valse Tình Yêu - 400,000₫ (vàng)
+  "ngat-ngay-huong-sac",           // Ngất Ngây Hương Sắc - 380,000₫ (hồng phấn)
+  "net-xuan-thi",                  // Nét Xuân Thì - 400,000₫ (vàng)
+  "dao-hong-tho-mong",             // Đào Hồng Thơ Mộng - 380,000₫ (hồng phấn)
+  "hoa-nang-ban-mai",              // Hoa Nắng Ban Mai - 400,000₫ (vàng)
+  "trai-tim-ruc-lua",              // Trái Tim Rực Lửa - 380,000₫ (hồng phấn)
+  "hoa-tinh-nhan",                 // Hoa Tình Nhân - 400,000₫ (vàng)
+  "mo-ve-em",                      // Mơ Về Em - 400,000₫ (hồng phấn)
+  "loi-ngo-yeu-thuong",            // Lời Ngỏ Yêu Thương - 400,000₫ (vàng)
+  "tinh-khoi-ngay-moi",            // Tinh Khôi Ngày Mới - 450,000₫ (hồng phấn)
+  "rang-ro-nu-cuoi",               // Rạng Rỡ Nụ Cười - 400,000₫ (vàng)
+  "chieu-thu-vuong-van",           // Chiều Thu Vương Vấn - 800,000₫ (hồng phấn)
+  "nu-cuoi-em-xinh",               // Nụ Cười Em Xinh - 430,000₫ (vàng)
+  "vuong-mien-tinh-yeu",           // Vương Miện Tình Yêu - 1,250,000₫ (hồng phấn)
+  "thanh-xuan-ruc-ro",             // Thanh Xuân Rực Rỡ - 450,000₫ (vàng)
+  "kem-vali",                      // Kem Vali 💛 - 450,000₫ (vàng)
+  "hoang-hon-tim",                 // Hoàng Hôn Tím - 450,000₫ (vàng)
+  "sac-yeu-vung-dai",              // Sắc Yêu Vụng Dại - 500,000₫ (vàng)
+  "ruc-ro-sac-xuan",               // Rực Rỡ Sắc Xuân - 550,000₫ (vàng)
+  "giac-mo-hong",                  // Giấc Mơ Hồng - 550,000₫ (vàng)
+  "loi-yeu-chua-noi",              // Lời Yêu Chưa Nói - 650,000₫ (vàng)
+];
+const graduationProducts: Product[] = (() => {
+  const pool = [...boProducts, ...saleProducts, ...boSpThemProducts, ...popularProducts, ...newProducts];
+  return graduationSlugs
     .map((slug) => pool.find((p) => p.slug === slug))
     .filter((p): p is Product => Boolean(p));
 })();
