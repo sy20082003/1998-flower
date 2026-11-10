@@ -112,8 +112,9 @@ export default function HeroSlider({ slides }: { slides: HeroSlide[] }) {
                 className={`heroSlide ${s.fit === "contain" ? "fitContain" : ""}`}
                 style={
                   {
-                    "--bg": `url(${main})`,
-                    "--bgm": `url(${s.mobileImage ?? main})`,
+                    // nền mờ lấp phần thừa: dùng ảnh siêu nhỏ để không phải tải thêm ảnh banner lớn lần nữa
+                    "--bg": `url(${s.blur ?? main})`,
+                    "--bgm": `url(${s.mobileBlur ?? s.mobileImage ?? main})`,
                   } as React.CSSProperties
                 }
                 key={main}

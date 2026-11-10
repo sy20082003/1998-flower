@@ -82,6 +82,9 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <head>
+        {/* Tải sớm 2 file chữ chính (Be Vietnam Pro 400: ký tự thường + dấu tiếng Việt) */}
+        <link rel="preload" href="/fonts/be-vietnam-pro-vietnamese-400.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/be-vietnam-pro-latin-400.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(florist) }} />
       </head>
       <body>
